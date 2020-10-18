@@ -1,0 +1,5 @@
+10-18
+Setup database
+migrate data to database
+connect to database
+scafold database into project
