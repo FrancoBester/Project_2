@@ -1,0 +1,201 @@
+JobID;JobRole;JobLevel;BusinessTravel;StockOptionLevel;EmployeeCount;StandardHours;RequirementID
+1;Healthcare Representative;2;Travel_Rarely;2;1;80;15
+2;Healthcare Representative;3;Travel_Rarely;1;1;80;26
+3;Healthcare Representative;2;Travel_Rarely;0;1;80;13
+4;Healthcare Representative;3;Non-Travel;1;1;80;28
+5;Healthcare Representative;3;Travel_Rarely;3;1;80;30
+6;Healthcare Representative;2;Travel_Rarely;3;1;80;22
+7;Healthcare Representative;4;Travel_Frequently;1;1;80;38
+8;Healthcare Representative;3;Travel_Frequently;1;1;80;29
+9;Healthcare Representative;2;Non-Travel;1;1;80;16
+10;Healthcare Representative;3;Travel_Frequently;0;1;80;25
+11;Healthcare Representative;4;Travel_Rarely;0;1;80;36
+12;Healthcare Representative;2;Travel_Rarely;1;1;80;17
+13;Healthcare Representative;2;Non-Travel;2;1;80;24
+14;Healthcare Representative;2;Travel_Frequently;1;1;80;14
+15;Healthcare Representative;3;Travel_Rarely;0;1;80;27
+16;Healthcare Representative;2;Travel_Frequently;3;1;80;23
+17;Healthcare Representative;2;Non-Travel;0;1;80;20
+18;Healthcare Representative;2;Travel_Frequently;2;1;80;18
+19;Healthcare Representative;3;Non-Travel;0;1;80;32
+20;Healthcare Representative;2;Travel_Frequently;0;1;80;19
+21;Healthcare Representative;4;Travel_Frequently;3;1;80;43
+22;Healthcare Representative;4;Non-Travel;1;1;80;41
+23;Healthcare Representative;3;Travel_Rarely;2;1;80;31
+24;Healthcare Representative;4;Travel_Rarely;1;1;80;42
+25;Human Resources;2;Travel_Rarely;1;1;80;17
+26;Human Resources;1;Travel_Rarely;0;1;80;1
+27;Human Resources;1;Travel_Rarely;1;1;80;3
+28;Human Resources;2;Travel_Rarely;0;1;80;13
+29;Human Resources;3;Travel_Frequently;3;1;80;33
+30;Human Resources;1;Travel_Frequently;1;1;80;7
+31;Human Resources;3;Travel_Rarely;1;1;80;26
+32;Human Resources;2;Travel_Rarely;2;1;80;15
+33;Human Resources;2;Non-Travel;1;1;80;16
+34;Human Resources;2;Travel_Frequently;2;1;80;18
+35;Human Resources;3;Travel_Rarely;0;1;80;27
+36;Human Resources;2;Travel_Frequently;0;1;80;19
+37;Human Resources;1;Travel_Rarely;3;1;80;4
+38;Human Resources;3;Travel_Rarely;2;1;80;31
+39;Human Resources;1;Non-Travel;3;1;80;10
+40;Human Resources;1;Non-Travel;1;1;80;9
+41;Human Resources;1;Travel_Frequently;0;1;80;2
+42;Laboratory Technician;1;Travel_Rarely;0;1;80;1
+43;Laboratory Technician;1;Travel_Rarely;1;1;80;3
+44;Laboratory Technician;1;Travel_Frequently;0;1;80;2
+45;Laboratory Technician;1;Travel_Rarely;3;1;80;4
+46;Laboratory Technician;2;Travel_Rarely;0;1;80;13
+47;Laboratory Technician;1;Non-Travel;2;1;80;6
+48;Laboratory Technician;2;Travel_Frequently;0;1;80;19
+49;Laboratory Technician;3;Travel_Rarely;0;1;80;27
+50;Laboratory Technician;2;Travel_Rarely;1;1;80;17
+51;Laboratory Technician;2;Travel_Rarely;2;1;80;15
+52;Laboratory Technician;1;Travel_Rarely;2;1;80;5
+53;Laboratory Technician;2;Non-Travel;1;1;80;16
+54;Laboratory Technician;2;Non-Travel;2;1;80;24
+55;Laboratory Technician;1;Travel_Frequently;1;1;80;7
+56;Laboratory Technician;1;Travel_Frequently;2;1;80;11
+57;Laboratory Technician;3;Travel_Frequently;1;1;80;29
+58;Laboratory Technician;2;Travel_Frequently;1;1;80;14
+59;Laboratory Technician;1;Non-Travel;1;1;80;9
+60;Laboratory Technician;1;Non-Travel;0;1;80;12
+61;Laboratory Technician;2;Travel_Frequently;2;1;80;18
+62;Laboratory Technician;1;Non-Travel;3;1;80;10
+63;Laboratory Technician;3;Travel_Rarely;1;1;80;26
+64;Laboratory Technician;2;Non-Travel;0;1;80;20
+65;Laboratory Technician;2;Travel_Rarely;3;1;80;22
+66;Laboratory Technician;2;Non-Travel;3;1;80;21
+67;Laboratory Technician;1;Travel_Frequently;3;1;80;8
+68;Manager;4;Travel_Rarely;0;1;80;36
+69;Manager;5;Travel_Rarely;1;1;80;47
+70;Manager;5;Travel_Rarely;0;1;80;48
+71;Manager;4;Travel_Rarely;3;1;80;37
+72;Manager;5;Non-Travel;1;1;80;49
+73;Manager;4;Non-Travel;0;1;80;39
+74;Manager;3;Travel_Rarely;0;1;80;27
+75;Manager;4;Travel_Frequently;2;1;80;40
+76;Manager;4;Travel_Frequently;1;1;80;38
+77;Manager;4;Non-Travel;1;1;80;41
+78;Manager;4;Travel_Rarely;1;1;80;42
+79;Manager;5;Non-Travel;0;1;80;51
+80;Manager;3;Non-Travel;1;1;80;28
+81;Manager;3;Travel_Rarely;1;1;80;26
+82;Manager;3;Travel_Frequently;2;1;80;34
+83;Manager;5;Travel_Frequently;1;1;80;53
+84;Manager;5;Travel_Rarely;3;1;80;54
+85;Manager;5;Travel_Rarely;2;1;80;52
+86;Manager;5;Travel_Frequently;0;1;80;50
+87;Manager;4;Travel_Rarely;2;1;80;45
+88;Manager;3;Travel_Rarely;2;1;80;31
+89;Manufacturing Director;3;Travel_Frequently;0;1;80;25
+90;Manufacturing Director;3;Travel_Rarely;1;1;80;26
+91;Manufacturing Director;2;Non-Travel;1;1;80;16
+92;Manufacturing Director;2;Travel_Rarely;1;1;80;17
+93;Manufacturing Director;2;Travel_Frequently;0;1;80;19
+94;Manufacturing Director;2;Travel_Rarely;0;1;80;13
+95;Manufacturing Director;3;Travel_Rarely;0;1;80;27
+96;Manufacturing Director;2;Travel_Rarely;2;1;80;15
+97;Manufacturing Director;2;Travel_Frequently;1;1;80;14
+98;Manufacturing Director;2;Non-Travel;2;1;80;24
+99;Manufacturing Director;3;Non-Travel;0;1;80;32
+100;Manufacturing Director;3;Travel_Frequently;2;1;80;34
+101;Manufacturing Director;3;Travel_Frequently;1;1;80;29
+102;Manufacturing Director;2;Non-Travel;0;1;80;20
+103;Manufacturing Director;2;Travel_Rarely;3;1;80;22
+104;Manufacturing Director;4;Travel_Rarely;0;1;80;36
+105;Manufacturing Director;4;Travel_Frequently;0;1;80;44
+106;Manufacturing Director;4;Travel_Rarely;1;1;80;42
+107;Manufacturing Director;3;Travel_Rarely;3;1;80;30
+108;Manufacturing Director;4;Travel_Frequently;1;1;80;38
+109;Manufacturing Director;3;Travel_Rarely;2;1;80;31
+110;Manufacturing Director;2;Travel_Frequently;2;1;80;18
+111;Manufacturing Director;4;Non-Travel;3;1;80;46
+112;Manufacturing Director;2;Travel_Frequently;3;1;80;23
+113;Research Director;3;Travel_Rarely;0;1;80;27
+114;Research Director;5;Travel_Rarely;0;1;80;48
+115;Research Director;3;Travel_Frequently;0;1;80;25
+116;Research Director;5;Travel_Rarely;1;1;80;47
+117;Research Director;3;Travel_Rarely;1;1;80;26
+118;Research Director;5;Travel_Frequently;0;1;80;50
+119;Research Director;3;Travel_Rarely;2;1;80;31
+120;Research Director;3;Travel_Frequently;3;1;80;33
+121;Research Director;3;Travel_Frequently;1;1;80;29
+122;Research Director;3;Non-Travel;2;1;80;35
+123;Research Director;5;Travel_Rarely;2;1;80;52
+124;Research Director;4;Travel_Rarely;3;1;80;37
+125;Research Director;4;Travel_Rarely;0;1;80;36
+126;Research Director;4;Travel_Rarely;1;1;80;42
+127;Research Director;3;Non-Travel;1;1;80;28
+128;Research Director;5;Travel_Frequently;1;1;80;53
+129;Research Director;3;Travel_Rarely;3;1;80;30
+130;Research Director;5;Non-Travel;2;1;80;55
+131;Research Director;4;Travel_Rarely;2;1;80;45
+132;Research Director;4;Travel_Frequently;2;1;80;40
+133;Research Director;4;Travel_Frequently;0;1;80;44
+134;Research Director;5;Travel_Rarely;3;1;80;54
+135;Research Scientist;2;Travel_Frequently;1;1;80;14
+136;Research Scientist;1;Travel_Frequently;0;1;80;2
+137;Research Scientist;1;Travel_Rarely;1;1;80;3
+138;Research Scientist;1;Travel_Rarely;2;1;80;5
+139;Research Scientist;1;Travel_Rarely;0;1;80;1
+140;Research Scientist;3;Travel_Rarely;1;1;80;26
+141;Research Scientist;1;Travel_Frequently;1;1;80;7
+142;Research Scientist;2;Travel_Rarely;2;1;80;15
+143;Research Scientist;2;Non-Travel;3;1;80;21
+144;Research Scientist;2;Travel_Rarely;0;1;80;13
+145;Research Scientist;2;Travel_Rarely;1;1;80;17
+146;Research Scientist;1;Travel_Frequently;3;1;80;8
+147;Research Scientist;1;Travel_Rarely;3;1;80;4
+148;Research Scientist;1;Non-Travel;1;1;80;9
+149;Research Scientist;1;Non-Travel;3;1;80;10
+150;Research Scientist;2;Travel_Frequently;0;1;80;19
+151;Research Scientist;2;Non-Travel;2;1;80;24
+152;Research Scientist;1;Non-Travel;0;1;80;12
+153;Research Scientist;1;Travel_Frequently;2;1;80;11
+154;Research Scientist;2;Travel_Rarely;3;1;80;22
+155;Research Scientist;2;Travel_Frequently;2;1;80;18
+156;Research Scientist;1;Non-Travel;2;1;80;6
+157;Research Scientist;2;Non-Travel;1;1;80;16
+158;Research Scientist;2;Non-Travel;0;1;80;20
+159;Sales Executive;2;Travel_Rarely;0;1;80;13
+160;Sales Executive;2;Travel_Rarely;1;1;80;17
+161;Sales Executive;2;Travel_Frequently;2;1;80;18
+162;Sales Executive;3;Travel_Frequently;0;1;80;25
+163;Sales Executive;2;Non-Travel;0;1;80;20
+164;Sales Executive;2;Travel_Frequently;0;1;80;19
+165;Sales Executive;3;Travel_Frequently;1;1;80;29
+166;Sales Executive;3;Travel_Rarely;0;1;80;27
+167;Sales Executive;3;Travel_Rarely;1;1;80;26
+168;Sales Executive;2;Travel_Rarely;3;1;80;22
+169;Sales Executive;4;Travel_Rarely;0;1;80;36
+170;Sales Executive;2;Non-Travel;1;1;80;16
+171;Sales Executive;2;Travel_Frequently;3;1;80;23
+172;Sales Executive;3;Travel_Rarely;2;1;80;31
+173;Sales Executive;3;Travel_Rarely;3;1;80;30
+174;Sales Executive;3;Non-Travel;0;1;80;32
+175;Sales Executive;2;Travel_Rarely;2;1;80;15
+176;Sales Executive;4;Travel_Frequently;1;1;80;38
+177;Sales Executive;4;Travel_Frequently;3;1;80;43
+178;Sales Executive;3;Non-Travel;1;1;80;28
+179;Sales Executive;2;Travel_Frequently;1;1;80;14
+180;Sales Executive;4;Travel_Frequently;2;1;80;40
+181;Sales Executive;4;Travel_Rarely;1;1;80;42
+182;Sales Executive;4;Non-Travel;0;1;80;39
+183;Sales Executive;2;Non-Travel;2;1;80;24
+184;Sales Executive;4;Travel_Frequently;0;1;80;44
+185;Sales Executive;3;Travel_Frequently;2;1;80;34
+186;Sales Representative;1;Travel_Rarely;0;1;80;1
+187;Sales Representative;2;Travel_Rarely;1;1;80;17
+188;Sales Representative;1;Travel_Rarely;1;1;80;3
+189;Sales Representative;1;Travel_Frequently;1;1;80;7
+190;Sales Representative;1;Travel_Frequently;0;1;80;2
+191;Sales Representative;2;Travel_Frequently;0;1;80;19
+192;Sales Representative;1;Non-Travel;0;1;80;12
+193;Sales Representative;1;Travel_Frequently;2;1;80;11
+194;Sales Representative;1;Travel_Rarely;2;1;80;5
+195;Sales Representative;2;Travel_Rarely;0;1;80;13
+196;Sales Representative;1;Travel_Rarely;3;1;80;4
+197;Sales Representative;1;Non-Travel;3;1;80;10
+198;Sales Representative;1;Non-Travel;1;1;80;9
+199;Sales Representative;2;Travel_Rarely;2;1;80;15
+200;Sales Representative;1;Non-Travel;2;1;80;6
