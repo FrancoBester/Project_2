@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace Dimension_Data_Demo.Areas.Identity.Data
     public class ApplicationUser : IdentityUser
     {
         [PersonalData]
-        [Column(TypeName ="int")]
-        public int EmployeeNumber { get; set;}
+        [Column(TypeName = "int")]
+        public int EmployeeNumber { get; set; }
     }
 }

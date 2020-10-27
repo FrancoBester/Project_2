@@ -47,11 +47,6 @@ namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            //[DataType(DataType.Text)]
-            [Display(Name = "Employee number")]
-            public int EmployeeNumber { get; set; }
-
-            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -80,7 +75,7 @@ namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email,EmployeeNumber = Input.EmployeeNumber };
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

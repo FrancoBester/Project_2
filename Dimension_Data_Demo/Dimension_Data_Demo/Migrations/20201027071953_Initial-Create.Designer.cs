@@ -11,7 +11,7 @@ using DbContext = Dimension_Data_Demo.Data.DbContext;
 namespace Dimension_Data_Demo.Migrations
 {
     [DbContext(typeof(DbContext))]
-    [Migration("20201025143942_Initial-Create")]
+    [Migration("20201027071953_Initial-Create")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
