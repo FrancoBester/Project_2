@@ -1,0 +1,59 @@
+﻿@model Dimension_Data_Demo.Models.EmployeeDetails
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>EmployeeDetails</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="DetailsId" />
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Attrition" class="control-label"></label>
+                <input asp-for="Attrition" class="form-control" />
+                <span asp-validation-for="Attrition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DistanceFromHome" class="control-label"></label>
+                <input asp-for="DistanceFromHome" class="form-control" />
+                <span asp-validation-for="DistanceFromHome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Over18" class="control-label"></label>
+                <input asp-for="Over18" class="form-control" />
+                <span asp-validation-for="Over18" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaritalId" class="control-label"></label>
+                <select asp-for="MaritalId" class="form-control" asp-items="ViewBag.MaritalId"></select>
+                <span asp-validation-for="MaritalId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenderId" class="control-label"></label>
+                <select asp-for="GenderId" class="form-control" asp-items="ViewBag.GenderId"></select>
+                <span asp-validation-for="GenderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

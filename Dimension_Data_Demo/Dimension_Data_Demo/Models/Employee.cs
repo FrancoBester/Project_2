@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using Dimension_Data_Demo.Data;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.Data.SqlClient;
 
 namespace Dimension_Data_Demo.Models
 {
     public partial class Employee
     {
+        private string connectionString = "Data Source=dimention-data-demo.cr0jdxtn9ll5.us-west-2.rds.amazonaws.com;Initial Catalog=dimention_data_demo;Persist Security Info=True;User ID=masterUsername;Password=Dd#20201023";
         public int EmployeeNumber { get; set; }
         public int? JobId { get; set; }
         public int? DetailsId { get; set; }
@@ -21,5 +26,7 @@ namespace Dimension_Data_Demo.Models
         public virtual CostToCompany Pay { get; set; }
         public virtual EmployeePerformance Performance { get; set; }
         public virtual Surveys Survey { get; set; }
+
+     
     }
 }

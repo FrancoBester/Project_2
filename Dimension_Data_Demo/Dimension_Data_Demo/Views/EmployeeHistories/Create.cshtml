@@ -1,0 +1,68 @@
+﻿@model Dimension_Data_Demo.Models.EmployeeHistory
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>EmployeeHistory</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HistoryId" class="control-label"></label>
+                <input asp-for="HistoryId" class="form-control" />
+                <span asp-validation-for="HistoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumCompaniesWorked" class="control-label"></label>
+                <input asp-for="NumCompaniesWorked" class="form-control" />
+                <span asp-validation-for="NumCompaniesWorked" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalWorkingYears" class="control-label"></label>
+                <input asp-for="TotalWorkingYears" class="form-control" />
+                <span asp-validation-for="TotalWorkingYears" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YearsAtCompany" class="control-label"></label>
+                <input asp-for="YearsAtCompany" class="form-control" />
+                <span asp-validation-for="YearsAtCompany" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YearsInCurrentRole" class="control-label"></label>
+                <input asp-for="YearsInCurrentRole" class="form-control" />
+                <span asp-validation-for="YearsInCurrentRole" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YearsSinceLastPromotion" class="control-label"></label>
+                <input asp-for="YearsSinceLastPromotion" class="form-control" />
+                <span asp-validation-for="YearsSinceLastPromotion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="YearsWithCurrManager" class="control-label"></label>
+                <input asp-for="YearsWithCurrManager" class="form-control" />
+                <span asp-validation-for="YearsWithCurrManager" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrainingTimesLastYear" class="control-label"></label>
+                <input asp-for="TrainingTimesLastYear" class="form-control" />
+                <span asp-validation-for="TrainingTimesLastYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
