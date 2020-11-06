@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Dimension_Data_Demo.Models.EmployeeDetails>
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -49,10 +50,10 @@
                 @Html.DisplayFor(modelItem => item.Over18)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Gender.GenderId)
+                @Html.DisplayFor(modelItem => item.Gender.Gender1)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Marital.MaritalId)
+                @Html.DisplayFor(modelItem => item.Marital.MaritalStatus1)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.DetailsId">Edit</a> |

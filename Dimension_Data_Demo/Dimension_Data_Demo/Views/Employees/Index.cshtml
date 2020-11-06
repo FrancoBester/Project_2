@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<Dimension_Data_Demo.Models.Employee>
-@*@model_2 IEnumerable<Dimension_Data_Demo.Models.EmployeeDetails>*@ 
+
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
-@TempData["EmployeeNumber"]
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,6 +13,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeNumber)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Details)
             </th>
@@ -42,27 +44,36 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                <a asp-controller="EmployeeDetails" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.Details.DetailsId)</a>
+                @Html.DisplayFor(modelItem => item.EmployeeNumber)
+            </td>
+            <td>
+                <a asp-controller="EmployeeDetails" asp-action="Index" asp-route-id="@item.Details.DetailsId">@Html.DisplayFor(modelItem => item.Details.DetailsId)</a>
+
+            </td>
+            <td>
+                <a asp-controller="EmployeeEducations" asp-action="Index" asp-route-id="@item.Education.EducationId">@Html.DisplayFor(modelItem => item.Education.EducationId)</a>
                 
             </td>
             <td>
-                   
-                @Html.DisplayFor(modelItem => item.Education.EducationId)
+                <a asp-controller="EmployeeHistories" asp-action="Index" asp-route-id="@item.History.HistoryId">@Html.DisplayFor(modelItem => item.History.HistoryId)</a>
+                
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.History.HistoryId)
+                <a asp-controller="JobInformations" asp-action="Index" asp-route-id="@item.Job.JobId"> @Html.DisplayFor(modelItem => item.Job.JobId)</a>
+               
+            </td>
+
+            <td>
+                <a asp-controller="CostToCompanies" asp-action="Index" asp-route-id="@item.Pay.PayId">@Html.DisplayFor(modelItem => item.Pay.PayId)</a>
+                
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Job.JobId)
+                <a asp-controller="EmployeePerformances" asp-action="Index" asp-route-id="@item.Performance.PerformanceId">@Html.DisplayFor(modelItem => item.Performance.PerformanceId)</a>
+                
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Pay.PayId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Performance.PerformanceId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Survey.SurveyId)
+                <a asp-controller="Surveys" asp-action="Index" asp-route-id="@item.Survey.SurveyId">@Html.DisplayFor(modelItem => item.Survey.SurveyId)</a>
+                
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.EmployeeNumber">Edit</a> |

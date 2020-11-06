@@ -29,13 +29,11 @@ namespace Dimension_Data_Demo.Controllers
             try
             {
                 var conn = _context.Database.GetDbConnection();
-                //conn.Open();
             }
             catch(Exception ex)
             {
                 string serror = ex.ToString();
-            }
-            //string connectionstring = conn?.ConnectionString;        
+            }  
         }
 
         // GET: Employees

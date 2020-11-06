@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Dimension_Data_Demo.Data;
 using Dimension_Data_Demo.Models;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Dimension_Data_Demo.Controllers
 {
@@ -20,9 +22,28 @@ namespace Dimension_Data_Demo.Controllers
         }
 
         // GET: EmployeeEducations
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            return View(await _context.EmployeeEducation.ToListAsync());
+            var backupID = HttpContext.Session.GetInt32("EducationID");
+            if (id == null)
+            {
+                backupID = HttpContext.Session.GetInt32("EducationID");
+                var dimention_data_demoContext = _context.EmployeeEducation.Where(e => e.EducationId == backupID);
+                return View(await dimention_data_demoContext.ToListAsync());
+            }
+            else if (backupID == null)
+            {
+                HttpContext.Session.SetInt32("EducationID", (int)id);
+                var dimention_data_demoContext = _context.EmployeeEducation.Where(e =>e.EducationId == id);
+                return View(await dimention_data_demoContext.ToListAsync());
+            }
+            else
+            {
+                var dimention_data_demoContext = _context.EmployeeEducation.Where(e => e.EducationId == id);
+                return View(await dimention_data_demoContext.ToListAsync());
+            }
+
+            //return View(await _context.EmployeeEducation.ToListAsync());
         }
 
         // GET: EmployeeEducations/Details/5
@@ -78,6 +99,7 @@ namespace Dimension_Data_Demo.Controllers
             {
                 return NotFound();
             }
+            HttpContext.Session.SetString("oldEducationModel", JsonConvert.SerializeObject(employeeEducation));
             return View(employeeEducation);
         }
 
@@ -92,7 +114,10 @@ namespace Dimension_Data_Demo.Controllers
             {
                 return NotFound();
             }
+            if(JsonConvert.SerializeObject(employeeEducation) == HttpContext.Session.GetString("oldEducationModel"))
+            {
 
+            }
             if (ModelState.IsValid)
             {
                 try

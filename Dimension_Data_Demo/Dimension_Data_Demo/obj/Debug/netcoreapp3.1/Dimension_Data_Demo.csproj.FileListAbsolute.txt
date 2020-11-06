@@ -403,3 +403,8 @@ C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.csproj.CoreCompileInputs.cache
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Create.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Delete.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Details.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Edit.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Index.cshtml.g.cs

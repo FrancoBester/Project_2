@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Dimension_Data_Demo.Data;
 using Dimension_Data_Demo.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
+using Newtonsoft.Json;
 
 namespace Dimension_Data_Demo.Controllers
 {
@@ -20,10 +23,27 @@ namespace Dimension_Data_Demo.Controllers
         }
 
         // GET: EmployeeDetails
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
-            var dimention_data_demoContext = _context.EmployeeDetails.Include(e => e.Gender).Include(e => e.Marital);
-            return View(await dimention_data_demoContext.ToListAsync());
+            var backupID = HttpContext.Session.GetInt32("DetailID");
+            if(id == null)
+            {
+                backupID = HttpContext.Session.GetInt32("DetailID");
+                var dimention_data_demoContext = _context.EmployeeDetails.Include(e => e.Gender).Include(e => e.Marital).Where(e => e.DetailsId == backupID);
+                return View(await dimention_data_demoContext.ToListAsync());
+            }
+            else if (backupID == null)
+            {
+                HttpContext.Session.SetInt32("DetailID", (int)id);
+                var dimention_data_demoContext = _context.EmployeeDetails.Include(e => e.Gender).Include(e => e.Marital).Where(e => e.DetailsId == id);
+                return View(await dimention_data_demoContext.ToListAsync());
+            }
+            else
+            {
+                var dimention_data_demoContext = _context.EmployeeDetails.Include(e => e.Gender).Include(e => e.Marital).Where(e => e.DetailsId == id);
+                return View(await dimention_data_demoContext.ToListAsync());
+            }
+
         }
 
         // GET: EmployeeDetails/Details/5
@@ -80,13 +100,16 @@ namespace Dimension_Data_Demo.Controllers
                 return NotFound();
             }
 
+            
             var employeeDetails = await _context.EmployeeDetails.FindAsync(id);
             if (employeeDetails == null)
             {
                 return NotFound();
             }
-            ViewData["GenderId"] = new SelectList(_context.Gender, "GenderId", "GenderId", employeeDetails.GenderId);
-            ViewData["MaritalId"] = new SelectList(_context.MaritalStatus, "MaritalId", "MaritalId", employeeDetails.MaritalId);
+            
+            ViewData["GenderId"] = new SelectList(_context.Gender, "GenderId", "Gender1", employeeDetails.GenderId);
+            ViewData["MaritalId"] = new SelectList(_context.MaritalStatus, "MaritalId", "MaritalStatus1", employeeDetails.MaritalId);
+            HttpContext.Session.SetString("oldEmployeeDetails", JsonConvert.SerializeObject(employeeDetails));//changes current model information into string and stores in a session,used later
             return View(employeeDetails);
         }
 
@@ -102,26 +125,45 @@ namespace Dimension_Data_Demo.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var old_Model_Info = HttpContext.Session.GetString("oldEmployeeDetails");//gets model details before changes could have been model
+            var new_Model_Info = JsonConvert.SerializeObject(employeeDetails);//get new model info te see if info was changed
+
+            if(old_Model_Info == new_Model_Info)//compares string to see if model has been changed or if is still the same
             {
-                try
-                {
-                    _context.Update(employeeDetails);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmployeeDetailsExists(employeeDetails.DetailsId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
                 return RedirectToAction(nameof(Index));
             }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(employeeDetails);
+                        await _context.SaveChangesAsync();
+                        //var conn = _context.Database.GetDbConnection();
+                        //conn.Open();
+                        //SqlCommand cmd = new SqlCommand();
+                        //cmd.Connection = (SqlConnection)conn;
+                        //cmd.CommandType = System.Data.CommandType.Text;
+                        //cmd.Parameters.AddWithValue()
+                        //cmd.CommandText = "Select "
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!EmployeeDetailsExists(employeeDetails.DetailsId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    //return RedirectToAction("Index","EmployeeDetailsController",new { id = 1});
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            
             ViewData["GenderId"] = new SelectList(_context.Gender, "GenderId", "GenderId", employeeDetails.GenderId);
             ViewData["MaritalId"] = new SelectList(_context.MaritalStatus, "MaritalId", "MaritalId", employeeDetails.MaritalId);
             return View(employeeDetails);
