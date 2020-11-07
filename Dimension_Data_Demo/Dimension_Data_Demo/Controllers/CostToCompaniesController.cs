@@ -20,7 +20,7 @@ namespace Dimension_Data_Demo.Controllers
         }
 
         // GET: CostToCompanies
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
             return View(await _context.CostToCompany.ToListAsync());
         }
