@@ -25,25 +25,15 @@ namespace Dimension_Data_Demo.Controllers
         // GET: EmployeeDetails
         public async Task<IActionResult> Index(int? id)
         {
-            var backupID = HttpContext.Session.GetInt32("DetailID");
-            if(id == null)
-            {
-                backupID = HttpContext.Session.GetInt32("DetailID");
-                var dimention_data_demoContext = _context.EmployeeDetails.Include(e => e.Gender).Include(e => e.Marital).Where(e => e.DetailsId == backupID);
-                return View(await dimention_data_demoContext.ToListAsync());
-            }
-            else if (backupID == null)
+            if(id != null)
             {
                 HttpContext.Session.SetInt32("DetailID", (int)id);
-                var dimention_data_demoContext = _context.EmployeeDetails.Include(e => e.Gender).Include(e => e.Marital).Where(e => e.DetailsId == id);
-                return View(await dimention_data_demoContext.ToListAsync());
-            }
-            else
-            {
-                var dimention_data_demoContext = _context.EmployeeDetails.Include(e => e.Gender).Include(e => e.Marital).Where(e => e.DetailsId == id);
-                return View(await dimention_data_demoContext.ToListAsync());
             }
 
+            var backupID = HttpContext.Session.GetInt32("DetailID");
+
+            var dimention_data_demoContext = _context.EmployeeDetails.Include(e => e.Gender).Include(e => e.Marital).Where(e => e.DetailsId == backupID);
+            return View(await dimention_data_demoContext.ToListAsync());
         }
 
         // GET: EmployeeDetails/Details/5

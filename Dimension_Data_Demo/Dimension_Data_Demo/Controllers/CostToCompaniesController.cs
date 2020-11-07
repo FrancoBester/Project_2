@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Dimension_Data_Demo.Data;
 using Dimension_Data_Demo.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Dimension_Data_Demo.Controllers
 {
@@ -22,7 +23,14 @@ namespace Dimension_Data_Demo.Controllers
         // GET: CostToCompanies
         public async Task<IActionResult> Index(int? id)
         {
-            return View(await _context.CostToCompany.ToListAsync());
+            if(id != null)
+            {
+                HttpContext.Session.SetInt32("PayID", (int)id);
+            }
+            var backupID = HttpContext.Session.GetInt32("PayID");
+
+            var dimention_data_demoContext = _context.CostToCompany.Where(e => e.PayId == backupID);
+            return View(await dimention_data_demoContext.ToListAsync());
         }
 
         // GET: CostToCompanies/Details/5

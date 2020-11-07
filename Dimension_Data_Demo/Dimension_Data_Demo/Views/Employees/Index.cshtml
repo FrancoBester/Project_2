@@ -48,35 +48,35 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EmployeeNumber)
             </td>
+
             <td>
                 <a asp-controller="EmployeeDetails" asp-action="Index" asp-route-id="@item.Details.DetailsId">@Html.DisplayFor(modelItem => item.Details.DetailsId)</a>
-                
             </td>
+
             <td>
                 <a asp-controller="EmployeeEducations" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.Education.EducationId)</a>
-                
             </td>
+
             <td>
-                <a asp-controller="EmployeeHistories" asp-action="Index" asp-route-id="@item.History.HistoryId">@Html.DisplayFor(modelItem => item.History.HistoryId)</a>
-                
+                <a asp-controller="EmployeeHistories" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.History.HistoryId)</a>
             </td>
+
             <td>
-                <a asp-controller="JobInformations" asp-action="Index" asp-route-id="@item.Job.JobId"> @Html.DisplayFor(modelItem => item.Job.JobId)</a>
-               
+                <a asp-controller="JobInformations" asp-action="Index" asp-route-id="@item.EmployeeNumber"> @Html.DisplayFor(modelItem => item.Job.JobId)</a>
             </td>
 
             <td>
                 <a asp-controller="CostToCompanies" asp-action="Index" asp-route-id="@item.Pay.PayId">@Html.DisplayFor(modelItem => item.Pay.PayId)</a>
-                
             </td>
+
             <td>
-                <a asp-controller="EmployeePerformances" asp-action="Index" asp-route-id="@item.Performance.PerformanceId">@Html.DisplayFor(modelItem => item.Performance.PerformanceId)</a>
-                
+                <a asp-controller="EmployeePerformances" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.Performance.PerformanceId)</a>
             </td>
+
             <td>
-                <a asp-controller="Surveys" asp-action="Index" asp-route-id="@item.Survey.SurveyId">@Html.DisplayFor(modelItem => item.Survey.SurveyId)</a>
-                
+                <a asp-controller="Surveys" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.Survey.SurveyId)</a>
             </td>
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.EmployeeNumber">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.EmployeeNumber">Details</a> |

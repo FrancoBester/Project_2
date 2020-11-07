@@ -138,7 +138,6 @@ namespace Dimension_Data_Demo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EducationId,Education,EducationField")] EmployeeEducation employeeEducation)
         {
-            var testing = employeeEducation.EducationField;
             if (id != employeeEducation.EducationId)
             {
                 return NotFound();
@@ -156,7 +155,7 @@ namespace Dimension_Data_Demo.Controllers
                     {
                         int educationId = -1;
                         var conn = _context.Database.GetDbConnection();
-                        conn.Open();
+                        await conn.OpenAsync();
                         SqlCommand cmd = new SqlCommand();
                         cmd.Connection = (SqlConnection)conn;
                         cmd.CommandType = System.Data.CommandType.Text;
@@ -166,7 +165,7 @@ namespace Dimension_Data_Demo.Controllers
                         SqlDataReader reader = await cmd.ExecuteReaderAsync();
                         while (reader.Read())
                         {
-                            educationId = int.Parse(reader.GetValue(0).ToString());
+                            educationId = reader.GetInt32(0);
                         }
                         await cmd.DisposeAsync();
                         await reader.CloseAsync();
@@ -179,8 +178,8 @@ namespace Dimension_Data_Demo.Controllers
                         cmd.CommandText = "Update dbo.Employee Set EducationID = @EduNumber Where EmployeeNumber=@EmpNumber";
                         await cmd.ExecuteNonQueryAsync();
 
-                        cmd.Dispose();
-                        conn.Close();
+                        await cmd.DisposeAsync();
+                        await conn.CloseAsync();
 
                     }
                     catch (DbUpdateConcurrencyException)
