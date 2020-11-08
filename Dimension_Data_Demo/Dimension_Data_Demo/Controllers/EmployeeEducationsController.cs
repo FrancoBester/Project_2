@@ -9,10 +9,6 @@ using Dimension_Data_Demo.Data;
 using Dimension_Data_Demo.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.Data.SqlClient;
-using System.Reflection.Metadata;
-using Microsoft.CodeAnalysis;
 
 namespace Dimension_Data_Demo.Controllers
 {
@@ -28,33 +24,26 @@ namespace Dimension_Data_Demo.Controllers
         // GET: EmployeeEducations
         public async Task<IActionResult> Index(int? id)
         {
-            if (id != null)
+            var backupID = HttpContext.Session.GetInt32("EducationID");
+            if (id == null)
             {
-                int EduactionID = -1;
-                var conn = _context.Database.GetDbConnection();
-                conn.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Id", (int)id);
-                cmd.CommandText = ("Select EducationID from dbo.Employee Where EmployeeNumber = @Id");
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    EduactionID = reader.GetInt32(0);
-                }
-                conn.Close();
-                cmd.Dispose();
-                reader.Close();
-                HttpContext.Session.SetInt32("edu_employeeNumber", (int)id);
-                HttpContext.Session.SetInt32("EducationId", (int)EduactionID);
+                backupID = HttpContext.Session.GetInt32("EducationID");
+                var dimention_data_demoContext = _context.EmployeeEducation.Where(e => e.EducationId == backupID);
+                return View(await dimention_data_demoContext.ToListAsync());
+            }
+            else if (backupID == null)
+            {
+                HttpContext.Session.SetInt32("EducationID", (int)id);
+                var dimention_data_demoContext = _context.EmployeeEducation.Where(e =>e.EducationId == id);
+                return View(await dimention_data_demoContext.ToListAsync());
+            }
+            else
+            {
+                var dimention_data_demoContext = _context.EmployeeEducation.Where(e => e.EducationId == id);
+                return View(await dimention_data_demoContext.ToListAsync());
             }
 
-            var backupID = HttpContext.Session.GetInt32("EducationId");
-            
-            var dimention_data_demoContext = _context.EmployeeEducation.Where(e => e.EducationId == backupID);
-            return View(await dimention_data_demoContext.ToListAsync());
- 
+            //return View(await _context.EmployeeEducation.ToListAsync());
         }
 
         // GET: EmployeeEducations/Details/5
@@ -100,23 +89,6 @@ namespace Dimension_Data_Demo.Controllers
         // GET: EmployeeEducations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            List<SelectListItem> EducationFieldlist = new List<SelectListItem>();
-            var conn = _context.Database.GetDbConnection();
-            conn.Open();
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = (SqlConnection)conn;
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = ("Select distinct(EducationField) from dbo.EmployeeEducation");
-            SqlDataReader reader = cmd.ExecuteReader();
-            while(reader.Read())
-            {
-                EducationFieldlist.Add(new SelectListItem() { Text = reader.GetValue(0).ToString()});
-            }
-            conn.Close();
-            cmd.Dispose();
-            reader.Close();
-            ViewData["fieldData"] = EducationFieldlist;
-
             if (id == null)
             {
                 return NotFound();
@@ -142,17 +114,22 @@ namespace Dimension_Data_Demo.Controllers
             {
                 return NotFound();
             }
-
             if(JsonConvert.SerializeObject(employeeEducation) == HttpContext.Session.GetString("oldEducationModel"))
             {
-                return RedirectToAction(nameof(Index));
+
             }
-            else
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                try
                 {
-                    try
+                    _context.Update(employeeEducation);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EmployeeEducationExists(employeeEducation.EducationId))
                     {
+<<<<<<< HEAD
                         int educationId = -1;
                         var conn = _context.Database.GetDbConnection();
                         await conn.OpenAsync();
@@ -181,24 +158,18 @@ namespace Dimension_Data_Demo.Controllers
                         await cmd.DisposeAsync();
                         await conn.CloseAsync();
 
+=======
+                        return NotFound();
+>>>>>>> parent of c642a3f... completed education controller
                     }
-                    catch (DbUpdateConcurrencyException)
+                    else
                     {
-                        if (!EmployeeEducationExists(employeeEducation.EducationId))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
+                        throw;
                     }
                 }
-                return RedirectToAction("Index", "Employees");
-                //return View(employeeEducation);
-
+                return RedirectToAction(nameof(Index));
             }
-            
+            return View(employeeEducation);
         }
 
         // GET: EmployeeEducations/Delete/5

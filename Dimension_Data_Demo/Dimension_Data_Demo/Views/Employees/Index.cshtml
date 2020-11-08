@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<Dimension_Data_Demo.Models.Employee>
-@using Microsoft.AspNetCore.Http
-@using Microsoft.AspNetCore.Mvc
-@using Microsoft.AspNetCore.Session
+
 
 @{
     ViewData["Title"] = "Index";
@@ -51,10 +49,19 @@
 
             <td>
                 <a asp-controller="EmployeeDetails" asp-action="Index" asp-route-id="@item.Details.DetailsId">@Html.DisplayFor(modelItem => item.Details.DetailsId)</a>
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of c642a3f... completed education controller
             </td>
 
             <td>
+<<<<<<< HEAD
                 <a asp-controller="EmployeeEducations" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.Education.EducationId)</a>
+=======
+                <a asp-controller="EmployeeEducations" asp-action="Index" asp-route-id="@item.Education.EducationId">@Html.DisplayFor(modelItem => item.Education.EducationId)</a>
+                
+>>>>>>> parent of c642a3f... completed education controller
             </td>
 
             <td>

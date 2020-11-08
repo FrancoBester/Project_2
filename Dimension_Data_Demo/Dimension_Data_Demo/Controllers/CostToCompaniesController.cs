@@ -21,7 +21,7 @@ namespace Dimension_Data_Demo.Controllers
         }
 
         // GET: CostToCompanies
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index()
         {
             if(id != null)
             {
