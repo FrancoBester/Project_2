@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Dimension_Data_Demo.Models.EmployeeHistory>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+                    window.onload = function () {
+                        alert("@ViewBag.Message");
+                    };
+        </script>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumCompaniesWorked)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalWorkingYears)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearsAtCompany)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearsInCurrentRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearsSinceLastPromotion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearsWithCurrManager)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingTimesLastYear)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumCompaniesWorked)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalWorkingYears)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearsAtCompany)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearsInCurrentRole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearsSinceLastPromotion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearsWithCurrManager)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrainingTimesLastYear)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.HistoryId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.HistoryId">Details</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

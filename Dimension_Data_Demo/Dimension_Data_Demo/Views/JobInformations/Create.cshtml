@@ -1,0 +1,161 @@
+﻿@model Dimension_Data_Demo.Models.JobInformation
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>JobInformation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="JobId" />
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td id="ddljobInfo">Job role</td>
+                        <td id="ddljobField" onchange="get_set_jobValue()">@Html.DropDownList("RoleFieldData", (IEnumerable<SelectListItem>)ViewData["RoleFieldData"])</td>
+                    </tr>
+                </thead>
+            </table>
+            <button type="button" onclick="showjobField()">New Job Role </button>
+            <div class="form-group" style="visibility:hidden" id="JobDiv">
+                <label>Job Role field cannot be empty</label>>
+                <label asp-for="JobRole" class="control-label"></label>
+                <input asp-for="JobRole" class="form-control" />
+                <span asp-validation-for="JobRole" class="text-danger"></span>
+                <p></p>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td id="ddldepartmentInfo">Department</td>
+                        <td id="ddldepartmentField" onchange="get_set_departmentValue()">@Html.DropDownList("DepartmentfieldData", (IEnumerable<SelectListItem>)ViewData["DepartmentfieldData"])</td>
+                    </tr>
+                </thead>
+            </table>
+            <button type="button" onclick="showdepartmentField()">New Department</button>
+            <div class="form-group" style="visibility:hidden" id="DepartmentDiv">
+                <label>Department field cannot be empty</label>
+                <label asp-for="Department" class="control-label"></label>
+                <input asp-for="Department" class="form-control" />
+                <span asp-validation-for="Department" class="text-danger"></span>
+                <p></p>
+            </div>
+
+            <div class="form-group">
+                <label>Field needs to be a positive number value</label>
+                <label asp-for="JobLevel" class="control-label"></label>
+                <input asp-for="JobLevel" class="form-control" />
+                <span asp-validation-for="JobLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Field needs to be a positive number value</label>
+                <label asp-for="StandardHours" class="control-label"></label>
+                <input asp-for="StandardHours" class="form-control" />
+                <span asp-validation-for="StandardHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Field needs to be a positive number value</label>
+                <label asp-for="EmployeeCount" class="control-label"></label>
+                <input asp-for="EmployeeCount" class="form-control" />
+                <span asp-validation-for="EmployeeCount" class="text-danger"></span>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td id="ddltravelInfo">Business Travel</td>
+                        <td id="ddltravelField" onchange="get_set_travelValue()">@Html.DropDownList("TravelfieldData", (IEnumerable<SelectListItem>)ViewData["TravelfieldData"])</td>
+                    </tr>
+                </thead>
+            </table>
+            <button type="button" onclick="showtravelField()">New Travel field</button>
+            <div class="form-group" style="visibility:hidden" id="TravelDiv">
+                <label>Business travel field cannot be empty</label>
+                <label asp-for="BusinessTravel" class="control-label"></label>
+                <input asp-for="BusinessTravel" class="form-control" />
+                <span asp-validation-for="BusinessTravel" class="text-danger"></span>
+                <p></p>
+            </div>
+
+            <div class="form-group">
+                <label>Field needs to be a positive number value</label>
+                <label asp-for="StockOptionLevel" class="control-label"></label>
+                <input asp-for="StockOptionLevel" class="form-control" />
+                <span asp-validation-for="StockOptionLevel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            @if (ViewBag.Message != null)
+            {
+                <script type="text/javascript">
+                    window.onload = function () {
+                        alert("@ViewBag.Message");
+                    };
+                </script>
+            }
+        </form>
+    </div>
+</div>
+
+<script>
+    function get_set_jobValue() {
+        var ddl_value = $("#ddljobField :selected").text();
+        var input_value = document.getElementById("JobRole");
+        input_value.innerHTML = ddl_value;
+        input_value.value = ddl_value;
+        console.log(input_value);
+    };
+
+    function get_set_departmentValue() {
+        var ddl_value = $("#ddldepartmentField :selected").text();
+        var input_value = document.getElementById("Department");
+        input_value.innerHTML = ddl_value;
+        input_value.value = ddl_value;
+    };
+
+    function get_set_travelValue() {
+        var ddl_value = $("#ddltravelField :selected").text();
+        var input_value = document.getElementById("BusinessTravel");
+        input_value.innerHTML = ddl_value;
+        input_value.value = ddl_value;
+    };
+
+    function showjobField() {
+        var eduField = document.getElementById("JobDiv");
+        eduField.style.visibility = "Visible";
+        var ddl_Field = document.getElementById("ddljobField");
+        var ddl_Field_Info = document.getElementById("ddljobInfo");
+        ddl_Field.style.visibility = "Hidden";
+        ddl_Field_Info.style.visibility = "Hidden";
+    }
+
+    function showdepartmentField() {
+        var eduField = document.getElementById("DepartmentDiv");
+        eduField.style.visibility = "Visible";
+        var ddl_Field = document.getElementById("ddldepartmentField");
+        var ddl_Field_Info = document.getElementById("ddldepartmentInfo");
+        ddl_Field.style.visibility = "Hidden";
+        ddl_Field_Info.style.visibility = "Hidden";
+    }
+
+    function showtravelField() {
+        var eduField = document.getElementById("TravelDiv");
+        eduField.style.visibility = "Visible";
+        var ddl_Field = document.getElementById("ddltravelField");
+        var ddl_Field_Info = document.getElementById("ddltravelInfo");
+        ddl_Field.style.visibility = "Hidden";
+        ddl_Field_Info.style.visibility = "Hidden";
+    }
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Dimension_Data_Demo.Models.Employee>
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Session
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a a asp-controller="EmployeeDetails" asp-action="Create">Create New</a>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Education)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.History)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Job)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Performance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Survey)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeNumber)
+            </td>
+
+            <td>
+                <a asp-controller="EmployeeDetails" asp-action="Index" asp-route-id="@item.Details.DetailsId">@Html.DisplayFor(modelItem => item.Details.DetailsId)</a>
+            </td>
+
+            <td>
+                <a asp-controller="EmployeeEducations" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.Education.EducationId)</a>
+            </td>
+
+            <td>
+                <a asp-controller="EmployeeHistories" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.History.HistoryId)</a>
+            </td>
+
+            <td>
+                <a asp-controller="JobInformations" asp-action="Index" asp-route-id="@item.EmployeeNumber"> @Html.DisplayFor(modelItem => item.Job.JobId)</a>
+            </td>
+
+            <td>
+                <a asp-controller="CostToCompanies" asp-action="Index" asp-route-id="@item.Pay.PayId">@Html.DisplayFor(modelItem => item.Pay.PayId)</a>
+            </td>
+
+            <td>
+                <a asp-controller="EmployeePerformances" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.Performance.PerformanceId)</a>
+            </td>
+
+            <td>
+                <a asp-controller="Surveys" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.Survey.SurveyId)</a>
+            </td>
+
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.EmployeeNumber">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
