@@ -26,14 +26,6 @@ namespace Dimension_Data_Demo.Controllers
         public EmployeesController(dimention_data_demoContext context)
         {
             _context = context;
-            try
-            {
-                var conn = _context.Database.GetDbConnection();
-            }
-            catch(Exception ex)
-            {
-                string serror = ex.ToString();
-            }  
         }
 
         // GET: Employees
@@ -60,27 +52,35 @@ namespace Dimension_Data_Demo.Controllers
             
             if (user_Role.ToString() == "Manager")//if the user is a manager they are allowed to see all other employee info that are part of the same department as they are
             {
-                var conn = _context.Database.GetDbConnection();
-                conn.Open();
-                //SqlConnection conn = new SqlConnection((_context.Database.GetDbConnection()).ToString());
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Department", user_Department.ToString());
-                cmd.CommandText = "Select JobID from dbo.JobInformation Where Department = @Department";
-                List<int> listOfJobIds = new List<int>();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while(reader.Read())
+                try
                 {
-                    string stest = reader.GetValue(0).ToString();
-                    listOfJobIds.Add(int.Parse(reader.GetValue(0).ToString()));
-                }
+                    var conn = _context.Database.GetDbConnection();
+                    conn.Open();
+                    //SqlConnection conn = new SqlConnection((_context.Database.GetDbConnection()).ToString());
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = (SqlConnection)conn;
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Department", user_Department.ToString());
+                    cmd.CommandText = "Select JobID from dbo.JobInformation Where Department = @Department";
+                    List<int> listOfJobIds = new List<int>();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        string stest = reader.GetValue(0).ToString();
+                        listOfJobIds.Add(int.Parse(reader.GetValue(0).ToString()));
+                    }
 
-                var dimention_data_demoContext_2 = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => listOfJobIds.Contains((int)b.JobId));
-                conn.Close();
-                reader.Close();
-                cmd.Dispose();
-                return View(await dimention_data_demoContext_2.ToListAsync());
+                    var dimention_data_demoContext_2 = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => listOfJobIds.Contains((int)b.JobId));
+                    conn.Close();
+                    reader.Close();
+                    cmd.Dispose();
+                    return View(await dimention_data_demoContext_2.ToListAsync());
+                }
+                catch(Exception)
+                {
+                    ViewBag.Message = "There was a problem retrieving the data. Please try later";
+                    return View();
+                }
             }
             else
             {
@@ -127,103 +127,48 @@ namespace Dimension_Data_Demo.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
-            ViewData["DetailsId"] = new SelectList(_context.EmployeeDetails, "DetailsId", "DetailsId");
-            ViewData["EducationId"] = new SelectList(_context.EmployeeEducation, "EducationId", "EducationId");
-            ViewData["HistoryId"] = new SelectList(_context.EmployeeHistory, "HistoryId", "HistoryId");
-            ViewData["JobId"] = new SelectList(_context.JobInformation, "JobId", "JobId");
-            ViewData["PayId"] = new SelectList(_context.CostToCompany, "PayId", "PayId");
-            ViewData["PerformanceId"] = new SelectList(_context.EmployeePerformance, "PerformanceId", "PerformanceId");
-            ViewData["SurveyId"] = new SelectList(_context.Surveys, "SurveyId", "SurveyId");
+            try
+            {
+                int value = 0;
+                var conn = _context.Database.GetDbConnection();
+                conn.OpenAsync();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = (SqlConnection)conn;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = ("Select top 1 * from dbo.Employee Order By EmployeeNumber DESC");
+                SqlDataReader reader = cmd.ExecuteReader();
+                while(reader.Read())
+                {
+                    value = reader.GetInt32(0);
+                }
+                cmd.Dispose();
+                reader.Close();
+
+                cmd = new SqlCommand();
+                cmd.Connection = (SqlConnection)conn;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@Del", (int)HttpContext.Session.GetInt32("newDetailsID"));
+                cmd.Parameters.AddWithValue("@Edu", (int)HttpContext.Session.GetInt32("newEducationID"));
+                cmd.Parameters.AddWithValue("@His", (int)HttpContext.Session.GetInt32("newHistoryID"));
+                cmd.Parameters.AddWithValue("@Pay", (int)HttpContext.Session.GetInt32("newPayID"));
+                cmd.Parameters.AddWithValue("@Per", (int)HttpContext.Session.GetInt32("newPerformanceID"));
+                cmd.Parameters.AddWithValue("@Job", (int)HttpContext.Session.GetInt32("newJobID"));
+                cmd.Parameters.AddWithValue("@Sur", (int)HttpContext.Session.GetInt32("newSurveyID"));
+                cmd.Parameters.AddWithValue("@Emp", value +1);
+                cmd.CommandText = ("Insert into dbo.Employee(EmployeeNumber,JobID,DetailsID,PayID,EducationID,SurveyID,HistoryID,PerformanceID) " +
+                    "Values(@Emp,@Job,@Del,@Pay,@Edu,@Sur,@His,@Per)");
+                cmd.ExecuteNonQuery();
+
+                cmd.Dispose();
+                conn.Close();
+            }
+            catch(Exception)
+            {
+                ViewBag.Message = "Error adding employee. Please try again later.";
+                return View();
+            }
+            ViewBag.Message = "Employee succesfully added.";
             return View();
-        }
-
-        // POST: Employees/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeNumber,JobId,DetailsId,PayId,EducationId,SurveyId,HistoryId,PerformanceId")] Employee employee)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(employee);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["DetailsId"] = new SelectList(_context.EmployeeDetails, "DetailsId", "DetailsId", employee.DetailsId);
-            ViewData["EducationId"] = new SelectList(_context.EmployeeEducation, "EducationId", "EducationId", employee.EducationId);
-            ViewData["HistoryId"] = new SelectList(_context.EmployeeHistory, "HistoryId", "HistoryId", employee.HistoryId);
-            ViewData["JobId"] = new SelectList(_context.JobInformation, "JobId", "JobId", employee.JobId);
-            ViewData["PayId"] = new SelectList(_context.CostToCompany, "PayId", "PayId", employee.PayId);
-            ViewData["PerformanceId"] = new SelectList(_context.EmployeePerformance, "PerformanceId", "PerformanceId", employee.PerformanceId);
-            ViewData["SurveyId"] = new SelectList(_context.Surveys, "SurveyId", "SurveyId", employee.SurveyId);
-            return View(employee);
-        }
-
-
-        // GET: Employees/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employee = await _context.Employee.FindAsync(id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-            ViewData["DetailsId"] = new SelectList(_context.EmployeeDetails, "DetailsId", "DetailsId", employee.DetailsId);
-            ViewData["EducationId"] = new SelectList(_context.EmployeeEducation, "EducationId", "EducationId", employee.EducationId);
-            ViewData["HistoryId"] = new SelectList(_context.EmployeeHistory, "HistoryId", "HistoryId", employee.HistoryId);
-            ViewData["JobId"] = new SelectList(_context.JobInformation, "JobId", "JobId", employee.JobId);
-            ViewData["PayId"] = new SelectList(_context.CostToCompany, "PayId", "PayId", employee.PayId);
-            ViewData["PerformanceId"] = new SelectList(_context.EmployeePerformance, "PerformanceId", "PerformanceId", employee.PerformanceId);
-            ViewData["SurveyId"] = new SelectList(_context.Surveys, "SurveyId", "SurveyId", employee.SurveyId);
-            return View(employee);
-        }
-
-        // POST: Employees/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmployeeNumber,JobId,DetailsId,PayId,EducationId,SurveyId,HistoryId,PerformanceId")] Employee employee)
-        {
-            if (id != employee.EmployeeNumber)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(employee);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmployeeExists(employee.EmployeeNumber))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["DetailsId"] = new SelectList(_context.EmployeeDetails, "DetailsId", "DetailsId", employee.DetailsId);
-            ViewData["EducationId"] = new SelectList(_context.EmployeeEducation, "EducationId", "EducationId", employee.EducationId);
-            ViewData["HistoryId"] = new SelectList(_context.EmployeeHistory, "HistoryId", "HistoryId", employee.HistoryId);
-            ViewData["JobId"] = new SelectList(_context.JobInformation, "JobId", "JobId", employee.JobId);
-            ViewData["PayId"] = new SelectList(_context.CostToCompany, "PayId", "PayId", employee.PayId);
-            ViewData["PerformanceId"] = new SelectList(_context.EmployeePerformance, "PerformanceId", "PerformanceId", employee.PerformanceId);
-            ViewData["SurveyId"] = new SelectList(_context.Surveys, "SurveyId", "SurveyId", employee.SurveyId);
-            return View(employee);
         }
 
         // GET: Employees/Delete/5
@@ -266,12 +211,6 @@ namespace Dimension_Data_Demo.Controllers
         {
             return _context.Employee.Any(e => e.EmployeeNumber == id);
         }
-
-        //public ActionResult test()
-        //{
-        //    string connection = 
-        //}
-        
     }
   
 }

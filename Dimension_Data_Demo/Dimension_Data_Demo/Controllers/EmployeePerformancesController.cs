@@ -10,9 +10,12 @@ using Dimension_Data_Demo.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Dimension_Data_Demo.Controllers
 {
+    [Authorize]
     public class EmployeePerformancesController : Controller
     {
         private readonly dimention_data_demoContext _context;
@@ -27,24 +30,32 @@ namespace Dimension_Data_Demo.Controllers
         {
             if (id != null)
             {
-                int PerformanceID = -1;
-                var conn = _context.Database.GetDbConnection();
-                await conn.OpenAsync();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Id", (int)id);
-                cmd.CommandText = ("Select PerformanceID from dbo.Employee Where EmployeeNumber = @Id");
-                SqlDataReader reader = await cmd.ExecuteReaderAsync();
-                while (reader.Read())
+                try
                 {
-                    PerformanceID = reader.GetInt32(0);
+                    int PerformanceID = -1;
+                    var conn = _context.Database.GetDbConnection();
+                    await conn.OpenAsync();
+                    SqlCommand cmd = new SqlCommand();
+                    cmd.Connection = (SqlConnection)conn;
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.Parameters.AddWithValue("@Id", (int)id);
+                    cmd.CommandText = ("Select PerformanceID from dbo.Employee Where EmployeeNumber = @Id");
+                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                    while (reader.Read())
+                    {
+                        PerformanceID = reader.GetInt32(0);
+                    }
+                    await conn.CloseAsync();
+                    await cmd.DisposeAsync();
+                    await reader.CloseAsync();
+                    HttpContext.Session.SetInt32("per_employeeNumber", (int)id);
+                    HttpContext.Session.SetInt32("PerformanceId", PerformanceID);
                 }
-                await conn.CloseAsync();
-                await cmd.DisposeAsync();
-                await reader.CloseAsync();
-                HttpContext.Session.SetInt32("per_employeeNumber", (int)id);
-                HttpContext.Session.SetInt32("PerformanceId", PerformanceID);
+                catch(Exception)
+                {
+                    ViewBag.Message = "There was a problem retrieving the data. Please try later";
+                    return View();
+                }
             }
 
             var backupID = HttpContext.Session.GetInt32("PerformanceId");
@@ -83,13 +94,28 @@ namespace Dimension_Data_Demo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PerformanceId,PerformanceRating,WorkLifeBalance,JobInvolvement")] EmployeePerformance employeePerformance)
         {
-            if (ModelState.IsValid)
+            if (employeePerformance.PerformanceRating <= -1 || employeePerformance.WorkLifeBalance <= -1 || employeePerformance.JobInvolvement <= -1)
             {
-                _context.Add(employeePerformance);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.Message = "All numbers must be possitive values";
+                return View();
             }
-            return View(employeePerformance);
+
+            try
+            {
+                int performanceId = get_set_PerformanceId(employeePerformance, "Select");
+                if (performanceId == -1)
+                {
+                    performanceId = get_set_PerformanceId(employeePerformance, "Insert");
+                }
+                HttpContext.Session.SetInt32("newPerformanceID", performanceId);
+            }
+            catch (Exception)
+            {
+                ViewBag.Message = "There was an error updating the information. Please try again later";
+                return View();
+            }
+            
+           return RedirectToAction("Create", "JobInformations");
         }
 
         // GET: EmployeePerformances/Edit/5
@@ -129,10 +155,40 @@ namespace Dimension_Data_Demo.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (employeePerformance.PerformanceRating <= -1 || employeePerformance.WorkLifeBalance <= -1 || employeePerformance.JobInvolvement <= -1)
+                    {
+                        ViewBag.Message = "All numbers must be possitive values";
+                        return View();
+                    }
+
                     try
                     {
-                        //_context.Update(employeePerformance);
-                        //await _context.SaveChangesAsync();
+                        try
+                        {
+                            int performanceId = get_set_PerformanceId(employeePerformance, "Select");
+                            if(performanceId == -1)
+                            {
+                                performanceId = get_set_PerformanceId(employeePerformance, "Insert");
+                            }
+                            var conn = _context.Database.GetDbConnection();
+                            await conn.OpenAsync();
+                            SqlCommand cmd = new SqlCommand();
+                            cmd.Connection = (SqlConnection)conn;
+                            cmd.CommandType = System.Data.CommandType.Text;
+                            cmd.Parameters.AddWithValue("@EmpNumber", HttpContext.Session.GetInt32("per_employeeNumber"));
+                            cmd.Parameters.AddWithValue("@PerNumber", performanceId);
+                            cmd.CommandText = "Update dbo.Employee Set PerformanceID = @PerNumber Where EmployeeNumber=@EmpNumber";
+
+                            await cmd.ExecuteNonQueryAsync();
+                            await cmd.DisposeAsync();
+                            await conn.CloseAsync();
+
+                        }
+                        catch(Exception)
+                        {
+                            ViewBag.Message = "There was an error updating the information. Please try again later";
+                            return View();
+                        }
                     }
                     catch (DbUpdateConcurrencyException)
                     {
@@ -145,44 +201,56 @@ namespace Dimension_Data_Demo.Controllers
                             throw;
                         }
                     }
-                    return RedirectToAction(nameof(Index));
                 }
-                return View(employeePerformance);
+                return RedirectToAction("Index", "Employees");
             }
-        }
-
-        // GET: EmployeePerformances/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employeePerformance = await _context.EmployeePerformance
-                .FirstOrDefaultAsync(m => m.PerformanceId == id);
-            if (employeePerformance == null)
-            {
-                return NotFound();
-            }
-
-            return View(employeePerformance);
-        }
-
-        // POST: EmployeePerformances/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var employeePerformance = await _context.EmployeePerformance.FindAsync(id);
-            _context.EmployeePerformance.Remove(employeePerformance);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool EmployeePerformanceExists(int id)
         {
             return _context.EmployeePerformance.Any(e => e.PerformanceId == id);
+        }
+
+        public int get_set_PerformanceId(EmployeePerformance employeePerformance,string command_type)
+        {
+            int performanceId = -1;
+            try
+            {
+                var conn = _context.Database.GetDbConnection();
+                conn.Open();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = (SqlConnection)conn;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.Parameters.AddWithValue("@PerRating", (int)employeePerformance.PerformanceRating);
+                cmd.Parameters.AddWithValue("@WorkBal", (int)employeePerformance.WorkLifeBalance);
+                cmd.Parameters.AddWithValue("@JobInv", (int)employeePerformance.JobInvolvement);
+                if (command_type == "Select")
+                {
+                    cmd.CommandText = ("Select PerformanceID from dbo.EmployeePerformance Where PerformanceRating = @PerRating and WorkLifeBalance = @WorkBal and JobInvolvement = @JobInv");
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        performanceId = reader.GetInt32(0);
+                    }
+                    cmd.Dispose();
+                    reader.Close();
+                    conn.Close();
+                }
+                else if (command_type == "Insert")
+                {
+                    cmd.CommandText = ("Insert Into dbo.EmployeePerformance(PerformanceID,PerformanceRating,WorkLifeBalance,JobInvolvement) Values((Select count(*)+1 from dbo.EmployeePerformance),@PerRating,@WorkBal,@JobInv)");
+                    cmd.ExecuteNonQuery();
+                    cmd.Dispose();
+                    conn.Close();
+                    performanceId = get_set_PerformanceId(employeePerformance, "Select");
+                }
+            }
+            catch(Exception)
+            {
+                return -1;
+            }
+            return performanceId;
         }
     }
 }

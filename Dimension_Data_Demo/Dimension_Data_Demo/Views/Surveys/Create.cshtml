@@ -13,11 +13,6 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="SurveyId" class="control-label"></label>
-                <input asp-for="SurveyId" class="form-control" />
-                <span asp-validation-for="SurveyId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="EnvironmentSatisfaction" class="control-label"></label>
                 <input asp-for="EnvironmentSatisfaction" class="form-control" />
                 <span asp-validation-for="EnvironmentSatisfaction" class="text-danger"></span>
@@ -35,12 +30,16 @@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+            @if (ViewBag.Message != null)
+            {
+                <script type="text/javascript">
+                    window.onload = function () {
+                        alert("@ViewBag.Message");
+                    };
+                </script>
+            }
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

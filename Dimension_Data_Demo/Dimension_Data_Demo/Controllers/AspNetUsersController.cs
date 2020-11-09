@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Dimension_Data_Demo.Data;
 using Dimension_Data_Demo.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Dimension_Data_Demo.Controllers
 {
@@ -95,6 +96,17 @@ namespace Dimension_Data_Demo.Controllers
 
             if (ModelState.IsValid)
             {
+                if (aspNetUsers.EmployeeNumber == null)
+                {
+                    ViewBag.Message ="Employee number is required to create account";
+                    return View();
+                }
+                else if(aspNetUsers.EmployeeNumber <= -1)
+                {
+                    ViewBag.Message = "Employee number needs to be a positive number value";
+                    return View();
+                }
+
                 try
                 {
                     _context.Update(aspNetUsers);

@@ -55,10 +55,6 @@ namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
             public string Email { get; set; }
 
             [Required]
-            [Display(Name = "Employee number")]
-            public int EmployeeNumber { get; set; }
-
-            [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -87,7 +83,7 @@ namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    //return Redirect("~/AspNetUsers/Edit/"+user.Id); - one may to add employeeNumber, does not confirm email
+                    //return Redirect("~/AspNetUsers/Edit/"+user.Id); //- one may to add employeeNumber, does not confirm email
                     _logger.LogInformation("User created a new account with password.");
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -102,15 +98,15 @@ namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
                     {
                         using (MailMessage mail = new MailMessage())
                         {
-                            mail.From = new MailAddress("francobester15@gmail.com");//sys.paradigm@gmail.com Sp2020sP
+                            mail.From = new MailAddress("testing.franco.bester@gmail.com");//sys.paradigm@gmail.com Sp2020sP
                             mail.To.Add(user.Email);
                             mail.Subject = "Confirm account";
-                            mail.Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+                            mail.Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'> clicking here</a>.";
                             mail.IsBodyHtml = true;
 
                             using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))
                             {
-                                smtp.Credentials = new System.Net.NetworkCredential("francobester15@gmail.com", "Ula2Franco1");
+                                smtp.Credentials = new System.Net.NetworkCredential("testing.franco.bester@gmail.com", "Ts@12345");
                                 smtp.EnableSsl = true;
                                 smtp.Send(mail);
                             }

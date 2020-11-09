@@ -14,14 +14,26 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="EducationId" />
             <div class="form-group">
+                <label>Education field must contain positive number values</label>
                 <label asp-for="Education" class="control-label"></label>
                 <input asp-for="Education" class="form-control" />
                 <span asp-validation-for="Education" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td id="ddlInfo">Education field</td>
+                        <td id="ddlField" onchange="get_set_fieldValue()">@Html.DropDownList("fieldData", (IEnumerable<SelectListItem>)ViewData["fieldData"])</td>
+                    </tr>
+                </thead>
+            </table>
+            <button type="button" onclick="showEducationField()">New Educaiton field</button>
+            <div class="form-group" style="visibility:hidden; margin:0rem; padding:0rem" id="EducationDiv">
+                <label>Education field cannot be empty</label>
                 <label asp-for="EducationField" class="control-label"></label>
                 <input asp-for="EducationField" class="form-control" />
                 <span asp-validation-for="EducationField" class="text-danger"></span>
+                <p></p>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -29,6 +41,25 @@
         </form>
     </div>
 </div>
+
+       
+<script>
+    function get_set_fieldValue() {
+        var ddl_value = $("#ddlField :selected").text();
+        var input_value = document.getElementById("EducationField");
+        input_value.innerHTML = ddl_value;
+        input_value.value = ddl_value;
+    };
+    function showEducationField() {
+        var eduField = document.getElementById("EducationDiv");
+        eduField.style.visibility = "Visible";
+        var ddl_Field = document.getElementById("ddlField");
+        var ddl_Field_Info = document.getElementById("ddlInfo");
+        ddl_Field.style.visibility = "Hidden";
+        ddl_Field_Info.style.visibility = "Hidden";
+    }
+</script>
+
 
 <div>
     <a asp-action="Index">Back to List</a>

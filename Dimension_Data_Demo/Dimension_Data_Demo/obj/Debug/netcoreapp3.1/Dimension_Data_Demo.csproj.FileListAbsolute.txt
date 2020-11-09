@@ -370,13 +370,9 @@ C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Index.cshtml.g.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\MimeKit.dll
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
-C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Create.cshtml.g.cs
-C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Delete.cshtml.g.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Details.cshtml.g.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Edit.cshtml.g.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Index.cshtml.g.cs
-C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Create.cshtml.g.cs
-C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Delete.cshtml.g.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Details.cshtml.g.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Edit.cshtml.g.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Index.cshtml.g.cs
@@ -408,3 +404,295 @@ C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Details.cshtml.g.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Edit.cshtml.g.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Index.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\appsettings.json
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.json
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.local.json
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Dimension_Data_Demo.StaticWebAssets.xml
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Dimension_Data_Demo.exe
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Dimension_Data_Demo.deps.json
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Dimension_Data_Demo.runtimeconfig.json
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Dimension_Data_Demo.runtimeconfig.dev.json
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Dimension_Data_Demo.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Dimension_Data_Demo.pdb
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Dimension_Data_Demo.Views.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Dimension_Data_Demo.Views.pdb
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.UI.Views.V3.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.UI.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Razor.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.Workspaces.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Data.Sqlite.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Sqlite.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Embedded.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Core.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\dotnet-aspnet-codegenerator-design.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\MimeKit.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\SQLitePCLRaw.batteries_v2.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\SQLitePCLRaw.nativelibrary.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\SQLitePCLRaw.core.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\SQLitePCLRaw.provider.dynamic_cdecl.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Composition.AttributedModel.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Composition.Convention.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Composition.Hosting.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Composition.Runtime.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Composition.TypedParts.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\alpine-x64\native\libe_sqlite3.so
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-arm\native\libe_sqlite3.so
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-arm64\native\libe_sqlite3.so
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-armel\native\libe_sqlite3.so
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-musl-x64\native\libe_sqlite3.so
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libe_sqlite3.so
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-x86\native\libe_sqlite3.so
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\libe_sqlite3.dylib
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\e_sqlite3.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.csprojAssemblyReference.cache
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.AssemblyInfoInputs.cache
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.AssemblyInfo.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.csproj.CoreCompileInputs.cache
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.MvcApplicationPartsAssemblyInfo.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.MvcApplicationPartsAssemblyInfo.cache
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.RazorAssemblyInfo.cache
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.RazorAssemblyInfo.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.TagHelpers.input.cache
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.TagHelpers.output.cache
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.RazorCoreGenerate.cache
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUsers\Create.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUsers\Delete.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUsers\Details.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUsers\Edit.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUsers\Index.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Details.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Edit.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Index.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Details.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Edit.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Index.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeEducations\Create.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeEducations\Details.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeEducations\Edit.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeEducations\Index.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeHistories\Create.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeHistories\Details.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeHistories\Edit.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeHistories\Index.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeePerformances\Create.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeePerformances\Details.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeePerformances\Edit.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeePerformances\Index.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Create.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Delete.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Index.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\JobInformations\Create.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\JobInformations\Details.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\JobInformations\Edit.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\JobInformations\Index.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Create.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Details.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Edit.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Index.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.RazorTargetAssemblyInfo.cache
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.RazorTargetAssemblyInfo.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.Views.pdb
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.csproj.CopyComplete
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\staticwebassets\Dimension_Data_Demo.StaticWebAssets.Manifest.cache
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\staticwebassets\Dimension_Data_Demo.StaticWebAssets.xml
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.dll
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.pdb
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.genruntimeconfig.cache
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Create.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Create.cshtml.g.cs
+D:\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ConfirmEmail.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\aws-beanstalk-tools-defaults.json
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Data.Sqlite.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Sqlite.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\SQLitePCLRaw.batteries_v2.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\SQLitePCLRaw.nativelibrary.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\SQLitePCLRaw.core.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\SQLitePCLRaw.provider.dynamic_cdecl.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\alpine-x64\native\libe_sqlite3.so
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-arm\native\libe_sqlite3.so
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-arm64\native\libe_sqlite3.so
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-armel\native\libe_sqlite3.so
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-musl-x64\native\libe_sqlite3.so
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-x64\native\libe_sqlite3.so
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\linux-x86\native\libe_sqlite3.so
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\osx-x64\native\libe_sqlite3.dylib
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\e_sqlite3.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ConfirmEmail.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUsers\Create.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUsers\Delete.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUsers\Details.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUsers\Edit.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\AspNetUsers\Index.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Create.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Details.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Edit.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Index.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Create.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Details.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Edit.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Index.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeEducations\Create.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeEducations\Details.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeEducations\Edit.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeEducations\Index.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeHistories\Create.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeHistories\Details.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeHistories\Edit.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeHistories\Index.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeePerformances\Create.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeePerformances\Details.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeePerformances\Edit.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeePerformances\Index.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Create.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Delete.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Index.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\JobInformations\Create.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\JobInformations\Details.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\JobInformations\Edit.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\JobInformations\Index.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Create.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Details.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Edit.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Surveys\Index.cshtml.g.cs

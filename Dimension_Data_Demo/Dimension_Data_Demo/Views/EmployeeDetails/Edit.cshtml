@@ -43,6 +43,14 @@
                 <select asp-for="GenderId" class="form-control" asp-items="ViewBag.GenderId"></select>
                 <span asp-validation-for="GenderId" class="text-danger"></span>
             </div>
+            @if (ViewBag.Message != null)
+            {
+                <script type="text/javascript">
+                    window.onload = function () {
+                        alert("@ViewBag.Message");
+                    };
+                </script>
+            }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
