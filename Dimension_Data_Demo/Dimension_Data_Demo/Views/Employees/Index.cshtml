@@ -1,13 +1,22 @@
-﻿@model IEnumerable<Dimension_Data_Demo.Models.Employee>
+﻿@model ReflectionIT.Mvc.Paging.PagingList<Dimension_Data_Demo.Models.Employee>
+
+
+@*@model IEnumerable<Dimension_Data_Demo.Models.Employee>*@
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Mvc
 @using Microsoft.AspNetCore.Session
+@using ReflectionIT.Mvc.Paging
+@*@addTagHelper *, ReflectionIT.Mvc.Paging*@
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
+
+<nav aria-label="Employees">
+    @await this.Component.InvokeAsync("Pager", new { paginglist = this.Model})
+</nav>
 
 <p>
     <a a asp-controller="EmployeeDetails" asp-action="Create">Create New</a>

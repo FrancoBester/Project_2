@@ -73,6 +73,10 @@
             "MimeKit": {
               "target": "Package",
               "version": "[2.9.2, )"
+            },
+            "ReflectionIT.Mvc.Paging": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             }
           },
           "imports": [

@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
+using ReflectionIT.Mvc.Paging;
 
 namespace Dimension_Data_Demo.Controllers
 {
@@ -29,7 +30,7 @@ namespace Dimension_Data_Demo.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1)
         {
             //try Row level security tried
             //{
@@ -42,6 +43,10 @@ namespace Dimension_Data_Demo.Controllers
             //    string stest = ex.ToString();
             //    return null;
             //}
+
+            //var qry = _context.Employee.AsNoTracking().OrderBy(p => p.EmployeeNumber);
+            //var model = await PagingList.CreateAsync(qry, 10, page);
+            //return View(model);
 
             //Gets user info from user that was stored in sessions from other pages
 
@@ -71,11 +76,12 @@ namespace Dimension_Data_Demo.Controllers
                         listOfJobIds.Add(int.Parse(reader.GetValue(0).ToString()));
                     }
 
-                    var dimention_data_demoContext_2 = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => listOfJobIds.Contains((int)b.JobId));
+                    var dimention_data_demoContext_2 = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => listOfJobIds.Contains((int)b.JobId)).AsNoTracking().OrderBy(e => e.EmployeeNumber);
                     conn.Close();
                     reader.Close();
                     cmd.Dispose();
-                    return View(await dimention_data_demoContext_2.ToListAsync());
+                    var model = await PagingList.CreateAsync(dimention_data_demoContext_2, 10, page);
+                    return View(model);
                 }
                 catch(Exception)
                 {
@@ -215,20 +221,46 @@ namespace Dimension_Data_Demo.Controllers
 
         public ActionResult Data()
         {
-            var d_age = _context.EmployeeDetails.ToList();
-            List<int> repartition = new List<int>();
-            var test = _context.Database.ExecuteSqlRaw("Select * from dbo.EmployeeDetails");
+            //Ages
+            var age_all = _context.EmployeeDetails.ToList();//gets all age database
+            List<int> repeat_age = new List<int>();
+            var emp_ages = age_all.Select(e => e.Age).Distinct();//gets unique ages from database
 
-            var ages = d_age.Select(e => e.Age).Distinct();
-
-            foreach (var item in ages)
+            foreach (var item in emp_ages)
             {
-               repartition.Add(d_age.Count(e => e.Age == item));
+                repeat_age.Add(age_all.Count(e => e.Age == item));//adds amount of each age in database to list
             }
 
-            var rep = repartition;
-            ViewBag.AGES = ages;
-            ViewBag.REP = repartition.ToList();
+            ViewBag.AGE = emp_ages;//returns data to view
+            ViewBag.AGEREP = repeat_age.ToList();//returns data to view
+
+            //Genders
+            var gender_all = _context.EmployeeDetails.ToList();//get all employee genders from database
+            List<int> repeat_gender = new List<int>();
+            var emp_gender = gender_all.Select(e => e.GenderId).Distinct();//gets uniquw age types from database
+
+            foreach(var gender in emp_gender)
+            {
+                repeat_gender.Add(gender_all.Count(e => e.GenderId == gender));//add amnount of each gender in database to list
+            }
+
+            ViewBag.GENDER = emp_gender;//returns gender to view
+            ViewBag.GENREP = repeat_gender.ToList();//returns data to view
+
+            //Marital
+            var marital_all = _context.EmployeeDetails.ToList();
+            List<int> repeat_marital = new List<int>();
+            var emp_marital = marital_all.Select(e => e.MaritalId).Distinct();
+
+            foreach(var marrige in emp_marital)
+            {
+                repeat_marital.Add(marital_all.Count(e => e.MaritalId == marrige));
+            }
+
+            ViewBag.MARRIGE = emp_marital;
+            ViewBag.MARREP = repeat_marital.ToList();
+
+
             return View();
 
         }

@@ -25,13 +25,13 @@
 
     <script>
 
-        var repArray = @Html.Raw(Json.Serialize(ViewBag.Rep));
-        var ages = @Html.Raw(Json.Serialize(ViewBag.Rep));
+        var repArray = @Html.Raw(Json.Serialize(ViewBag.MARREP));
+        var ages = @Html.Raw(Json.Serialize(ViewBag.MARREP));
 
         var ctx = $("#bar_chart");
         var barchart = new Chart(ctx, {
 
-            type: 'bar',
+            type: 'pie',
             data: {
                 labels: ages,
                 datasets: [{
@@ -48,9 +48,6 @@
                 scales: { xAex: [{ ticks: { beginAtZero: true } }] },
                 legend: { display: false }
             },
-
-
-
         });
 
     </script>

@@ -691,7 +691,11 @@ C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Analytics\Index.cshtml.g.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\CostToCompanies\Create.cshtml.g.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\EmployeeDetails\Create.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Data.cshtml.g.cs
+C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
+C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ReflectionIT.Mvc.Paging.Views.dll
+C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\bin\Debug\netcoreapp3.1\ReflectionIT.Mvc.Paging.dll
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.csproj.CoreCompileInputs.cache
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Dimension_Data_Demo.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Franco Bester\Desktop\Project_2\Dimension_Data_Demo\Dimension_Data_Demo\obj\Debug\netcoreapp3.1\Razor\Views\Employees\Data.cshtml.g.cs
