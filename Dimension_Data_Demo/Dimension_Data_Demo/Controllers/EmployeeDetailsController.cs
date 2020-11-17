@@ -217,6 +217,8 @@ namespace Dimension_Data_Demo.Controllers
 
                 if (command_type == "Select")
                 {
+                   //var test = _context.EmployeeDetails.Select(e => e.DetailsId)
+
                     cmd.CommandText = ("Select DetailsID from dbo.employeeDetails Where Age = @Age and Attrition = @Attrition and DistanceFromHome = @Distance and Over18 = @Over and MaritalID = @Marital and GenderID = @Gender");
                     SqlDataReader reader =  cmd.ExecuteReader();
 

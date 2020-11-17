@@ -32,6 +32,8 @@ namespace Dimension_Data_Demo.Controllers
             var backupID = HttpContext.Session.GetInt32("PayID");
 
             var dimention_data_demoContext = _context.CostToCompany.Where(e => e.PayId == backupID);
+
+
             return View(await dimention_data_demoContext.ToListAsync());
         }
 
@@ -103,7 +105,7 @@ namespace Dimension_Data_Demo.Controllers
             {
                 return NotFound();
             }
-            HttpContext.Session.SetString("oldJCostModel", JsonConvert.SerializeObject(costToCompany));//Saves model as string in session to be used to compare later
+            HttpContext.Session.SetString("oldCostModel", JsonConvert.SerializeObject(costToCompany));//Saves model as string in session to be used to compare later
             return View(costToCompany);
         }
 

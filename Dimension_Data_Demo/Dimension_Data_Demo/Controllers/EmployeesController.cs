@@ -44,6 +44,7 @@ namespace Dimension_Data_Demo.Controllers
             //}
 
             //Gets user info from user that was stored in sessions from other pages
+
             var user_EmpNumber = HttpContext.Session.GetString("EmployeeNumber");
             var user_Role = HttpContext.Session.GetString("JobRole");
             var user_Department = HttpContext.Session.GetString("Department");
@@ -210,6 +211,26 @@ namespace Dimension_Data_Demo.Controllers
         private bool EmployeeExists(int id)
         {
             return _context.Employee.Any(e => e.EmployeeNumber == id);
+        }
+
+        public ActionResult Data()
+        {
+            var d_age = _context.EmployeeDetails.ToList();
+            List<int> repartition = new List<int>();
+            var test = _context.Database.ExecuteSqlRaw("Select * from dbo.EmployeeDetails");
+
+            var ages = d_age.Select(e => e.Age).Distinct();
+
+            foreach (var item in ages)
+            {
+               repartition.Add(d_age.Count(e => e.Age == item));
+            }
+
+            var rep = repartition;
+            ViewBag.AGES = ages;
+            ViewBag.REP = repartition.ToList();
+            return View();
+
         }
     }
   

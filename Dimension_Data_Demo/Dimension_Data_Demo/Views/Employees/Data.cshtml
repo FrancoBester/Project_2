@@ -1,0 +1,59 @@
+﻿<html>
+
+<head>
+    <script src="~/js/Chart.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        #chart_container{
+            width:400px;
+            height:400px;
+            border: 1px solid #ddd;
+            padding: 1px;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div id="chart_container">
+        <canvas id="bar_chart"></canvas>
+    </div>
+
+    <script>
+
+        var repArray = @Html.Raw(Json.Serialize(ViewBag.Rep));
+        var ages = @Html.Raw(Json.Serialize(ViewBag.Rep));
+
+        var ctx = $("#bar_chart");
+        var barchart = new Chart(ctx, {
+
+            type: 'bar',
+            data: {
+                labels: ages,
+                datasets: [{
+                    label: "Example",
+                    data: repArray,
+                    backgroundColor: ["rgba(242,166,54,.5)", "rgba(145,65,72,.5)", "rgba(74,25,92,.5)"],
+                    borderColor: ["rgba(242,166,54,.5)", "rgba(145,65,72,.5)", "rgba(74,25,92,.5)"],
+                    borderWidth:1
+                }]
+            },
+            options: {
+
+                maintainAspectRatio: false,
+                scales: { xAex: [{ ticks: { beginAtZero: true } }] },
+                legend: { display: false }
+            },
+
+
+
+        });
+
+    </script>
+</body>
+
+</html>
