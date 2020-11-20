@@ -34,25 +34,11 @@ namespace Dimension_Data_Demo.Controllers
             {
                 try
                 {
-                    //Is used to filter data to only show single person data
-                    int EduactionID = -1;
-                    var conn = _context.Database.GetDbConnection();
-                    await conn.OpenAsync();
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = (SqlConnection)conn;
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Id", (int)id);
-                    cmd.CommandText = ("Select EducationID from dbo.Employee Where EmployeeNumber = @Id");
-                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
-                    while (reader.Read())
-                    {
-                        EduactionID = reader.GetInt32(0);
-                    }
-                    await conn.CloseAsync();
-                    await cmd.DisposeAsync();
-                    await reader.CloseAsync();
-                    HttpContext.Session.SetInt32("edu_employeeNumber", (int)id);
-                    HttpContext.Session.SetInt32("EducationId", (int)EduactionID);
+                    //Is used to filter data to only show single persons education data from database
+                    int EduactionID = ((int)_context.Employee.Where(e => e.EmployeeNumber == id).Select(e => e.EducationId).First());
+
+                    HttpContext.Session.SetInt32("edu_employeeNumber", (int)id);//saves id in session to be used when the user returns to the page an does not use the main navigation page
+                    HttpContext.Session.SetInt32("EducationId", (int)EduactionID);//saves id in session to be used when the user returns to the page an does not use the main navigation page
                 }
                 catch(Exception)
                 {
@@ -62,7 +48,7 @@ namespace Dimension_Data_Demo.Controllers
             }
 
             var backupID = HttpContext.Session.GetInt32("EducationId");
-            var dimention_data_demoContext = _context.EmployeeEducation.Where(e => e.EducationId == backupID);
+            var dimention_data_demoContext = _context.EmployeeEducation.Where(e => e.EducationId == backupID);//filter view to only show one employees education data
             return View(await dimention_data_demoContext.ToListAsync());
         }
 
@@ -90,21 +76,14 @@ namespace Dimension_Data_Demo.Controllers
             try//gets only existing education fields from the database and addes to a drop down list
             {
                 List<SelectListItem> EducationFieldlist = new List<SelectListItem>();
-                var conn = _context.Database.GetDbConnection();
-                conn.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = ("Select distinct(EducationField) from dbo.EmployeeEducation");
-                SqlDataReader reader =  cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    EducationFieldlist.Add(new SelectListItem() { Text = reader.GetValue(0).ToString() });
-                }
 
-                conn.Close();
-                cmd.Dispose();
-                reader.Close();
+                var field_education = _context.EmployeeEducation.Select(e => e.EducationField).Distinct();
+
+                foreach (var field in field_education)
+                {
+                    string stest = field.ToString();
+                    EducationFieldlist.Add(new SelectListItem() { Text = field.ToString() });
+                }
                 ViewData["fieldData"] = EducationFieldlist;
             }
             catch (Exception)
@@ -131,15 +110,22 @@ namespace Dimension_Data_Demo.Controllers
                 employeeEducation.EducationField = "Human Resources";
             }
 
-
             try
             {
-                int educationId = get_set_EducationId(employeeEducation, "Select");
-                if (educationId == -1)
+                int education_ID = (int)_context.EmployeeEducation.Where(e => e.Education == employeeEducation.Education && e.EducationField == employeeEducation.EducationField).Select(e => e.EducationId).First();
+                if (education_ID == 0)
                 {
-                    educationId = get_set_EducationId(employeeEducation, "Insert");
+                    int new_education_ID = ((int)_context.EmployeeEducation.OrderByDescending(e => e.EducationId).Select(e => e.EducationId).First()) + 1;//gets the id of the new record that will be added into the table
+                    employeeEducation.EducationId = new_education_ID;//assignes new it to model
+                    _context.Add(employeeEducation);//addes id to model that will be added to database
+                    await _context.SaveChangesAsync();//addes the new models info into the database
+
+                    HttpContext.Session.SetInt32("newEducationID", new_education_ID);//addes id to session to be used later when adding user into the main table in the database
                 }
-                HttpContext.Session.SetInt32("newEducationID", educationId);
+                else
+                {
+                    HttpContext.Session.SetInt32("newEducationID", education_ID);//addes id to session to be used later when adding user into the main table in the database
+                }
             }
             catch (Exception)
             {
@@ -155,26 +141,19 @@ namespace Dimension_Data_Demo.Controllers
             try//gets only existing education fields from the database and addes to a drop down list
             {
                 List<SelectListItem> EducationFieldlist = new List<SelectListItem>();
-                var conn = _context.Database.GetDbConnection();
-                await conn.OpenAsync();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = ("Select distinct(EducationField) from dbo.EmployeeEducation");
-                SqlDataReader reader = await cmd.ExecuteReaderAsync();
-                while (reader.Read())
+
+                var field_education = _context.EmployeeEducation.Select(e => e.EducationField).Distinct();
+
+                foreach (var field in field_education)
                 {
-                    EducationFieldlist.Add(new SelectListItem() { Text = reader.GetValue(0).ToString() });
+                    string stest = field.ToString();
+                    EducationFieldlist.Add(new SelectListItem() { Text = field.ToString() });
                 }
-
-
-                await conn.CloseAsync();
-                await cmd.DisposeAsync();
-                await reader.CloseAsync();
                 ViewData["fieldData"] = EducationFieldlist;
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                string error = ex.ToString();
                 return RedirectToAction(nameof(Index));
             }
 
@@ -225,27 +204,27 @@ namespace Dimension_Data_Demo.Controllers
                     {
                         try
                         {
-                            int educationId = get_set_EducationId(employeeEducation, "Select");
-                            if (educationId == -1)
+                            int education_ID = (int)_context.EmployeeEducation.Where(e => e.Education == employeeEducation.Education && e.EducationField == employeeEducation.EducationField).Select(e => e.EducationId).First();
+                            if (education_ID == 0)
                             {
-                                educationId = get_set_EducationId(employeeEducation, "Insert");
+                                education_ID = ((int)_context.EmployeeEducation.OrderByDescending(e => e.EducationId).Select(e => e.EducationId).First()) + 1;//gets the id of the new record that will be added into the tab
                             }
 
-                            var conn = _context.Database.GetDbConnection();
-                            await conn.OpenAsync();
-                            SqlCommand cmd = new SqlCommand();
-                            cmd.Connection = (SqlConnection)conn;
-                            cmd.CommandType = System.Data.CommandType.Text;
-                            cmd.Parameters.AddWithValue("@EmpNumber", HttpContext.Session.GetInt32("edu_employeeNumber"));
-                            cmd.Parameters.AddWithValue("@EduNumber", educationId);
-                            cmd.CommandText = "Update dbo.Employee Set EducationID = @EduNumber Where EmployeeNumber=@EmpNumber";
+                            int employee_number = (int)HttpContext.Session.GetInt32("edu_employeeNumber");
+                            var employee_model = _context.Employee.FirstOrDefault(e => e.EmployeeNumber == employee_number);
 
-                            await cmd.ExecuteNonQueryAsync();
-                            await cmd.DisposeAsync();
-                            await conn.CloseAsync();
+                            Employee emp = (Employee)employee_model;
+                            var testing = emp.EducationId;
+                            //emp.EducationId
+
+                            //var test = _context.Employee.;
+                            //employee_model = education_ID;
+
+
                         }
-                        catch(Exception)
+                        catch(Exception ex)
                         {
+                            string error = ex.ToString();
                             return RedirectToAction(nameof(Index));
                         }
 
@@ -269,49 +248,6 @@ namespace Dimension_Data_Demo.Controllers
         private bool EmployeeEducationExists(int id)
         {
             return _context.EmployeeEducation.Any(e => e.EducationId == id);
-        }
-
-        public int get_set_EducationId(EmployeeEducation employeeEducation, string command_type)
-        {
-            int educationId = -1;
-            try
-            {
-                var conn = _context.Database.GetDbConnection();
-                conn.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Education", (int)employeeEducation.Education);
-                cmd.Parameters.AddWithValue("@EduField", employeeEducation.EducationField.ToString());
-
-                if (command_type == "Select")
-                {
-                    cmd.CommandText = ("Select EducationID from dbo.EmployeeEducation Where Education = @Education and EducationField = @EduField");
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        educationId = reader.GetInt32(0);
-                    }
-                    cmd.Dispose();
-                    reader.Close();
-                    conn.Close();
-                }
-                else if (command_type == "Insert")
-                {
-                    cmd.CommandText = ("Insert Into dbo.EmployeeEducation(EducationID,Education,EducationField) " +
-                        "Values((Select count(*)+1 from dbo.EmployeeEducation),@Education,@EduField)");
-                    cmd.ExecuteNonQuery();
-                    cmd.Dispose();
-                    conn.Close();
-                    educationId = get_set_EducationId(employeeEducation, "Select");
-                }
-            }
-            catch(Exception)
-            {
-                return -1;
-            }
-            return educationId;
         }
     }
 }

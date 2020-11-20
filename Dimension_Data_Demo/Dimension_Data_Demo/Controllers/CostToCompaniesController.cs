@@ -25,7 +25,7 @@ namespace Dimension_Data_Demo.Controllers
         // GET: CostToCompanies
         public async Task<IActionResult> Index(int? id)
         {
-            if(id != null)
+            if (id != null)
             {
                 HttpContext.Session.SetInt32("PayID", (int)id);
             }
@@ -53,7 +53,7 @@ namespace Dimension_Data_Demo.Controllers
             if (ModelState.IsValid)
             {
                 string sOverTime = costToCompany.OverTime;
-                sOverTime = sOverTime.ToUpper();
+                sOverTime = sOverTime.ToUpper();//ensures that all data is in the same format for the column
                 //Ensure user enter positive numbers into database
                 if (costToCompany.HourlyRate < 0 || costToCompany.MonthlyRate < 0 || costToCompany.MonthlyIncome < 0 || costToCompany.DailyRate < 0 || costToCompany.DailyRate < 0 || costToCompany.PercentSalaryHike < 0)
                 {
@@ -67,10 +67,21 @@ namespace Dimension_Data_Demo.Controllers
                 }
                 costToCompany.OverTime = sOverTime;
 
-                
-                int costNumber = get_set_CostId(costToCompany, "Insert");
-                
-                HttpContext.Session.SetInt32("newPayID", costNumber);
+                try
+                {
+                    int pay_ID = ((int)_context.CostToCompany.OrderByDescending(e => e.PayId).Select(e => e.PayId).First()) + 1;//gets the id of the last record in the table and increase by one as a new id
+                    costToCompany.PayId = pay_ID;//assignes new id to model
+                    _context.Add(costToCompany);//add model to be added into the db context
+                    await _context.SaveChangesAsync();//addes the new row into the database using the db context
+
+                    HttpContext.Session.SetInt32("newPayID", pay_ID);//add id to a session to be used later when creating the new user in the employee table
+                }
+                catch (Exception ex)//catches any error that may happen in try brackets
+                {
+                    string error = ex.ToString();//variable used to see error when testing
+                    ViewBag.Message = "There was an error updating the information. Please try again later";
+                    return View();
+                }
             }
             return RedirectToAction("Create", "EmployeePerformances");
         }
@@ -132,7 +143,7 @@ namespace Dimension_Data_Demo.Controllers
                     string sOverTime = costToCompany.OverTime;
                     sOverTime = sOverTime.ToUpper();
                     //Ensure user enter positive numbers into database
-                    if(costToCompany.HourlyRate < 0 || costToCompany.MonthlyRate < 0|| costToCompany.MonthlyIncome < 0 || costToCompany.DailyRate < 0 || costToCompany.DailyRate < 0 || costToCompany.PercentSalaryHike < 0)
+                    if (costToCompany.HourlyRate < 0 || costToCompany.MonthlyRate < 0 || costToCompany.MonthlyIncome < 0 || costToCompany.DailyRate < 0 || costToCompany.DailyRate < 0 || costToCompany.PercentSalaryHike < 0)
                     {
                         ViewBag.Message = "All numbers must be possitive values";
                         return View();
@@ -167,53 +178,6 @@ namespace Dimension_Data_Demo.Controllers
         private bool CostToCompanyExists(int id)
         {
             return _context.CostToCompany.Any(e => e.PayId == id);
-        }
-        public int get_set_CostId(CostToCompany costToCompany, string command_type)
-        {
-            int costNumber = -1;
-            try
-            {
-                var conn = _context.Database.GetDbConnection();
-                conn.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@hourRate", (int)costToCompany.HourlyRate);
-                cmd.Parameters.AddWithValue("@montRate", costToCompany.MonthlyRate);
-                cmd.Parameters.AddWithValue("@montIn", (int)costToCompany.MonthlyIncome);
-                cmd.Parameters.AddWithValue("@dailRate", costToCompany.DailyRate);
-                cmd.Parameters.AddWithValue("@Over", costToCompany.OverTime.ToString().ToUpper());
-                cmd.Parameters.AddWithValue("@perSal", (int)costToCompany.PercentSalaryHike);
-
-                if (command_type == "Select")
-                {
-                    cmd.CommandText = ("Select PayID from dbo.CostToCompany Where HourlyRate = @hourRate and MonthlyRate = @montRate and MonthlyIncome = @montIn and DailyRate = @dailRate and OverTime = @Over and PercentSalaryHike = @perSal");
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        costNumber = reader.GetInt32(0);
-                    }
-                    cmd.Dispose();
-                    reader.Close();
-                    conn.Close();
-                }
-                else if (command_type == "Insert")
-                {
-                    cmd.CommandText = ("Insert Into dbo.CostToCompany(PayID,HourlyRate,MonthlyRate,MonthlyIncome,DailyRate,OverTime,PercentSalaryHike) " +
-                        "Values((Select count(*)+1 from dbo.CostToCompany),@hourRate,@montRate,@montIn,@dailRate,@Over,@perSal)");
-                    cmd.ExecuteNonQuery();
-                    cmd.Dispose();
-                    conn.Close();
-                    costNumber = get_set_CostId(costToCompany, "Select");
-                }
-            }
-            catch (Exception ex)
-            {
-                string serror = ex.ToString();
-                return -1;
-            }
-            return costNumber;
         }
 
     }

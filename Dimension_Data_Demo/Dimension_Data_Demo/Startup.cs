@@ -43,7 +43,7 @@ namespace Dimension_Data_Demo
             services.AddControllersWithViews();
             services.AddDbContext<dimention_data_demoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRazorPages();
-            services.AddPaging();
+            //services.AddPaging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

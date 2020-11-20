@@ -71,12 +71,16 @@ namespace Dimension_Data_Demo.Controllers
 
                 try
                 {
-                    int detailNumber = get_set_DetailsId(employeeDetails, "Insert");
-                    
-                    HttpContext.Session.SetInt32("newDetailsID", detailNumber);
+                    int detail_ID = ((int)_context.EmployeeDetails.OrderByDescending(e => e.DetailsId).Select(e => e.DetailsId).First()) + 1;//gets the last employee number in database and addes one as new users id
+                    employeeDetails.DetailsId = detail_ID; //assignes id to model used to create new record in database
+                    _context.Add(employeeDetails);//add model to context - pre sql execution
+                    await _context.SaveChangesAsync();//model added to context is add to database
+
+                    HttpContext.Session.SetInt32("newDetailsID", detail_ID);//new detail id is added to session to be used at a later time
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
+                    string error = ex.ToString();//variable used to see error when testing
                     ViewBag.Message = "There was an error updating the information. Please try again later";
                     return View();
                 }
@@ -196,56 +200,6 @@ namespace Dimension_Data_Demo.Controllers
         private bool EmployeeDetailsExists(int id)
         {
             return _context.EmployeeDetails.Any(e => e.DetailsId == id);
-        }
-
-        public int get_set_DetailsId(EmployeeDetails employeeDetails, string command_type)
-        {
-            int detailNumber = -1;
-            try
-            {
-                var conn = _context.Database.GetDbConnection();
-                conn.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Age", (int)employeeDetails.Age);
-                cmd.Parameters.AddWithValue("@Attrition", employeeDetails.Attrition);
-                cmd.Parameters.AddWithValue("@Distance", (int)employeeDetails.DistanceFromHome);
-                cmd.Parameters.AddWithValue("@Over", employeeDetails.Over18);
-                cmd.Parameters.AddWithValue("@Marital", (int)employeeDetails.MaritalId);
-                cmd.Parameters.AddWithValue("@Gender", (int)employeeDetails.GenderId);
-
-                if (command_type == "Select")
-                {
-                   //var test = _context.EmployeeDetails.Select(e => e.DetailsId)
-
-                    cmd.CommandText = ("Select DetailsID from dbo.employeeDetails Where Age = @Age and Attrition = @Attrition and DistanceFromHome = @Distance and Over18 = @Over and MaritalID = @Marital and GenderID = @Gender");
-                    SqlDataReader reader =  cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        detailNumber = reader.GetInt32(0);
-                    }
-                    cmd.Dispose();
-                    reader.Close();
-                    conn.Close();
-                }
-                else if (command_type == "Insert")
-                {
-                    cmd.CommandText = ("Insert Into dbo.EmployeeDetails(DetailsID,Age,Attrition,DistanceFromHome,Over18,MaritalID,GenderID) " +
-                        "Values((Select count(*)+1 from dbo.EmployeeDetails),@Age,@Attrition,@Distance,@Over,@Marital,@Gender)");
-                    cmd.ExecuteNonQuery();
-                    cmd.Dispose();
-                    conn.Close();
-                    detailNumber = get_set_DetailsId(employeeDetails, "Select");
-                }
-            }
-            catch (Exception ex)
-            {
-                string serror = ex.ToString();
-                return -1;
-            }
-            return detailNumber;
         }
     }
 }
