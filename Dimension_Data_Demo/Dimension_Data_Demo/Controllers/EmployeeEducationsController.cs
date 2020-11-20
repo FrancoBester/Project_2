@@ -81,7 +81,6 @@ namespace Dimension_Data_Demo.Controllers
 
                 foreach (var field in field_education)
                 {
-                    string stest = field.ToString();
                     EducationFieldlist.Add(new SelectListItem() { Text = field.ToString() });
                 }
                 ViewData["fieldData"] = EducationFieldlist;
@@ -207,20 +206,20 @@ namespace Dimension_Data_Demo.Controllers
                             int education_ID = (int)_context.EmployeeEducation.Where(e => e.Education == employeeEducation.Education && e.EducationField == employeeEducation.EducationField).Select(e => e.EducationId).First();
                             if (education_ID == 0)
                             {
-                                education_ID = ((int)_context.EmployeeEducation.OrderByDescending(e => e.EducationId).Select(e => e.EducationId).First()) + 1;//gets the id of the new record that will be added into the tab
+                                education_ID = ((int)_context.EmployeeEducation.OrderByDescending(e => e.EducationId).Select(e => e.EducationId).First()) + 1;//gets the id of the new record that will be added into the database
+                                employeeEducation.EducationId = education_ID;//assignes new id to model
+                                _context.Add(employeeEducation);//addes id to model that will be added to database
+                                await _context.SaveChangesAsync();//addes the new models info into the database
                             }
 
-                            int employee_number = (int)HttpContext.Session.GetInt32("edu_employeeNumber");
-                            var employee_model = _context.Employee.FirstOrDefault(e => e.EmployeeNumber == employee_number);
+                            int employee_number = (int)HttpContext.Session.GetInt32("edu_employeeNumber");//gets employee number from session
+                            var employee_model = _context.Employee.FirstOrDefault(e => e.EmployeeNumber == employee_number);//gets the employee data according to the employee number
 
-                            Employee emp = (Employee)employee_model;
-                            var testing = emp.EducationId;
-                            //emp.EducationId
+                            Employee temp_employee = (Employee)employee_model;//comverts employee data into a employee model
+                            temp_employee.EducationId = education_ID;//cahnges the eduaction id of the model to be the updated education id
 
-                            //var test = _context.Employee.;
-                            //employee_model = education_ID;
-
-
+                            _context.Update(temp_employee);//addes employee model to db context
+                            await _context.SaveChangesAsync();//update database with new data from employee model
                         }
                         catch(Exception ex)
                         {

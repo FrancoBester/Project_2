@@ -32,24 +32,11 @@ namespace Dimension_Data_Demo.Controllers
             {
                 try
                 {
-                    int PerformanceID = -1;
-                    var conn = _context.Database.GetDbConnection();
-                    await conn.OpenAsync();
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = (SqlConnection)conn;
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Id", (int)id);
-                    cmd.CommandText = ("Select PerformanceID from dbo.Employee Where EmployeeNumber = @Id");
-                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
-                    while (reader.Read())
-                    {
-                        PerformanceID = reader.GetInt32(0);
-                    }
-                    await conn.CloseAsync();
-                    await cmd.DisposeAsync();
-                    await reader.CloseAsync();
-                    HttpContext.Session.SetInt32("per_employeeNumber", (int)id);
-                    HttpContext.Session.SetInt32("PerformanceId", PerformanceID);
+                    //Is used to filter data to only show single persons performance data from database
+                    int PerformanceID = ((int)_context.Employee.Where(e => e.EmployeeNumber == id).Select(e => e.PerformanceId).First());
+
+                    HttpContext.Session.SetInt32("per_employeeNumber", (int)id);//saves id in session to be used when the user returns to the page an does not use the main navigation page
+                    HttpContext.Session.SetInt32("PerformanceId", PerformanceID);//saves id in session to be used when the user returns to the page an does not use the main navigation page
                 }
                 catch(Exception)
                 {
@@ -59,7 +46,7 @@ namespace Dimension_Data_Demo.Controllers
             }
 
             var backupID = HttpContext.Session.GetInt32("PerformanceId");
-            var dimention_data_demoContext = _context.EmployeePerformance.Where(e => e.PerformanceId == backupID);
+            var dimention_data_demoContext = _context.EmployeePerformance.Where(e => e.PerformanceId == backupID);//filter view to only show one employees performance data
             return View(await dimention_data_demoContext.ToListAsync());
         }
 
@@ -102,12 +89,21 @@ namespace Dimension_Data_Demo.Controllers
 
             try
             {
-                int performanceId = get_set_PerformanceId(employeePerformance, "Select");
-                if (performanceId == -1)
+                int performance_ID = (int)_context.EmployeePerformance.Where(e => e.PerformanceRating == employeePerformance.PerformanceRating && e.WorkLifeBalance == employeePerformance.WorkLifeBalance && 
+                e.JobInvolvement == employeePerformance.JobInvolvement).Select(e => e.PerformanceId).First();
+                if(performance_ID == 0)
                 {
-                    performanceId = get_set_PerformanceId(employeePerformance, "Insert");
+                    int new_performance_ID = ((int)_context.EmployeePerformance.OrderByDescending(e => e.PerformanceId).Select(e => e.PerformanceId).First()) + 1;//gets the id of the new record that will be added into the table
+                    employeePerformance.PerformanceId = new_performance_ID;//assignes new it to model
+                    _context.Add(employeePerformance);//addes id to model that will be added to database
+                    await _context.SaveChangesAsync();//addes the new models info into the database
+
+                    HttpContext.Session.SetInt32("newPerformanceID", new_performance_ID);//addes id to session to be used later when adding user into the main table in the database
                 }
-                HttpContext.Session.SetInt32("newPerformanceID", performanceId);
+                else
+                {
+                    HttpContext.Session.SetInt32("newPerformanceID", performance_ID);//addes id to session to be used later when adding user into the main table in the database
+                }
             }
             catch (Exception)
             {
