@@ -40,8 +40,9 @@ namespace Dimension_Data_Demo.Controllers
                     HttpContext.Session.SetInt32("edu_employeeNumber", (int)id);//saves id in session to be used when the user returns to the page an does not use the main navigation page
                     HttpContext.Session.SetInt32("EducationId", (int)EduactionID);//saves id in session to be used when the user returns to the page an does not use the main navigation page
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
+                    string error = ex.ToString();
                     ViewBag.Message = "There was a problem retrieving the data. Please try later";
                     return View();
                 }
@@ -100,24 +101,26 @@ namespace Dimension_Data_Demo.Controllers
         public async Task<IActionResult> Create([Bind("EducationId,Education,EducationField")] EmployeeEducation employeeEducation)
         {
            
-            if (employeeEducation.Education <= -1)
+            if (employeeEducation.Education <= -1)//ensures that all data intered is logically correct
             {
                 return RedirectToAction(nameof(Index));
             }
-            else if (employeeEducation.EducationField == null)
+            else if (employeeEducation.EducationField == null)//ensures that all data intered is logically correct
             {
                 employeeEducation.EducationField = "Human Resources";
             }
 
             try
             {
-                int education_ID = (int)_context.EmployeeEducation.Where(e => e.Education == employeeEducation.Education && e.EducationField == employeeEducation.EducationField).Select(e => e.EducationId).First();
-                if (education_ID == 0)
+                int education_ID = (int)_context.EmployeeEducation.Where(e => e.Education == employeeEducation.Education && 
+                e.EducationField == employeeEducation.EducationField).Select(e => e.EducationId).FirstOrDefault();//gets id of record that meets all where clauses
+
+                if (education_ID == 0)//if 0 then a new record needs to be added
                 {
                     int new_education_ID = ((int)_context.EmployeeEducation.OrderByDescending(e => e.EducationId).Select(e => e.EducationId).First()) + 1;//gets the id of the new record that will be added into the table
                     employeeEducation.EducationId = new_education_ID;//assignes new it to model
-                    _context.Add(employeeEducation);//addes id to model that will be added to database
-                    await _context.SaveChangesAsync();//addes the new models info into the database
+                    _context.Add(employeeEducation);//adds id to model that will be added to database
+                    await _context.SaveChangesAsync();//adds the new models info into the database
 
                     HttpContext.Session.SetInt32("newEducationID", new_education_ID);//addes id to session to be used later when adding user into the main table in the database
                 }
@@ -126,8 +129,9 @@ namespace Dimension_Data_Demo.Controllers
                     HttpContext.Session.SetInt32("newEducationID", education_ID);//addes id to session to be used later when adding user into the main table in the database
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                string error = ex.ToString();
                 return RedirectToAction("Index", "Home");
             }
 
@@ -208,8 +212,8 @@ namespace Dimension_Data_Demo.Controllers
                             {
                                 education_ID = ((int)_context.EmployeeEducation.OrderByDescending(e => e.EducationId).Select(e => e.EducationId).First()) + 1;//gets the id of the new record that will be added into the database
                                 employeeEducation.EducationId = education_ID;//assignes new id to model
-                                _context.Add(employeeEducation);//addes id to model that will be added to database
-                                await _context.SaveChangesAsync();//addes the new models info into the database
+                                _context.Add(employeeEducation);//adde model to context that will be used for update
+                                await _context.SaveChangesAsync();//adds the new models info into the database
                             }
 
                             int employee_number = (int)HttpContext.Session.GetInt32("edu_employeeNumber");//gets employee number from session

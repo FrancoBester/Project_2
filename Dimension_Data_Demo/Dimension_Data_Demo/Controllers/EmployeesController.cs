@@ -60,31 +60,22 @@ namespace Dimension_Data_Demo.Controllers
             {
                 try
                 {
-                    var conn = _context.Database.GetDbConnection();
-                    conn.Open();
-                    //SqlConnection conn = new SqlConnection((_context.Database.GetDbConnection()).ToString());
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = (SqlConnection)conn;
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Department", user_Department.ToString());
-                    cmd.CommandText = "Select JobID from dbo.JobInformation Where Department = @Department";
+                    var list_job_ID = _context.JobInformation.Where(e => e.Department == user_Department).Select(e => e.JobId);
                     List<int> listOfJobIds = new List<int>();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+
+                    foreach (var jobID in list_job_ID)
                     {
-                        string stest = reader.GetValue(0).ToString();
-                        listOfJobIds.Add(int.Parse(reader.GetValue(0).ToString()));
+                        listOfJobIds.Add((int)jobID);
                     }
 
+
                     var dimention_data_demoContext_2 = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => listOfJobIds.Contains((int)b.JobId)).AsNoTracking().OrderBy(e => e.EmployeeNumber);
-                    conn.Close();
-                    reader.Close();
-                    cmd.Dispose();
                     var model = await PagingList.CreateAsync(dimention_data_demoContext_2, 10, page);
                     return View(model);
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
+                    string error = ex.ToString();
                     ViewBag.Message = "There was a problem retrieving the data. Please try later";
                     return View();
                 }
@@ -95,9 +86,6 @@ namespace Dimension_Data_Demo.Controllers
                 var dimention_data_demoContext = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => b.EmployeeNumber == iEmployeeNumbeer);
                 return View(await dimention_data_demoContext.ToListAsync());
             }
-            //var dimention_data_demoContext = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => b.EmployeeNumber == valu) ;
-            //CostToCompaniesController employeeCost = new CostToCompaniesController(_context);
-            //await employeeCost.Details(valu);
             
         }
 
@@ -114,9 +102,7 @@ namespace Dimension_Data_Demo.Controllers
 
             var employee = await _context.Employee
                 .Include(e => e.Details)
-
                 .Include(e => e.Education)
-
                 .Include(e => e.History)
                 .Include(e => e.Job)
                 .Include(e => e.Pay)
@@ -136,41 +122,57 @@ namespace Dimension_Data_Demo.Controllers
         {
             try
             {
-                int value = 0;
-                var conn = _context.Database.GetDbConnection();
-                conn.OpenAsync();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = ("Select top 1 * from dbo.Employee Order By EmployeeNumber DESC");
-                SqlDataReader reader = cmd.ExecuteReader();
-                while(reader.Read())
-                {
-                    value = reader.GetInt32(0);
-                }
-                cmd.Dispose();
-                reader.Close();
+                int employee_ID = ((int)_context.Employee.OrderByDescending(e => e.EmployeeNumber).Select(e => e.EmployeeNumber).First()) + 1; //gets the employee number of the new employee
 
-                cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Del", (int)HttpContext.Session.GetInt32("newDetailsID"));
-                cmd.Parameters.AddWithValue("@Edu", (int)HttpContext.Session.GetInt32("newEducationID"));
-                cmd.Parameters.AddWithValue("@His", (int)HttpContext.Session.GetInt32("newHistoryID"));
-                cmd.Parameters.AddWithValue("@Pay", (int)HttpContext.Session.GetInt32("newPayID"));
-                cmd.Parameters.AddWithValue("@Per", (int)HttpContext.Session.GetInt32("newPerformanceID"));
-                cmd.Parameters.AddWithValue("@Job", (int)HttpContext.Session.GetInt32("newJobID"));
-                cmd.Parameters.AddWithValue("@Sur", (int)HttpContext.Session.GetInt32("newSurveyID"));
-                cmd.Parameters.AddWithValue("@Emp", value +1);
-                cmd.CommandText = ("Insert into dbo.Employee(EmployeeNumber,JobID,DetailsID,PayID,EducationID,SurveyID,HistoryID,PerformanceID) " +
-                    "Values(@Emp,@Job,@Del,@Pay,@Edu,@Sur,@His,@Per)");
-                cmd.ExecuteNonQuery();
+                Employee new_employee = new Employee();
+                new_employee.EmployeeNumber = employee_ID;
+                new_employee.DetailsId = (int)HttpContext.Session.GetInt32("newDetailsID");
+                new_employee.EducationId = (int)HttpContext.Session.GetInt32("newEducationID");
+                new_employee.HistoryId = (int)HttpContext.Session.GetInt32("newHistoryID");
+                new_employee.PayId = (int)HttpContext.Session.GetInt32("newPayID");
+                new_employee.PerformanceId = (int)HttpContext.Session.GetInt32("newPerformanceID");
+                new_employee.JobId = (int)HttpContext.Session.GetInt32("newJobID");
+                new_employee.SurveyId = (int)HttpContext.Session.GetInt32("newSurveyID");
 
-                cmd.Dispose();
-                conn.Close();
+                _context.Add(new_employee);
+                _context.SaveChangesAsync();
+
+                //int value = 0;
+                //var conn = _context.Database.GetDbConnection();
+                //conn.OpenAsync();
+                //SqlCommand cmd = new SqlCommand();
+                //cmd.Connection = (SqlConnection)conn;
+                //cmd.CommandType = System.Data.CommandType.Text;
+                //cmd.CommandText = ("Select top 1 * from dbo.Employee Order By EmployeeNumber DESC");
+                //SqlDataReader reader = cmd.ExecuteReader();
+                //while(reader.Read())
+                //{
+                //    value = reader.GetInt32(0);
+                //}
+                //cmd.Dispose();
+                //reader.Close();
+
+                //cmd = new SqlCommand();
+                //cmd.Connection = (SqlConnection)conn;
+                //cmd.CommandType = System.Data.CommandType.Text;
+                //cmd.Parameters.AddWithValue("@Del", (int)HttpContext.Session.GetInt32("newDetailsID"));
+                //cmd.Parameters.AddWithValue("@Edu", (int)HttpContext.Session.GetInt32("newEducationID"));
+                //cmd.Parameters.AddWithValue("@His", (int)HttpContext.Session.GetInt32("newHistoryID"));
+                //cmd.Parameters.AddWithValue("@Pay", (int)HttpContext.Session.GetInt32("newPayID"));
+                //cmd.Parameters.AddWithValue("@Per", (int)HttpContext.Session.GetInt32("newPerformanceID"));
+                //cmd.Parameters.AddWithValue("@Job", (int)HttpContext.Session.GetInt32("newJobID"));
+                //cmd.Parameters.AddWithValue("@Sur", (int)HttpContext.Session.GetInt32("newSurveyID"));
+                //cmd.Parameters.AddWithValue("@Emp", value +1);
+                //cmd.CommandText = ("Insert into dbo.Employee(EmployeeNumber,JobID,DetailsID,PayID,EducationID,SurveyID,HistoryID,PerformanceID) " +
+                //    "Values(@Emp,@Job,@Del,@Pay,@Edu,@Sur,@His,@Per)");
+                //cmd.ExecuteNonQuery();
+
+                //cmd.Dispose();
+                //conn.Close();
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                string error = ex.ToString();
                 ViewBag.Message = "Error adding employee. Please try again later.";
                 return View();
             }

@@ -47,12 +47,8 @@
     function get_set_fieldValue() {
         var ddl_value = $("#ddlField :selected").text();
         var input_value = document.getElementById("EducationField");
-        console.log(input_value.innerHTML);
-        console.log(input_value.value);
         input_value.innerHTML = ddl_value;
         input_value.value = ddl_value;
-        console.log(input_value.innerHTML);
-        console.log(input_value.value);
     };
     function showEducationField() {
         var eduField = document.getElementById("EducationDiv");

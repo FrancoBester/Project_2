@@ -154,6 +154,7 @@ namespace Dimension_Data_Demo.Controllers
                         return View();
                     }
                     costToCompany.OverTime = sOverTime;
+
                     try
                     {
                         _context.Update(costToCompany);//updates database

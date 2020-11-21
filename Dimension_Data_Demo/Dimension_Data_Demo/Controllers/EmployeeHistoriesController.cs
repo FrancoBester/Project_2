@@ -91,10 +91,11 @@ namespace Dimension_Data_Demo.Controllers
                 try
                 {
                     try
-                    {
+                    { 
                         int history_ID = (int)_context.EmployeeHistory.Where(e => e.NumCompaniesWorked == employeeHistory.NumCompaniesWorked && e.TotalWorkingYears == employeeHistory.TotalWorkingYears &&
                         e.YearsAtCompany == employeeHistory.YearsAtCompany && e.YearsInCurrentRole == employeeHistory.YearsInCurrentRole && e.YearsSinceLastPromotion == employeeHistory.YearsSinceLastPromotion &&
-                        e.YearsWithCurrManager == employeeHistory.YearsWithCurrManager && e.TrainingTimesLastYear == employeeHistory.TrainingTimesLastYear).Select(e => e.HistoryId).First();
+                        e.YearsWithCurrManager == employeeHistory.YearsWithCurrManager && e.TrainingTimesLastYear == employeeHistory.TrainingTimesLastYear).Select(e => e.HistoryId).FirstOrDefault();
+
                         if (history_ID == 0)
                         {
                             int new_history_ID = ((int)_context.EmployeeHistory.OrderByDescending(e => e.HistoryId).Select(e => e.HistoryId).First()) + 1;//gets the new hisoty to be used when adding new record in database
@@ -187,7 +188,7 @@ namespace Dimension_Data_Demo.Controllers
                             {
                                 history_ID = ((int)_context.EmployeeHistory.OrderByDescending(e => e.HistoryId).Select(e => e.HistoryId).First()) + 1;//gets the id of the new record that will be added into the database
                                 employeeHistory.HistoryId = history_ID;//Assignes new id to model
-                                _context.Add(employeeHistory);//addes id to model that will be added to database
+                                _context.Add(employeeHistory);//adds id to model that will be added to database
                                 await _context.SaveChangesAsync();//adds ne model info into the database
                             }
 

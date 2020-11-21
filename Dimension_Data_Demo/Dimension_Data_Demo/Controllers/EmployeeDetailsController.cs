@@ -73,8 +73,8 @@ namespace Dimension_Data_Demo.Controllers
                 {
                     int detail_ID = ((int)_context.EmployeeDetails.OrderByDescending(e => e.DetailsId).Select(e => e.DetailsId).First()) + 1;//gets the last employee number in database and addes one as new users id
                     employeeDetails.DetailsId = detail_ID; //assignes id to model used to create new record in database
-                    _context.Add(employeeDetails);//add model to context - pre sql execution
-                    await _context.SaveChangesAsync();//model added to context is add to database
+                    //_context.Add(employeeDetails);//add model to context - pre sql execution
+                    //await _context.SaveChangesAsync();//model added to context is add to database
 
                     HttpContext.Session.SetInt32("newDetailsID", detail_ID);//new detail id is added to session to be used at a later time
                 }
@@ -172,6 +172,7 @@ namespace Dimension_Data_Demo.Controllers
                     }
                     employeeDetails.Attrition = employeeDetails.Attrition.ToUpper();
                     employeeDetails.Over18 = (employeeDetails.Over18[0].ToString()).ToUpper();
+
                     try
                     {
                         _context.Update(employeeDetails);

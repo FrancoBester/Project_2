@@ -31,27 +31,16 @@ namespace Dimension_Data_Demo.Controllers
             {
                 try
                 {
-                    int SurveyID = -1;
-                    var conn = _context.Database.GetDbConnection();
-                    await conn.OpenAsync();
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = (SqlConnection)conn;
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Id", (int)id);
-                    cmd.CommandText = ("Select SurveyID from dbo.Employee Where EmployeeNumber = @Id");
-                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
-                    while (reader.Read())
-                    {
-                        SurveyID = reader.GetInt32(0);
-                    }
-                    await conn.CloseAsync();
-                    await cmd.DisposeAsync();
-                    await reader.CloseAsync();
-                    HttpContext.Session.SetInt32("sur_employeeNumber", (int)id);
-                    HttpContext.Session.SetInt32("SurveyId", SurveyID);
+                    //Is used to filter data to only show single persons education data from database
+                    int SurveyID = ((int)_context.Employee.Where(e => e.EmployeeNumber == id).Select(e => e.SurveyId).First());
+
+                    HttpContext.Session.SetInt32("sur_employeeNumber", (int)id);//saves id in session to be used when the user returns to the page an does not use the main navigation page
+                    HttpContext.Session.SetInt32("SurveyId", (int)SurveyID);//saves id in session to be used when the user returns to the page an does not use the main navigation page
+
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
+                    string error = ex.ToString();
                     ViewBag.Message = "There was a problem retrieving the data. Please try later";
                     return View();
                 }
@@ -101,15 +90,27 @@ namespace Dimension_Data_Demo.Controllers
 
             try
             {
-                int surveyId = get_set_SurveyId(surveys, "Select"); ;
-                if (surveyId == -1)
+                int survey_ID = (int)_context.Surveys.Where(e => e.EnvironmentSatisfaction == surveys.EnvironmentSatisfaction && e.JobSatisfaction == surveys.JobSatisfaction && 
+                e.RelationshipSatisfaction == surveys.RelationshipSatisfaction).Select(e => e.SurveyId).FirstOrDefault();//gets id of record that meets all where clauses
+
+                if(survey_ID == 0)//if 0 then a new record needs to be added
                 {
-                    surveyId = get_set_SurveyId(surveys, "Insert");
+                    int new_survey_ID = ((int)_context.Surveys.OrderByDescending(e => e.SurveyId).Select(e => e.SurveyId).First()) + 1;//gets the id of the new record that will be added into the table
+                    surveys.SurveyId = new_survey_ID;//assignes new id to model
+                    _context.Add(surveys);//adds if to model that will be added to database
+                    await _context.SaveChangesAsync();//adds the new model info into the database
+
+                    HttpContext.Session.SetInt32("newSurveyID", new_survey_ID);//addes id to session to be used later when adding user into the main table in the database
                 }
-                HttpContext.Session.SetInt32("newSurveyID", surveyId);
+                else
+                {
+                    HttpContext.Session.SetInt32("newSurveyID", survey_ID);//addes id to session to be used later when adding user into the main table in the database
+                }
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                string error = ex.ToString();
                 ViewBag.Message = "There was an error updating the information. Please try again later";
                 return View();
             }
@@ -146,7 +147,7 @@ namespace Dimension_Data_Demo.Controllers
                 return NotFound();
             }
 
-            if (JsonConvert.SerializeObject(surveys) == HttpContext.Session.GetString("oldSurveyModel"))
+            if (JsonConvert.SerializeObject(surveys) == HttpContext.Session.GetString("oldSurveyModel"))//checks if changes where made to the data, if not dont waste time updating database
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -164,26 +165,29 @@ namespace Dimension_Data_Demo.Controllers
                     {
                         try
                         {
-                            int surveyId = get_set_SurveyId(surveys, "Select"); ;
-                            if (surveyId == -1)
-                            {
-                                surveyId = get_set_SurveyId(surveys, "Insert");
-                            }
-                            var conn = _context.Database.GetDbConnection();
-                            await conn.OpenAsync();
-                            SqlCommand cmd = new SqlCommand();
-                            cmd.Connection = (SqlConnection)conn;
-                            cmd.CommandType = System.Data.CommandType.Text;
-                            cmd.Parameters.AddWithValue("@EmpNumber", HttpContext.Session.GetInt32("sur_employeeNumber"));
-                            cmd.Parameters.AddWithValue("@SurNumber", surveyId);
-                            cmd.CommandText = ("Update dbo.Employee Set SurveyID = @SurNumber Where EmployeeNumber = @EmpNumber");
-                            await cmd.ExecuteNonQueryAsync();
+                            int survey_ID = (int)_context.Surveys.Where(e => e.EnvironmentSatisfaction == surveys.EnvironmentSatisfaction && e.JobSatisfaction == surveys.JobSatisfaction &&
+                            e.RelationshipSatisfaction == surveys.RelationshipSatisfaction).Select(e => e.SurveyId).First();//gets id of record that meets all where clauses
 
-                            await cmd.DisposeAsync();
-                            await conn.CloseAsync();
+                            if(survey_ID == 0)
+                            {
+                                survey_ID = ((int)_context.Surveys.OrderByDescending(e => e.SurveyId).Select(e => e.SurveyId).First()) + 1;//gets the id of the new record that will be added into the database
+                                surveys.SurveyId = survey_ID;//assignes new id to model
+                                _context.Add(surveys);//addes model to context that will be used for update
+                                await _context.SaveChangesAsync();//adds the new model info into the database
+                            }
+
+                            int employee_number = (int)HttpContext.Session.GetInt32("edu_employeeNumber");//gets employee number from session
+                            var employee_model = _context.Employee.FirstOrDefault(e => e.EmployeeNumber == employee_number);//gets the employee data according to the employee number
+
+                            Employee temp_employee = (Employee)employee_model;//comverts employee data into a employee model
+                            temp_employee.SurveyId = survey_ID;//cahnges the survey id of the model to be the updated survey id
+
+                            _context.Update(temp_employee);//addes employee model to db context
+                            await _context.SaveChangesAsync();//update database with new data from employee model
                         }
-                        catch(Exception)
+                        catch(Exception ex)
                         {
+                            string error = ex.ToString();
                             ViewBag.Message = "There was an error updating the information. Please try again later";
                             return View();
                         }
@@ -208,41 +212,6 @@ namespace Dimension_Data_Demo.Controllers
         {
             return _context.Surveys.Any(e => e.SurveyId == id);
         }
-        public int get_set_SurveyId(Surveys surveys, string command_type)
-        {
-            int surveyId = -1;
-            var conn = _context.Database.GetDbConnection();
-            conn.Open();
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = (SqlConnection)conn;
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.Parameters.AddWithValue("@EnvSat", (int)surveys.EnvironmentSatisfaction);
-            cmd.Parameters.AddWithValue("@JobSat", (int)surveys.JobSatisfaction);
-            cmd.Parameters.AddWithValue("@RelSat",(int)surveys.RelationshipSatisfaction);
-
-            if (command_type == "Select")
-            {
-                cmd.CommandText = ("Select SurveyID from dbo.Surveys Where EnvironmentSatisfaction = @EnvSat and JobSatisfaction = @JobSat and RelationshipSatisfaction = @RelSat");
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    surveyId = reader.GetInt32(0);
-                }
-                cmd.Dispose();
-                reader.Close();
-                conn.Close();
-            }
-            else if (command_type == "Insert")
-            {
-                cmd.CommandText = ("Insert Into dbo.Surveys(SurveyID,EnvironmentSatisfaction, JobSatisfaction,RelationshipSatisfaction) " +
-                    "Values((Select count(*)+1 from dbo.Surveys),@EnvSat,@JobSat,@RelSat)");
-                cmd.ExecuteNonQuery();
-                cmd.Dispose();
-                conn.Close();
-                surveyId = get_set_SurveyId(surveys, "Select");
-            }
-            return surveyId;
-        }
+        
     }
 }
