@@ -14,11 +14,6 @@
 
 <h1>Index</h1>
 
-<nav aria-label="Employees" style="text-align:center;font-size:larger" class="nav_2">
-
-    @await this.Component.InvokeAsync("Pager", new { paginglist = this.Model})
-</nav>
-
 <p>
 
     @if (ViewBag.Message != null)
@@ -34,6 +29,12 @@
         <a a asp-controller="EmployeeDetails" asp-action="Create">Create New</a>
     }
 </p>
+
+<nav aria-label="Employees" style="text-align:center;font-size:larger" class="nav_2">
+
+    @await this.Component.InvokeAsync("Pager", new { paginglist = this.Model})
+</nav>
+
 <table class="table">
     <thead>
         <tr>

@@ -61,9 +61,9 @@ namespace Dimension_Data_Demo.Controllers
             {
                 _context.Add(aspNetUsers);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
-            return View(aspNetUsers);
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: AspNetUsers/Edit/5
@@ -79,7 +79,7 @@ namespace Dimension_Data_Demo.Controllers
             {
                 return NotFound();
             }
-            return View(aspNetUsers);
+            return RedirectToAction("Index", "Home");
         }
 
         // POST: AspNetUsers/Edit/5
