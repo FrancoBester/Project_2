@@ -14,12 +14,13 @@
 
 <h1>Index</h1>
 
-<nav aria-label="Employees">
+<nav aria-label="Employees" style="text-align:center;font-size:larger" class="nav_2">
+
     @await this.Component.InvokeAsync("Pager", new { paginglist = this.Model})
 </nav>
 
 <p>
-    <a a asp-controller="EmployeeDetails" asp-action="Create">Create New</a>
+
     @if (ViewBag.Message != null)
     {
         <script type="text/javascript">
@@ -27,6 +28,10 @@
                 alert("@ViewBag.Message");
             };
         </script>
+    }
+    @if (ViewBag.job != null)
+    {
+        <a a asp-controller="EmployeeDetails" asp-action="Create">Create New</a>
     }
 </p>
 <table class="table">
@@ -67,11 +72,11 @@
             </td>
 
             <td>
-                <a asp-controller="EmployeeDetails" asp-action="Index" asp-route-id="@item.Details.DetailsId">@Html.DisplayFor(modelItem => item.Details.DetailsId)</a>
+                <a asp-controller="EmployeeDetails" asp-action="Index" asp-route-id="@item.Details.DetailsId">@Html.DisplayFor(modelItem => item.Details.Age)</a>
             </td>
 
             <td>
-                <a asp-controller="EmployeeEducations" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.Education.EducationId)</a>
+                <a asp-controller="EmployeeEducations" asp-action="Index" asp-route-id="@item.EmployeeNumber">@Html.DisplayFor(modelItem => item.Education.EducationField)</a>
             </td>
 
             <td>
@@ -79,11 +84,11 @@
             </td>
 
             <td>
-                <a asp-controller="JobInformations" asp-action="Index" asp-route-id="@item.EmployeeNumber"> @Html.DisplayFor(modelItem => item.Job.JobId)</a>
+                <a asp-controller="JobInformations" asp-action="Index" asp-route-id="@item.EmployeeNumber"> @Html.DisplayFor(modelItem => item.Job.Department)</a>
             </td>
 
             <td>
-                <a asp-controller="CostToCompanies" asp-action="Index" asp-route-id="@item.Pay.PayId">@Html.DisplayFor(modelItem => item.Pay.PayId)</a>
+                <a asp-controller="CostToCompanies" asp-action="Index" asp-route-id="@item.Pay.PayId">@Html.DisplayFor(modelItem => item.Pay.MonthlyIncome)</a>
             </td>
 
             <td>
