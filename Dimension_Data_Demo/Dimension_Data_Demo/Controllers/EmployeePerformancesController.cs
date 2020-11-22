@@ -32,24 +32,11 @@ namespace Dimension_Data_Demo.Controllers
             {
                 try
                 {
-                    int PerformanceID = -1;
-                    var conn = _context.Database.GetDbConnection();
-                    await conn.OpenAsync();
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = (SqlConnection)conn;
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Id", (int)id);
-                    cmd.CommandText = ("Select PerformanceID from dbo.Employee Where EmployeeNumber = @Id");
-                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
-                    while (reader.Read())
-                    {
-                        PerformanceID = reader.GetInt32(0);
-                    }
-                    await conn.CloseAsync();
-                    await cmd.DisposeAsync();
-                    await reader.CloseAsync();
-                    HttpContext.Session.SetInt32("per_employeeNumber", (int)id);
-                    HttpContext.Session.SetInt32("PerformanceId", PerformanceID);
+                    //Is used to filter data to only show single persons performance data from database
+                    int PerformanceID = ((int)_context.Employee.Where(e => e.EmployeeNumber == id).Select(e => e.PerformanceId).First());
+
+                    HttpContext.Session.SetInt32("per_employeeNumber", (int)id);//saves id in session to be used when the user returns to the page an does not use the main navigation page
+                    HttpContext.Session.SetInt32("PerformanceId", PerformanceID);//saves id in session to be used when the user returns to the page an does not use the main navigation page
                 }
                 catch(Exception)
                 {
@@ -59,7 +46,7 @@ namespace Dimension_Data_Demo.Controllers
             }
 
             var backupID = HttpContext.Session.GetInt32("PerformanceId");
-            var dimention_data_demoContext = _context.EmployeePerformance.Where(e => e.PerformanceId == backupID);
+            var dimention_data_demoContext = _context.EmployeePerformance.Where(e => e.PerformanceId == backupID);//filter view to only show one employees performance data
             return View(await dimention_data_demoContext.ToListAsync());
         }
 
@@ -94,25 +81,44 @@ namespace Dimension_Data_Demo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PerformanceId,PerformanceRating,WorkLifeBalance,JobInvolvement")] EmployeePerformance employeePerformance)
         {
-            if (employeePerformance.PerformanceRating <= -1 || employeePerformance.WorkLifeBalance <= -1 || employeePerformance.JobInvolvement <= -1)
+            if (ModelState.IsValid)
             {
-                ViewBag.Message = "All numbers must be possitive values";
-                return View();
-            }
 
-            try
-            {
-                int performanceId = get_set_PerformanceId(employeePerformance, "Select");
-                if (performanceId == -1)
+                if (employeePerformance.PerformanceRating <= -1 || employeePerformance.WorkLifeBalance <= -1 || employeePerformance.JobInvolvement <= -1)
                 {
-                    performanceId = get_set_PerformanceId(employeePerformance, "Insert");
+                    ViewBag.Message = "All numbers must be possitive values";
+                    return View();
                 }
-                HttpContext.Session.SetInt32("newPerformanceID", performanceId);
+
+                try
+                {
+                    int performance_ID = (int)_context.EmployeePerformance.Where(e => e.PerformanceRating == employeePerformance.PerformanceRating && e.WorkLifeBalance == employeePerformance.WorkLifeBalance &&
+                    e.JobInvolvement == employeePerformance.JobInvolvement).Select(e => e.PerformanceId).FirstOrDefault();
+
+                    if (performance_ID == 0)
+                    {
+                        int new_performance_ID = ((int)_context.EmployeePerformance.OrderByDescending(e => e.PerformanceId).Select(e => e.PerformanceId).First()) + 1;//gets the id of the new record that will be added into the table
+                        employeePerformance.PerformanceId = new_performance_ID;//assignes new it to model
+                        _context.Add(employeePerformance);//addes id to model that will be added to database
+                        await _context.SaveChangesAsync();//addes the new models info into the database
+
+                        HttpContext.Session.SetInt32("newPerformanceID", new_performance_ID);//addes id to session to be used later when adding user into the main table in the database
+                    }
+                    else
+                    {
+                        HttpContext.Session.SetInt32("newPerformanceID", performance_ID);//addes id to session to be used later when adding user into the main table in the database
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string error = ex.ToString();
+                    ViewBag.Message = "There was an error updating the information. Please try again later";
+                    return View();
+                }
             }
-            catch (Exception)
+            else
             {
-                ViewBag.Message = "There was an error updating the information. Please try again later";
-                return View();
+                string test = "t";
             }
             
            return RedirectToAction("Create", "JobInformations");
@@ -165,27 +171,31 @@ namespace Dimension_Data_Demo.Controllers
                     {
                         try
                         {
-                            int performanceId = get_set_PerformanceId(employeePerformance, "Select");
-                            if(performanceId == -1)
-                            {
-                                performanceId = get_set_PerformanceId(employeePerformance, "Insert");
-                            }
-                            var conn = _context.Database.GetDbConnection();
-                            await conn.OpenAsync();
-                            SqlCommand cmd = new SqlCommand();
-                            cmd.Connection = (SqlConnection)conn;
-                            cmd.CommandType = System.Data.CommandType.Text;
-                            cmd.Parameters.AddWithValue("@EmpNumber", HttpContext.Session.GetInt32("per_employeeNumber"));
-                            cmd.Parameters.AddWithValue("@PerNumber", performanceId);
-                            cmd.CommandText = "Update dbo.Employee Set PerformanceID = @PerNumber Where EmployeeNumber=@EmpNumber";
+                            int performance_ID = (int)_context.EmployeePerformance.Where(e => e.PerformanceRating == employeePerformance.PerformanceRating && e.WorkLifeBalance == employeePerformance.WorkLifeBalance && 
+                            e.JobInvolvement == employeePerformance.JobInvolvement).Select(e => e.PerformanceId).First();
 
-                            await cmd.ExecuteNonQueryAsync();
-                            await cmd.DisposeAsync();
-                            await conn.CloseAsync();
+
+                            if(performance_ID == 0)
+                            {
+                                performance_ID = ((int)_context.EmployeePerformance.OrderByDescending(e => e.PerformanceId).Select(e => e.PerformanceId).First()) + 1;//gets the id of the new record that will be added into the database
+                                employeePerformance.PerformanceId = performance_ID;//assignes new id to model
+                                _context.Add(employeePerformance);//addes id to model that will be added to database
+                                await _context.SaveChangesAsync();//adds new model info into the database
+                            }
+
+                            int employee_number = (int)HttpContext.Session.GetInt32("per_employeeNumber");//gets employee number from session
+                            var employee_model = _context.Employee.FirstOrDefault(e => e.EmployeeNumber == employee_number);//gets the employee data according to the employee number
+
+                            Employee temp_employee = (Employee)employee_model;//comverts employee data into a employee model
+                            temp_employee.PerformanceId = performance_ID;//cahnges the performance id of the model to be the updated performance id
+
+                            _context.Update(temp_employee);//addes employee model to db context
+                            await _context.SaveChangesAsync();//update database with new data from employee model
 
                         }
-                        catch(Exception)
+                        catch(Exception ex)
                         {
+                            string error = ex.ToString();
                             ViewBag.Message = "There was an error updating the information. Please try again later";
                             return View();
                         }
@@ -209,48 +219,6 @@ namespace Dimension_Data_Demo.Controllers
         private bool EmployeePerformanceExists(int id)
         {
             return _context.EmployeePerformance.Any(e => e.PerformanceId == id);
-        }
-
-        public int get_set_PerformanceId(EmployeePerformance employeePerformance,string command_type)
-        {
-            int performanceId = -1;
-            try
-            {
-                var conn = _context.Database.GetDbConnection();
-                conn.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@PerRating", (int)employeePerformance.PerformanceRating);
-                cmd.Parameters.AddWithValue("@WorkBal", (int)employeePerformance.WorkLifeBalance);
-                cmd.Parameters.AddWithValue("@JobInv", (int)employeePerformance.JobInvolvement);
-                if (command_type == "Select")
-                {
-                    cmd.CommandText = ("Select PerformanceID from dbo.EmployeePerformance Where PerformanceRating = @PerRating and WorkLifeBalance = @WorkBal and JobInvolvement = @JobInv");
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        performanceId = reader.GetInt32(0);
-                    }
-                    cmd.Dispose();
-                    reader.Close();
-                    conn.Close();
-                }
-                else if (command_type == "Insert")
-                {
-                    cmd.CommandText = ("Insert Into dbo.EmployeePerformance(PerformanceID,PerformanceRating,WorkLifeBalance,JobInvolvement) Values((Select count(*)+1 from dbo.EmployeePerformance),@PerRating,@WorkBal,@JobInv)");
-                    cmd.ExecuteNonQuery();
-                    cmd.Dispose();
-                    conn.Close();
-                    performanceId = get_set_PerformanceId(employeePerformance, "Select");
-                }
-            }
-            catch(Exception)
-            {
-                return -1;
-            }
-            return performanceId;
         }
     }
 }

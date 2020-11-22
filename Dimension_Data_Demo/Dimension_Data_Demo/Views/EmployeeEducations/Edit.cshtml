@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="EducationId" />
             <div class="form-group">
-                <label>Education field must contain positive number values</label>
+                <label class="error_label">*Education field must contain positive number values</label>
                 <label asp-for="Education" class="control-label"></label>
                 <input asp-for="Education" class="form-control" />
                 <span asp-validation-for="Education" class="text-danger"></span>
@@ -29,14 +29,14 @@
             </table>
             <button type="button" onclick="showEducationField()">New Educaiton field</button>
             <div class="form-group" style="visibility:hidden; margin:0rem; padding:0rem" id="EducationDiv">
-                <label>Education field cannot be empty</label>
+                <label class="error_label">*Education field cannot be empty</label>
                 <label asp-for="EducationField" class="control-label"></label>
                 <input asp-for="EducationField" class="form-control" />
                 <span asp-validation-for="EducationField" class="text-danger"></span>
                 <p></p>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" onclick="get_set_fieldValue()"/>
             </div>
         </form>
     </div>

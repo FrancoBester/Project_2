@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using System.Net.Mail;
 using System.Net;
 using MimeKit;
+using System.Web;
 
 namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
 {
@@ -88,12 +89,7 @@ namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    //var callbackUrl = Url.Page(
-                    //    "/Account/ConfirmEmail",
-                    //    pageHandler: null,
-                    //    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                    //    protocol: Request.Scheme);
-                    string Message;
+                    string Message = $"Please confirm your account by <a href='http://dimensiondatademo-dev-2.us-west-2.elasticbeanstalk.com/Identity/Account?RegisterConfirmation?email=" + Input.Email + "&returnUrl=%2F'> clicking here </a>.";
                     try
                     {
                         using (MailMessage mail = new MailMessage())
@@ -101,7 +97,7 @@ namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
                             mail.From = new MailAddress("testing.franco.bester@gmail.com");//sys.paradigm@gmail.com Sp2020sP
                             mail.To.Add(user.Email);
                             mail.Subject = "Confirm account";
-                            mail.Body = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'> clicking here</a>.";
+                            mail.Body = Message;
                             mail.IsBodyHtml = true;
 
                             using (SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587))

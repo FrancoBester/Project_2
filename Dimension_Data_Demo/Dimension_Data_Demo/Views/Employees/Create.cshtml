@@ -56,6 +56,14 @@
                     };
                 </script>
             }
+            @if (ViewBag.Employee_new != null)
+            {
+                <script type="text/javascript">
+                    window.onload = function () {
+                        alert("@ViewBag.Employee_new");
+                    };
+                </script>
+            }
         </form>
     </div>
 </div>

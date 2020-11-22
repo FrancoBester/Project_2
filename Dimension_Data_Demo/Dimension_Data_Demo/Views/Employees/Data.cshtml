@@ -1,0 +1,456 @@
+﻿<html>
+
+<head>
+    <script src="~/js/Chart.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        #chart_container{
+            height:300px;
+            width: 500px;
+            border: 1px solid #ddd;
+            padding: 1px;
+            border-radius: 4px;
+        }
+
+        #chart_div {
+            padding: 3rem;
+            
+        }
+
+        #big_chart {
+            height: 200px;
+            border: 1px solid #ddd;
+            padding: 1px;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <p>Page will reload in 5 minutes</p>
+    <div id="big_chart">
+        Ages of employees
+        <canvas id="emp_age"></canvas>
+        <p></p>
+    </div>
+
+    <div id="chart_div">
+        <div id="chart_container" style="float:left">
+            Gender of employees
+            <div style="height:280px;width:470px">
+                <canvas id="emp_gender"></canvas>
+            </div>
+            <p></p>
+        </div>
+
+        <div id="chart_container" style="float:right">
+            Marital status of employees
+            <div style="height:280px;width:470px">
+                <canvas id="emp_marrige"></canvas>
+            </div>
+            <p></p>
+        </div>
+        <p></p>
+    </div>
+
+    <p></p>
+
+    <div id="chart_div">
+        <div id="chart_container" style="float:left">
+            Employee per department
+            <div style="height:280px;width:470px">
+                <canvas id="emp_department"></canvas>
+            </div>
+            <p></p>
+        </div>
+
+        <div id="chart_container" style="float:right">
+            Travel conditions of employees
+            <div style="height:280px;width:470px">
+                <canvas id="emp_travel"></canvas>
+            </div>
+            <p></p>
+        </div>
+        <p></p>
+    </div>
+
+    <p></p>
+
+    <div id="chart_div">
+        <div id="chart_container" style="float:left">
+            Education levels of employees
+            <div style="height:280px;width:470px">
+                <canvas id="emp_education"></canvas>
+            </div>
+            <p></p>
+        </div>
+
+        <div id="chart_container" style="float:right">
+            Relationship satisfaction levels of employees
+            <div style="height:280px;width:470px">
+                <canvas id="emp_relationship"></canvas>
+            </div>
+            <p></p>
+        </div>
+        <p></p>
+    </div>
+
+    <p></p>
+
+    <div id="chart_div">
+        <div id="chart_container" style="float:left">
+            Job satisfaction levels of employees
+            <canvas id="emp_job"></canvas>
+            <p></p>
+        </div>
+
+        <div id="chart_container" style="float:right">
+            Enviromnet satisfaction levels of employees
+            <canvas id="emp_environment"></canvas>
+            <p></p>
+        </div>
+        <p></p>
+    </div>
+
+    <p></p>
+    
+    <script>//1
+        var repArray = @Html.Raw(Json.Serialize(ViewBag.AGEREP));
+        var ages = @Html.Raw(Json.Serialize(ViewBag.AGE));
+
+        var ctx = $("#emp_age");
+        var agechart = new Chart(ctx, {
+
+            type: 'bar',
+            data: {
+                labels: ages,
+                datasets: [{
+                    data: repArray,
+                    backgroundColor: ["Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green",
+                        "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green"
+                        , "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green"],
+
+                    borderColor: ["Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green",
+                        "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green"
+                        , "Red", "Green", "Red", "Green", "Red", "Green", "Red", "Green"],
+
+                    borderWidth: 1,
+                    barThickness: 'flex',
+                }]
+            },
+            options: {
+
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Employee amount',
+                            fontSize: 25
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Employee age(years)',
+                            fontSize: 25
+                        }
+                    }],
+                    xAxes: [{ ticks: { beginAtZero: true } }],
+                    yAxes: [{ ticks: { beginAtZero: true } }]
+                },
+                legend: { display: false }
+            },
+        });
+
+    </script>
+
+    <script>
+//2
+        var repArray = @Html.Raw(Json.Serialize(ViewBag.GENREP));
+        var data = @Html.Raw(Json.Serialize(ViewBag.GENDER));
+
+        var ctx = $("#emp_gender");
+        var barchart = new Chart(ctx, {
+
+            type: 'pie',
+            data: {
+                labels: data,
+                datasets: [{
+                    data: repArray,
+                    backgroundColor: ["Turquoise", "Blue"],
+                    borderColor: ["Turquoise", "Blue"],
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+
+                maintainAspectRatio: false,
+                legend: { display: false }
+            },
+        });
+    </script>
+
+    <script>
+//3
+        var repArray = @Html.Raw(Json.Serialize(ViewBag.MARREP));
+        var data = @Html.Raw(Json.Serialize(ViewBag.MARRIGE));
+
+        var ctx = $("#emp_marrige");
+        var barchart = new Chart(ctx, {
+
+            type: 'pie',
+            data: {
+                labels: data,
+                datasets: [{
+                    data: repArray,
+                    backgroundColor: ["Purple", "Pink", "Lime"],
+                    borderColor: ["Purple", "Pink", "Lime"],
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+
+                maintainAspectRatio: false,
+                legend: { display: false }
+            },
+        });
+    </script>
+
+    <script>
+//4
+        var repArray = @Html.Raw(Json.Serialize(ViewBag.DEPREP));
+        var data = @Html.Raw(Json.Serialize(ViewBag.DEPARTMENT));
+
+        var ctx = $("#emp_department");
+        var barchart = new Chart(ctx, {
+
+            type: 'pie',
+            data: {
+                labels: data,
+                datasets: [{
+                    data: repArray,
+                    backgroundColor: ["Blue","Red","Green"],
+                    borderColor: ["Blue", "Red", "Green"],
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+
+                maintainAspectRatio: false,
+                scales: { xAex: [{ ticks: { beginAtZero: true } }] },
+                legend: { display: false }
+            },
+        });
+    </script>
+
+    <script>
+//5
+        var repArray = @Html.Raw(Json.Serialize(ViewBag.TRAREP));
+        var data = @Html.Raw(Json.Serialize(ViewBag.TRAVEL));
+
+        var ctx = $("#emp_travel");
+        var barchart = new Chart(ctx, {
+
+            type: 'pie',
+            data: {
+                labels: ages,
+                datasets: [{
+                    data: repArray,
+                    backgroundColor: ["Lime", "Purple", "Turquoise", "Lime", "Purple", "Turquoise"],
+                    borderColor: ["Lime", "Purple", "Turquoise", "Lime", "Purple", "Turquoise"],
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+
+                maintainAspectRatio: false,
+                legend: { display: false }
+            },
+        });
+    </script>
+
+    <script>
+//6
+        var repArray = @Html.Raw(Json.Serialize(ViewBag.EDUREP));
+        var ages = @Html.Raw(Json.Serialize(ViewBag.EDUCATION));
+
+        var ctx = $("#emp_education");
+        var barchart = new Chart(ctx, {
+
+            type: 'bar',
+            data: {
+                labels: ages,
+                datasets: [{
+                    data: repArray,
+                    backgroundColor: ["Red", "Turquoise", "Red", "Turquoise", "Red", "Turquoise"],
+                    borderColor: ["Red", "Turquoise", "Red", "Turquoise", "Red", "Turquoise"],
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Employee amount',
+                            fontSize: 25
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Employee age(years)',
+                            fontSize: 25
+                        }
+                    }],
+                    xAxes: [{ ticks: { beginAtZero: true } }],
+                    yAxes: [{ ticks: { beginAtZero: true } }]
+                },
+                legend: { display: false }
+            },
+        });
+    </script>
+
+    <script>
+//7
+        var repArray = @Html.Raw(Json.Serialize(ViewBag.ENVREP));
+        var ages = @Html.Raw(Json.Serialize(ViewBag.ENVIRONMENT));
+
+        var ctx = $("#emp_environment");
+        var barchart = new Chart(ctx, {
+
+            type: 'bar',
+            data: {
+                labels: ages,
+                datasets: [{
+                    data: repArray,
+                    backgroundColor: ["Purple", "Blue", "Purple", "Blue", "Purple", "Blue", "Purple", "Blue"],
+                    borderColor: ["Purple", "Blue", "Purple", "Blue", "Purple", "Blue", "Purple", "Blue"],
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Employee amount',
+                            fontSize: 25
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Employee age(years)',
+                            fontSize: 25
+                        }
+                    }],
+                    xAxes: [{ ticks: { beginAtZero: true } }],
+                    yAxes: [{ ticks: { beginAtZero: true } }]
+                },
+                legend: { display: false }
+            },
+        });
+    </script>
+
+    <script>
+//8
+        var repArray = @Html.Raw(Json.Serialize(ViewBag.REPJOB));
+        var data = @Html.Raw(Json.Serialize(ViewBag.JOB));
+
+        var ctx = $("#emp_job");
+        var barchart = new Chart(ctx, {
+
+            type: 'bar',
+            data: {
+                labels: data,
+                datasets: [{
+                    data: repArray,
+                    backgroundColor: ["Pink", "Grey", "Pink", "Grey", "Pink", "Grey", "Pink", "Grey"],
+                    borderColor: ["Pink", "Grey", "Pink", "Grey", "Pink", "Grey", "Pink", "Grey"],
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Employee amount',
+                            fontSize: 25
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Employee age(years)',
+                            fontSize: 25
+                        }
+                    }],
+                    xAxes: [{ ticks: { beginAtZero: true } }],
+                    yAxes: [{ ticks: { beginAtZero: true } }]
+                },
+                legend: { display: false }
+            },
+        });
+    </script>
+
+    <script>
+//9
+        var repArray = @Html.Raw(Json.Serialize(ViewBag.RELREP));
+        var data = @Html.Raw(Json.Serialize(ViewBag.REL));
+
+        var ctx = $("#emp_relationship");
+        var barchart = new Chart(ctx, {
+
+            type: 'bar',
+            data: {
+                labels: data,
+                datasets: [{
+                    data: repArray,
+                    backgroundColor: ["Lime", "Green", "Lime", "Green", "Lime", "Green"],
+                    borderColor: ["Lime", "Green", "Lime", "Green", "Lime", "Green"],
+                    borderWidth: 1,
+
+                }]
+            },
+            options: {
+
+                maintainAspectRatio: false,
+                scales: {
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Employee amount',
+                            fontSize: 25
+                        }
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Employee age(years)',
+                            fontSize: 25
+                        }
+                    }],
+                    xAxes: [{ ticks: { beginAtZero: true } }],
+                    yAxes: [{ ticks: { beginAtZero: true } }]
+                },
+                legend: { display: false }
+            },
+        });
+    </script>
+
+</body>
+
+</html>
+<meta http-equiv="refresh" content="600" />

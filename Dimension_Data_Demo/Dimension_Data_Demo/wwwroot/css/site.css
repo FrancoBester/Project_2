@@ -69,3 +69,31 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.nav_2 {
+    text-align: center;
+    margin: 20px 0 0;
+    padding: 10px 0;
+}
+
+.nav_2 ul {
+    list-style: none;
+    margin: 0 2px;
+    padding: 0;
+}
+
+.nav_2 li {
+    display: inline-block;
+    padding: 5px 5px;
+}
+
+.nav_2 a {
+    font-weight: normal;
+    padding: 10px 5px;
+    font-size: .80em;
+}
+
+.error_label{
+    font-size:small;
+    color:red;
+}

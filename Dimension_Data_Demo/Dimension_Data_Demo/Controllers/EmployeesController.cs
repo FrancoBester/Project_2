@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Session;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
+using ReflectionIT.Mvc.Paging;
 
 namespace Dimension_Data_Demo.Controllers
 {
@@ -29,7 +30,7 @@ namespace Dimension_Data_Demo.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page=1)
         {
             //try Row level security tried
             //{
@@ -43,41 +44,38 @@ namespace Dimension_Data_Demo.Controllers
             //    return null;
             //}
 
+            //var qry = _context.Employee.AsNoTracking().OrderBy(p => p.EmployeeNumber);
+            //var model = await PagingList.CreateAsync(qry, 10, page);
+            //return View(model);
+
             //Gets user info from user that was stored in sessions from other pages
+
             var user_EmpNumber = HttpContext.Session.GetString("EmployeeNumber");
             var user_Role = HttpContext.Session.GetString("JobRole");
             var user_Department = HttpContext.Session.GetString("Department");
-
             int iEmployeeNumbeer = int.Parse(user_EmpNumber.ToString());
             
             if (user_Role.ToString() == "Manager")//if the user is a manager they are allowed to see all other employee info that are part of the same department as they are
             {
                 try
                 {
-                    var conn = _context.Database.GetDbConnection();
-                    conn.Open();
-                    //SqlConnection conn = new SqlConnection((_context.Database.GetDbConnection()).ToString());
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = (SqlConnection)conn;
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Department", user_Department.ToString());
-                    cmd.CommandText = "Select JobID from dbo.JobInformation Where Department = @Department";
+                    var list_job_ID = _context.JobInformation.Where(e => e.Department == user_Department).Select(e => e.JobId);
                     List<int> listOfJobIds = new List<int>();
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+
+                    foreach (var jobID in list_job_ID)
                     {
-                        string stest = reader.GetValue(0).ToString();
-                        listOfJobIds.Add(int.Parse(reader.GetValue(0).ToString()));
+                        listOfJobIds.Add((int)jobID);
                     }
 
-                    var dimention_data_demoContext_2 = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => listOfJobIds.Contains((int)b.JobId));
-                    conn.Close();
-                    reader.Close();
-                    cmd.Dispose();
-                    return View(await dimention_data_demoContext_2.ToListAsync());
+
+                    var dimention_data_demoContext_2 = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => listOfJobIds.Contains((int)b.JobId)).AsNoTracking().OrderBy(e => e.EmployeeNumber);
+                    var model = await PagingList.CreateAsync(dimention_data_demoContext_2, 10, page);
+                    ViewBag.job = user_Role.ToString();
+                    return View(model);
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
+                    string error = ex.ToString();
                     ViewBag.Message = "There was a problem retrieving the data. Please try later";
                     return View();
                 }
@@ -85,13 +83,10 @@ namespace Dimension_Data_Demo.Controllers
             else
             {
                 //if user is not a manager they are only allowed to see their own info
-                var dimention_data_demoContext = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => b.EmployeeNumber == iEmployeeNumbeer);
-                return View(await dimention_data_demoContext.ToListAsync());
+                var dimention_data_demoContext = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => b.EmployeeNumber == iEmployeeNumbeer).AsNoTracking().OrderBy(e => e.EmployeeNumber);
+                var model = await PagingList.CreateAsync(dimention_data_demoContext, 10, page);
+                return View(model);
             }
-            //var dimention_data_demoContext = _context.Employee.Include(e => e.Details).Include(e => e.Education).Include(e => e.History).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Performance).Include(e => e.Survey).Where(b => b.EmployeeNumber == valu) ;
-            //CostToCompaniesController employeeCost = new CostToCompaniesController(_context);
-            //await employeeCost.Details(valu);
-            
         }
 
         // GET: Employees/Details/5
@@ -107,9 +102,7 @@ namespace Dimension_Data_Demo.Controllers
 
             var employee = await _context.Employee
                 .Include(e => e.Details)
-
                 .Include(e => e.Education)
-
                 .Include(e => e.History)
                 .Include(e => e.Job)
                 .Include(e => e.Pay)
@@ -127,47 +120,32 @@ namespace Dimension_Data_Demo.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
+            int employee_ID = 0;
             try
             {
-                int value = 0;
-                var conn = _context.Database.GetDbConnection();
-                conn.OpenAsync();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = ("Select top 1 * from dbo.Employee Order By EmployeeNumber DESC");
-                SqlDataReader reader = cmd.ExecuteReader();
-                while(reader.Read())
-                {
-                    value = reader.GetInt32(0);
-                }
-                cmd.Dispose();
-                reader.Close();
+                 employee_ID = ((int)_context.Employee.OrderByDescending(e => e.EmployeeNumber).Select(e => e.EmployeeNumber).First()) + 1; //gets the employee number of the new employee
 
-                cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@Del", (int)HttpContext.Session.GetInt32("newDetailsID"));
-                cmd.Parameters.AddWithValue("@Edu", (int)HttpContext.Session.GetInt32("newEducationID"));
-                cmd.Parameters.AddWithValue("@His", (int)HttpContext.Session.GetInt32("newHistoryID"));
-                cmd.Parameters.AddWithValue("@Pay", (int)HttpContext.Session.GetInt32("newPayID"));
-                cmd.Parameters.AddWithValue("@Per", (int)HttpContext.Session.GetInt32("newPerformanceID"));
-                cmd.Parameters.AddWithValue("@Job", (int)HttpContext.Session.GetInt32("newJobID"));
-                cmd.Parameters.AddWithValue("@Sur", (int)HttpContext.Session.GetInt32("newSurveyID"));
-                cmd.Parameters.AddWithValue("@Emp", value +1);
-                cmd.CommandText = ("Insert into dbo.Employee(EmployeeNumber,JobID,DetailsID,PayID,EducationID,SurveyID,HistoryID,PerformanceID) " +
-                    "Values(@Emp,@Job,@Del,@Pay,@Edu,@Sur,@His,@Per)");
-                cmd.ExecuteNonQuery();
+                Employee new_employee = new Employee();
+                new_employee.EmployeeNumber = employee_ID;
+                new_employee.DetailsId = (int)HttpContext.Session.GetInt32("newDetailsID");
+                new_employee.EducationId = (int)HttpContext.Session.GetInt32("newEducationID");
+                new_employee.HistoryId = (int)HttpContext.Session.GetInt32("newHistoryID");
+                new_employee.PayId = (int)HttpContext.Session.GetInt32("newPayID");
+                new_employee.PerformanceId = (int)HttpContext.Session.GetInt32("newPerformanceID");
+                new_employee.JobId = (int)HttpContext.Session.GetInt32("newJobID");
+                new_employee.SurveyId = (int)HttpContext.Session.GetInt32("newSurveyID");
 
-                cmd.Dispose();
-                conn.Close();
+                _context.Add(new_employee);
+                _context.SaveChangesAsync();
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                string error = ex.ToString();
                 ViewBag.Message = "Error adding employee. Please try again later.";
                 return View();
             }
             ViewBag.Message = "Employee succesfully added.";
+            ViewBag.Employee_new = "New employee number is: " + employee_ID.ToString();
             return View();
         }
 
@@ -210,6 +188,178 @@ namespace Dimension_Data_Demo.Controllers
         private bool EmployeeExists(int id)
         {
             return _context.Employee.Any(e => e.EmployeeNumber == id);
+        }
+
+        public ActionResult Data()
+        {
+            var user_Role = HttpContext.Session.GetString("JobRole");
+            if (user_Role.ToString() == "Manager")
+            {
+                var employee = _context.Employee.ToList();//used by multiple caculations
+
+                //Ages
+                var employeeDetails_all = _context.EmployeeDetails.ToList();//gets all age database
+                List<int> repeat_age = new List<int>();
+                var emp_ages = employeeDetails_all.OrderBy(e => e.Age).Select(e => e.Age).Distinct();//gets unique ages from database
+
+                foreach (var item in emp_ages)
+                {
+                    repeat_age.Add(employeeDetails_all.Count(e => e.Age == item));//adds amount of each age in database to list
+                }
+
+                ViewBag.AGE = emp_ages;//returns data to view
+                ViewBag.AGEREP = repeat_age.ToList();//returns data to view
+
+                //Genders
+                var gender_all = _context.Gender.ToList();
+                List<int> repeat_gender = new List<int>();
+                var emp_gender = gender_all.Select(e => e.Gender1).Distinct();
+                var emp_gender_2 = employeeDetails_all.Select(e => e.GenderId).Distinct();//gets unique age types from database
+
+                foreach (var gender in emp_gender_2)
+                {
+                    repeat_gender.Add(employeeDetails_all.Count(e => e.GenderId == gender));//add amnount of each gender in database to list
+                }
+
+                ViewBag.GENDER = emp_gender;//returns gender to view
+                ViewBag.GENREP = repeat_gender.ToList();//returns data to view
+
+                //Marital
+                var marrige_all = _context.MaritalStatus.ToList();
+                List<int> repeat_marital = new List<int>();
+                var emp_marital = marrige_all.Select(e => e.MaritalStatus1).Distinct();
+                var emp_marital_id = employeeDetails_all.Select(e => e.MaritalId).Distinct();
+
+
+                foreach (var marrige in emp_marital_id)
+                {
+                    repeat_marital.Add(employeeDetails_all.Count(e => e.MaritalId == marrige));
+                }
+
+                ViewBag.MARRIGE = emp_marital;
+                ViewBag.MARREP = repeat_marital.ToList();
+
+
+
+                //Departments
+                var jobInformation_all = _context.JobInformation.ToList();
+                List<int> repeat_department = new List<int>();
+                var emp_departmet = jobInformation_all.OrderBy(e => e.Department).Select(e => e.Department).Distinct();
+
+                foreach (var department in emp_departmet)
+                {
+                    repeat_department.Add(jobInformation_all.Count(e => e.Department == department));
+                }
+
+                ViewBag.DEPARTMENT = emp_departmet;
+                ViewBag.DEPREP = repeat_department.ToList();
+
+                //Travel
+                List<int> repeat_travel = new List<int>();
+                var emp_travel = jobInformation_all.Select(e => e.BusinessTravel).Distinct();
+
+                foreach (var travel in emp_travel)
+                {
+                    var total = 0;
+                    var unique_number = jobInformation_all.Where(e => e.BusinessTravel == travel).Select(e => e.JobId);
+                    foreach (var number in unique_number)
+                    {
+                        total = total + employee.Count(e => e.JobId == number);
+                    }
+                    repeat_travel.Add(total);
+                }
+
+                ViewBag.TRAVEL = jobInformation_all.Select(e => e.BusinessTravel).Distinct();
+                ViewBag.TRAREP = repeat_travel.ToList();
+
+
+
+                //Educations
+                var education_all = _context.EmployeeEducation.ToList();
+                List<int> repeat_education = new List<int>();
+                var emp_education = education_all.OrderBy(e => e.EducationField).Select(e => e.EducationField).Distinct();
+
+                foreach (var education in emp_education)
+                {
+                    var total = 0;
+                    var unique_number = education_all.Where(e => e.EducationField == education).Select(e => e.EducationId);
+
+                    foreach (var number in unique_number)
+                    {
+                        total = total + employee.Count(e => e.EducationId == number);
+                    }
+                    repeat_education.Add(total);
+                }
+
+                ViewBag.EDUCATION = emp_education;
+                ViewBag.EDUREP = repeat_education.ToList();
+
+
+
+                //Environment
+                var survey_all = _context.Surveys.ToList();
+                List<int> repeat_environment = new List<int>();
+                var emp_environment = survey_all.OrderBy(e => e.EnvironmentSatisfaction).Select(e => e.EnvironmentSatisfaction).Distinct();
+
+                foreach (var environment in emp_environment)
+                {
+                    int total = 0;
+                    var unique_number = survey_all.Where(e => e.EnvironmentSatisfaction == environment).Select(e => e.SurveyId);
+
+                    foreach (var number in unique_number)
+                    {
+                        total = total + employee.Count(e => e.SurveyId == number);
+                    }
+                    repeat_environment.Add(total);
+                }
+
+                ViewBag.ENVIRONMENT = emp_environment;
+                ViewBag.ENVREP = repeat_environment.ToList();
+
+                //Job
+                List<int> repeat_job = new List<int>();
+                var emp_job = survey_all.OrderBy(e => e.JobSatisfaction).Select(e => e.JobSatisfaction).Distinct();
+
+                foreach (var job in emp_job)
+                {
+                    int total = 0;
+                    var unique_number = survey_all.Where(e => e.JobSatisfaction == job).Select(e => e.SurveyId);
+
+                    foreach (var number in unique_number)
+                    {
+                        total = total + employee.Count(e => e.SurveyId == number);
+                    }
+                    repeat_job.Add(total);
+                }
+
+                ViewBag.JOB = emp_job;
+                ViewBag.REPJOB = repeat_job.ToList();
+
+                //relationship
+                List<int> repeat_relationship = new List<int>();
+                var emp_relationship = survey_all.OrderBy(e => e.RelationshipSatisfaction).Select(e => e.RelationshipSatisfaction).Distinct();
+
+                foreach (var relationship in emp_relationship)
+                {
+                    int total = 0;
+                    var unique_number = survey_all.Where(e => e.RelationshipSatisfaction == relationship).Select(e => e.SurveyId);
+
+                    foreach (var number in unique_number)
+                    {
+                        total = total + employee.Count(e => e.SurveyId == number);
+                    }
+                    repeat_relationship.Add(total);
+                }
+
+                ViewBag.REl = emp_relationship;
+                ViewBag.RELREP = repeat_relationship.ToList();
+
+                return View();
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
   

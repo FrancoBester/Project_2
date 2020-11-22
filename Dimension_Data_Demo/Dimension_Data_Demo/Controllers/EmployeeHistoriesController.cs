@@ -31,24 +31,11 @@ namespace Dimension_Data_Demo.Controllers
             {
                 try
                 {
-                    int HistoryID = -1;
-                    var conn = _context.Database.GetDbConnection();
-                    await conn.OpenAsync();
-                    SqlCommand cmd = new SqlCommand();
-                    cmd.Connection = (SqlConnection)conn;
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Id", (int)id);
-                    cmd.CommandText = ("Select HistoryID from dbo.Employee Where EmployeeNumber = @Id");
-                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
-                    while (reader.Read())
-                    {
-                        HistoryID = reader.GetInt32(0);
-                    }
-                    await conn.CloseAsync();
-                    await cmd.DisposeAsync();
-                    await reader.CloseAsync();
-                    HttpContext.Session.SetInt32("his_employeeNumber", (int)id);
-                    HttpContext.Session.SetInt32("HistoryId", HistoryID);
+                    //Used to fileter data to only show a single persons history data
+                    int HistoryID = ((int)_context.Employee.Where(e => e.EmployeeNumber == id).Select(e => e.HistoryId).First());
+
+                    HttpContext.Session.SetInt32("his_employeeNumber", (int)id);//saves data in session to be used later
+                    HttpContext.Session.SetInt32("HistoryId", HistoryID);//saves data in session to be used later
                 }
                 catch(Exception)
                 {
@@ -104,16 +91,28 @@ namespace Dimension_Data_Demo.Controllers
                 try
                 {
                     try
-                    {
-                        int historyId = get_set_HistoryId(employeeHistory, "Select");
-                        if (historyId == -1)
+                    { 
+                        int history_ID = (int)_context.EmployeeHistory.Where(e => e.NumCompaniesWorked == employeeHistory.NumCompaniesWorked && e.TotalWorkingYears == employeeHistory.TotalWorkingYears &&
+                        e.YearsAtCompany == employeeHistory.YearsAtCompany && e.YearsInCurrentRole == employeeHistory.YearsInCurrentRole && e.YearsSinceLastPromotion == employeeHistory.YearsSinceLastPromotion &&
+                        e.YearsWithCurrManager == employeeHistory.YearsWithCurrManager && e.TrainingTimesLastYear == employeeHistory.TrainingTimesLastYear).Select(e => e.HistoryId).FirstOrDefault();
+
+                        if (history_ID == 0)
                         {
-                            historyId = get_set_HistoryId(employeeHistory, "Insert");
+                            int new_history_ID = ((int)_context.EmployeeHistory.OrderByDescending(e => e.HistoryId).Select(e => e.HistoryId).First()) + 1;//gets the new hisoty to be used when adding new record in database
+                            employeeHistory.HistoryId = new_history_ID;//assignes new id to model
+                            _context.Add(employeeHistory);//adds model to be added to database in context
+                            await _context.SaveChangesAsync();//addes model to database
+
+                            HttpContext.Session.SetInt32("newHistoryID", new_history_ID);//saves history in session to be used when user is added to database
                         }
-                        HttpContext.Session.SetInt32("newHistoryID", historyId);
+                        else
+                        {
+                            HttpContext.Session.SetInt32("newHistoryID", history_ID);//saves history in session to be used when user is added to database
+                        }
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        string error = ex.ToString();//varaible used to get error when testing
                         ViewBag.Message = "There was an error updating the information. Please try again later";
                         return View();
                     }
@@ -181,27 +180,30 @@ namespace Dimension_Data_Demo.Controllers
                     {
                         try
                         {
-                            int historyId = get_set_HistoryId(employeeHistory, "Select");
-                            if(historyId == -1)
+                            int history_ID = (int)_context.EmployeeHistory.Where(e => e.NumCompaniesWorked == employeeHistory.NumCompaniesWorked && e.TotalWorkingYears == employeeHistory.TotalWorkingYears &&
+                            e.YearsAtCompany == employeeHistory.YearsAtCompany && e.YearsInCurrentRole == employeeHistory.YearsInCurrentRole && e.YearsSinceLastPromotion == employeeHistory.YearsSinceLastPromotion &&
+                            e.YearsWithCurrManager == employeeHistory.YearsWithCurrManager && e.TrainingTimesLastYear == employeeHistory.TrainingTimesLastYear).Select(e => e.HistoryId).First();
+
+                            if (history_ID == 0)
                             {
-                                historyId = get_set_HistoryId(employeeHistory, "Insert");
+                                history_ID = ((int)_context.EmployeeHistory.OrderByDescending(e => e.HistoryId).Select(e => e.HistoryId).First()) + 1;//gets the id of the new record that will be added into the database
+                                employeeHistory.HistoryId = history_ID;//Assignes new id to model
+                                _context.Add(employeeHistory);//adds id to model that will be added to database
+                                await _context.SaveChangesAsync();//adds ne model info into the database
                             }
 
-                            var conn = _context.Database.GetDbConnection();
-                            await conn.OpenAsync();
-                            SqlCommand cmd = new SqlCommand();
-                            cmd.Connection = (SqlConnection)conn;
-                            cmd.CommandType = System.Data.CommandType.Text;
-                            cmd.Parameters.AddWithValue("@EmpNumber", HttpContext.Session.GetInt32("his_employeeNumber"));
-                            cmd.Parameters.AddWithValue("@EduNumber", historyId);
-                            cmd.CommandText = "Update dbo.Employee Set HistoryID = @EduNumber Where EmployeeNumber=@EmpNumber";
-                            await cmd.ExecuteNonQueryAsync();
+                            int employee_number = (int)HttpContext.Session.GetInt32("his_employeeNumber");//gets employee number from session
+                            var employee_model = _context.Employee.FirstOrDefault(e => e.EmployeeNumber == employee_number);//gets the employee data according to the employee number
 
-                            await cmd.DisposeAsync();
-                            await conn.CloseAsync();
+                            Employee temp_employee = (Employee)employee_model;//comverts employee data into a employee model
+                            temp_employee.HistoryId = history_ID;//cahnges the eduaction id of the model to be the updated education id
+
+                            _context.Update(temp_employee);//addes employee model to db context
+                            await _context.SaveChangesAsync();//update database with new data from employee model
                         }
-                        catch(Exception)
+                        catch(Exception ex)
                         {
+                            string error = ex.ToString();//variable used to see error when testing
                             ViewBag.Message = "There was an error updating the information. Please try again later";
                             return View();
                         }
@@ -226,56 +228,6 @@ namespace Dimension_Data_Demo.Controllers
         private bool EmployeeHistoryExists(int id)
         {
             return _context.EmployeeHistory.Any(e => e.HistoryId == id);
-        }
-
-        public int get_set_HistoryId(EmployeeHistory employeeHistory, string command_type)
-        {
-            int historyId = -1;
-            try
-            {
-                var conn = _context.Database.GetDbConnection();
-                conn.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = (SqlConnection)conn;
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.Parameters.AddWithValue("@NumWorked", (int)employeeHistory.NumCompaniesWorked);
-                cmd.Parameters.AddWithValue("@TotWorked", (int)employeeHistory.TotalWorkingYears);
-                cmd.Parameters.AddWithValue("@YearComp", (int)employeeHistory.YearsAtCompany);
-                cmd.Parameters.AddWithValue("@YearCurr", (int)employeeHistory.YearsInCurrentRole);
-                cmd.Parameters.AddWithValue("@YearSince", (int)employeeHistory.YearsSinceLastPromotion);
-                cmd.Parameters.AddWithValue("@YearCurrMan", (int)employeeHistory.YearsWithCurrManager);
-                cmd.Parameters.AddWithValue("@TrainTime", (int)employeeHistory.TrainingTimesLastYear);
-
-                if (command_type == "Select")
-                {
-                    cmd.CommandText = ("Select HistoryID from dbo.EmployeeHistory Where NumCompaniesWorked = @NumWorked and TotalWorkingYears = @TotWorked and " +
-                             "YearsAtCompany = @YearComp and YearsInCurrentRole = @YearCurr and YearsSinceLastPromotion = @YearSince and YearsWithCurrManager = @YearCurrMan " +
-                             "and TrainingTimesLastYear = @TrainTime");
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        historyId = reader.GetInt32(0);
-                    }
-                    cmd.Dispose();
-                    reader.Close();
-                    conn.Close();
-                }
-                else if (command_type == "Insert")
-                {
-                    cmd.CommandText = ("Insert Into dbo.EmployeeHistory(HistoryID,NumCompaniesWorked,TotalWorkingYears,YearsAtCompany,YearsInCurrentRole,YearsSinceLastPromotion,YearsWithCurrManager,TrainingTimesLastYear) " +
-                        "Values((Select count(*)+1 from dbo.EmployeeHistory),@NumWorked,@TotWorked,@YearComp,@YearCurr,@YearSince,@YearCurrMan,@TrainTime)");
-                    cmd.ExecuteNonQuery();
-                    cmd.Dispose();
-                    conn.Close();
-                    historyId = get_set_HistoryId(employeeHistory, "Select");
-                }
-            }
-            catch (Exception)
-            {
-                return -1;
-            }
-            return historyId;
         }
     }
 }
