@@ -37,7 +37,7 @@ namespace Dimension_Data_Demo.Controllers
                     HttpContext.Session.SetInt32("job_employeeNumber", (int)id);//saces data in session to be used later
                     HttpContext.Session.SetInt32("JobId", JobID);//saves data in session to be used later
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     ViewBag.Message = "There was a problem retrieving the data. Please try later";
                     return View();
@@ -79,30 +79,30 @@ namespace Dimension_Data_Demo.Controllers
 
                 var field_job = _context.JobInformation.Select(e => e.JobRole).Distinct();
 
-                foreach(var job in field_job)
+                foreach (var job in field_job)
                 {
                     JobRoleFieldList.Add(new SelectListItem() { Text = job.ToString() });
                 }
 
                 var field_department = _context.JobInformation.Select(e => e.Department).Distinct();
 
-                foreach(var department in field_department)
+                foreach (var department in field_department)
                 {
                     JobDepartmentFieldList.Add(new SelectListItem() { Text = department.ToString() });
                 }
 
                 var field_travel = _context.JobInformation.Select(e => e.BusinessTravel).Distinct();
 
-                foreach(var travel in field_travel)
+                foreach (var travel in field_travel)
                 {
                     TravelFieldList.Add(new SelectListItem() { Text = travel.ToString() });
                 }
 
-                
+
                 ViewData["RolefieldData"] = JobRoleFieldList;
                 ViewData["DepartmentfieldData"] = JobDepartmentFieldList;
                 ViewData["TravelfieldData"] = TravelFieldList;
-                      
+
             }
             catch (Exception ex)
             {
@@ -124,7 +124,7 @@ namespace Dimension_Data_Demo.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            if (jobInformation.JobRole == null )//assignes value to model if user did not assign them 
+            if (jobInformation.JobRole == null)//assignes value to model if user did not assign them 
             {
                 jobInformation.JobRole = "Healthcare Representative";
             }
@@ -142,10 +142,10 @@ namespace Dimension_Data_Demo.Controllers
             try
             {
                 int job_ID = (int)_context.JobInformation.Where(e => e.JobRole == jobInformation.JobRole && e.Department == jobInformation.Department && e.JobLevel == jobInformation.JobLevel &&
-                e.StandardHours == jobInformation.StandardHours && e.EmployeeCount == jobInformation.EmployeeCount && e.BusinessTravel == jobInformation.BusinessTravel && 
+                e.StandardHours == jobInformation.StandardHours && e.EmployeeCount == jobInformation.EmployeeCount && e.BusinessTravel == jobInformation.BusinessTravel &&
                 e.StockOptionLevel == jobInformation.StockOptionLevel).Select(e => e.JobId).FirstOrDefault();//gets id of record that meets all where clauses
 
-                if(job_ID == 0)//if 0 then a new record needs to be added
+                if (job_ID == 0)//if 0 then a new record needs to be added
                 {
                     int new_job_ID = ((int)_context.JobInformation.OrderByDescending(e => e.JobId).Select(e => e.JobId).First()) + 1;//gets the id of the new record that will be added into the table
                     jobInformation.JobId = new_job_ID;//assignes new it to model
@@ -162,9 +162,9 @@ namespace Dimension_Data_Demo.Controllers
             catch (Exception ex)
             {
                 string error = ex.ToString();
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
-            
+
             return RedirectToAction("Create", "Surveys");
         }
 
@@ -202,9 +202,9 @@ namespace Dimension_Data_Demo.Controllers
                 ViewData["RolefieldData"] = JobRoleFieldList;
                 ViewData["DepartmentfieldData"] = JobDepartmentFieldList;
                 ViewData["TravelfieldData"] = TravelFieldList;
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string error = ex.ToString();
                 return RedirectToAction(nameof(Index));
@@ -278,7 +278,7 @@ namespace Dimension_Data_Demo.Controllers
                             _context.Update(temp_employee);//addes employee model to db context
                             await _context.SaveChangesAsync();//update database with new data from employee model
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             string error = ex.ToString();
                             return RedirectToAction(nameof(Index));

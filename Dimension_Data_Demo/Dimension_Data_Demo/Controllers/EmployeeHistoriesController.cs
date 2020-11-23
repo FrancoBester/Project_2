@@ -27,7 +27,7 @@ namespace Dimension_Data_Demo.Controllers
         // GET: EmployeeHistories
         public async Task<IActionResult> Index(int? id)
         {
-            if(id != null)
+            if (id != null)
             {
                 try
                 {
@@ -37,7 +37,7 @@ namespace Dimension_Data_Demo.Controllers
                     HttpContext.Session.SetInt32("his_employeeNumber", (int)id);//saves data in session to be used later
                     HttpContext.Session.SetInt32("HistoryId", HistoryID);//saves data in session to be used later
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     ViewBag.Message = "There was a problem retrieving the data. Please try later";
                     return View();
@@ -91,7 +91,7 @@ namespace Dimension_Data_Demo.Controllers
                 try
                 {
                     try
-                    { 
+                    {
                         int history_ID = (int)_context.EmployeeHistory.Where(e => e.NumCompaniesWorked == employeeHistory.NumCompaniesWorked && e.TotalWorkingYears == employeeHistory.TotalWorkingYears &&
                         e.YearsAtCompany == employeeHistory.YearsAtCompany && e.YearsInCurrentRole == employeeHistory.YearsInCurrentRole && e.YearsSinceLastPromotion == employeeHistory.YearsSinceLastPromotion &&
                         e.YearsWithCurrManager == employeeHistory.YearsWithCurrManager && e.TrainingTimesLastYear == employeeHistory.TrainingTimesLastYear).Select(e => e.HistoryId).FirstOrDefault();
@@ -170,7 +170,7 @@ namespace Dimension_Data_Demo.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if(employeeHistory.NumCompaniesWorked <= -1 || employeeHistory.TotalWorkingYears <= -1 || employeeHistory.YearsAtCompany <= -1 || employeeHistory.YearsInCurrentRole <= -1 || employeeHistory.YearsSinceLastPromotion <= -1 || employeeHistory.YearsWithCurrManager <= -1 || employeeHistory.TrainingTimesLastYear <= -1 )
+                    if (employeeHistory.NumCompaniesWorked <= -1 || employeeHistory.TotalWorkingYears <= -1 || employeeHistory.YearsAtCompany <= -1 || employeeHistory.YearsInCurrentRole <= -1 || employeeHistory.YearsSinceLastPromotion <= -1 || employeeHistory.YearsWithCurrManager <= -1 || employeeHistory.TrainingTimesLastYear <= -1)
                     {
                         ViewBag.Message = "All numbers must be positive values";
                         return View();
@@ -201,7 +201,7 @@ namespace Dimension_Data_Demo.Controllers
                             _context.Update(temp_employee);//addes employee model to db context
                             await _context.SaveChangesAsync();//update database with new data from employee model
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             string error = ex.ToString();//variable used to see error when testing
                             ViewBag.Message = "There was an error updating the information. Please try again later";

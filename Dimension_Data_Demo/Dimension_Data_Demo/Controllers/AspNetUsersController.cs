@@ -61,9 +61,9 @@ namespace Dimension_Data_Demo.Controllers
             {
                 _context.Add(aspNetUsers);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction("Index", "Home");
+            return View(aspNetUsers);
         }
 
         // GET: AspNetUsers/Edit/5
@@ -79,7 +79,7 @@ namespace Dimension_Data_Demo.Controllers
             {
                 return NotFound();
             }
-            return RedirectToAction("Index", "Home");
+            return View(aspNetUsers);
         }
 
         // POST: AspNetUsers/Edit/5
@@ -98,10 +98,10 @@ namespace Dimension_Data_Demo.Controllers
             {
                 if (aspNetUsers.EmployeeNumber == null)
                 {
-                    ViewBag.Message ="Employee number is required to create account";
+                    ViewBag.Message = "Employee number is required to create account";
                     return View();
                 }
-                else if(aspNetUsers.EmployeeNumber <= -1)
+                else if (aspNetUsers.EmployeeNumber <= -1)
                 {
                     ViewBag.Message = "Employee number needs to be a positive number value";
                     return View();
@@ -123,7 +123,7 @@ namespace Dimension_Data_Demo.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(aspNetUsers);
         }

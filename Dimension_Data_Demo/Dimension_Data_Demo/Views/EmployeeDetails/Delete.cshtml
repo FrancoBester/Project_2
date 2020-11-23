@@ -1,0 +1,57 @@
+﻿@model Dimension_Data_Demo.Models.EmployeeDetails
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>EmployeeDetails</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Attrition)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Attrition)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DistanceFromHome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DistanceFromHome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Over18)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Over18)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Gender.GenderId)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Marital)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Marital.MaritalId)
+        </dd class>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="DetailsId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

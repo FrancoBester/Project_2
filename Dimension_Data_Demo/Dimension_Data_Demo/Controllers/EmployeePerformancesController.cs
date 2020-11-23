@@ -38,7 +38,7 @@ namespace Dimension_Data_Demo.Controllers
                     HttpContext.Session.SetInt32("per_employeeNumber", (int)id);//saves id in session to be used when the user returns to the page an does not use the main navigation page
                     HttpContext.Session.SetInt32("PerformanceId", PerformanceID);//saves id in session to be used when the user returns to the page an does not use the main navigation page
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     ViewBag.Message = "There was a problem retrieving the data. Please try later";
                     return View();
@@ -120,8 +120,8 @@ namespace Dimension_Data_Demo.Controllers
             {
                 string test = "t";
             }
-            
-           return RedirectToAction("Create", "JobInformations");
+
+            return RedirectToAction("Create", "JobInformations");
         }
 
         // GET: EmployeePerformances/Edit/5
@@ -153,7 +153,7 @@ namespace Dimension_Data_Demo.Controllers
                 return NotFound();
             }
 
-            if (JsonConvert.SerializeObject(employeePerformance) == HttpContext.Session.GetString("oldPerformanceModel")) 
+            if (JsonConvert.SerializeObject(employeePerformance) == HttpContext.Session.GetString("oldPerformanceModel"))
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -171,11 +171,11 @@ namespace Dimension_Data_Demo.Controllers
                     {
                         try
                         {
-                            int performance_ID = (int)_context.EmployeePerformance.Where(e => e.PerformanceRating == employeePerformance.PerformanceRating && e.WorkLifeBalance == employeePerformance.WorkLifeBalance && 
+                            int performance_ID = (int)_context.EmployeePerformance.Where(e => e.PerformanceRating == employeePerformance.PerformanceRating && e.WorkLifeBalance == employeePerformance.WorkLifeBalance &&
                             e.JobInvolvement == employeePerformance.JobInvolvement).Select(e => e.PerformanceId).First();
 
 
-                            if(performance_ID == 0)
+                            if (performance_ID == 0)
                             {
                                 performance_ID = ((int)_context.EmployeePerformance.OrderByDescending(e => e.PerformanceId).Select(e => e.PerformanceId).First()) + 1;//gets the id of the new record that will be added into the database
                                 employeePerformance.PerformanceId = performance_ID;//assignes new id to model
@@ -193,7 +193,7 @@ namespace Dimension_Data_Demo.Controllers
                             await _context.SaveChangesAsync();//update database with new data from employee model
 
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             string error = ex.ToString();
                             ViewBag.Message = "There was an error updating the information. Please try again later";

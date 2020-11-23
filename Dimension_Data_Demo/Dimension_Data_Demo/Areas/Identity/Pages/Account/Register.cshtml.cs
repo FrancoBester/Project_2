@@ -16,7 +16,6 @@ using Microsoft.Extensions.Logging;
 using System.Net.Mail;
 using System.Net;
 using MimeKit;
-using System.Web;
 
 namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
 {
@@ -79,7 +78,7 @@ namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                
+
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -89,7 +88,7 @@ namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    string Message = $"Please confirm your account by <a href='http://dimensiondatademo-dev-2.us-west-2.elasticbeanstalk.com/Identity/Account?RegisterConfirmation?email=" + Input.Email + "&returnUrl=%2F'> clicking here </a>.";
+                    string Message = $"Please confirm your account by <a href='http://dimensiondatademo-dev-2.us-west-2.elasticbeanstalk.com/Identity/Account/RegisterConfirmation?email=" + Input.Email + "&returnUrl=%2F'> clicking here </a>.";
                     try
                     {
                         using (MailMessage mail = new MailMessage())
@@ -112,8 +111,8 @@ namespace Dimension_Data_Demo.Areas.Identity.Pages.Account
                     {
                         Message = ex.ToString();
                     }
- 
 
+                    
                     //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                     //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 

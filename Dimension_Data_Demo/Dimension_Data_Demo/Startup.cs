@@ -16,7 +16,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.IdentityModel.Protocols;
 using Dimension_Data_Demo.Models;
-using ReflectionIT.Mvc.Paging;
 
 namespace Dimension_Data_Demo
 {
@@ -43,7 +42,6 @@ namespace Dimension_Data_Demo
             services.AddControllersWithViews();
             services.AddDbContext<dimention_data_demoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRazorPages();
-            //services.AddPaging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

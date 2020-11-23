@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -6,14 +6,98 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Views\AspNetUsers\Create.cshtml" />
+    <None Include="Views\AspNetUsers\Delete.cshtml" />
+    <None Include="Views\AspNetUsers\Details.cshtml" />
+    <None Include="Views\AspNetUsers\Edit.cshtml" />
+    <None Include="Views\AspNetUsers\Index.cshtml" />
+    <None Include="Views\CostToCompanies\Create.cshtml" />
+    <None Include="Views\CostToCompanies\Delete.cshtml" />
+    <None Include="Views\CostToCompanies\Details.cshtml" />
+    <None Include="Views\CostToCompanies\Edit.cshtml" />
+    <None Include="Views\CostToCompanies\Index.cshtml" />
+    <None Include="Views\EmployeeDetails\Create.cshtml" />
+    <None Include="Views\EmployeeDetails\Delete.cshtml" />
+    <None Include="Views\EmployeeDetails\Details.cshtml" />
+    <None Include="Views\EmployeeDetails\Edit.cshtml" />
+    <None Include="Views\EmployeeDetails\Index.cshtml" />
+    <None Include="Views\EmployeeEducations\Create.cshtml" />
+    <None Include="Views\EmployeeEducations\Delete.cshtml" />
+    <None Include="Views\EmployeeEducations\Details.cshtml" />
+    <None Include="Views\EmployeeEducations\Edit.cshtml" />
+    <None Include="Views\EmployeeEducations\Index.cshtml" />
+    <None Include="Views\EmployeeHistories\Create.cshtml" />
+    <None Include="Views\EmployeeHistories\Delete.cshtml" />
+    <None Include="Views\EmployeeHistories\Details.cshtml" />
+    <None Include="Views\EmployeeHistories\Edit.cshtml" />
+    <None Include="Views\EmployeeHistories\Index.cshtml" />
+    <None Include="Views\EmployeePerformances\Create.cshtml" />
+    <None Include="Views\EmployeePerformances\Delete.cshtml" />
+    <None Include="Views\EmployeePerformances\Details.cshtml" />
+    <None Include="Views\EmployeePerformances\Edit.cshtml" />
+    <None Include="Views\EmployeePerformances\Index.cshtml" />
+    <None Include="Views\Employees\Create.cshtml" />
+    <None Include="Views\Employees\Delete.cshtml" />
+    <None Include="Views\Employees\Details.cshtml" />
+    <None Include="Views\Employees\Edit.cshtml" />
+    <None Include="Views\Employees\Index.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\JobInformations\Create.cshtml" />
+    <None Include="Views\JobInformations\Delete.cshtml" />
+    <None Include="Views\JobInformations\Details.cshtml" />
+    <None Include="Views\JobInformations\Edit.cshtml" />
+    <None Include="Views\JobInformations\Index.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\Surveys\Create.cshtml" />
+    <None Include="Views\Surveys\Delete.cshtml" />
+    <None Include="Views\Surveys\Details.cshtml" />
+    <None Include="Views\Surveys\Edit.cshtml" />
+    <None Include="Views\Surveys\Index.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
+    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
+    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
+    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="MimeKit" Version="2.9.2" />
     <PackageReference Include="ReflectionIT.Mvc.Paging" Version="4.0.0" />

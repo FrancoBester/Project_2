@@ -30,7 +30,7 @@ namespace Dimension_Data_Demo.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index(int page=1)
+        public async Task<IActionResult> Index(int page = 1)
         {
             //try Row level security tried
             //{
@@ -54,7 +54,7 @@ namespace Dimension_Data_Demo.Controllers
             var user_Role = HttpContext.Session.GetString("JobRole");
             var user_Department = HttpContext.Session.GetString("Department");
             int iEmployeeNumbeer = int.Parse(user_EmpNumber.ToString());
-            
+
             if (user_Role.ToString() == "Manager")//if the user is a manager they are allowed to see all other employee info that are part of the same department as they are
             {
                 try
@@ -73,7 +73,7 @@ namespace Dimension_Data_Demo.Controllers
                     ViewBag.job = user_Role.ToString();
                     return View(model);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     string error = ex.ToString();
                     ViewBag.Message = "There was a problem retrieving the data. Please try later";
@@ -93,7 +93,7 @@ namespace Dimension_Data_Demo.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             var conn = _context.Database.GetDbConnection();
-            
+
 
             if (id == null)
             {
@@ -107,7 +107,7 @@ namespace Dimension_Data_Demo.Controllers
                 .Include(e => e.Job)
                 .Include(e => e.Pay)
                 .Include(e => e.Performance)
-                .Include(e => e.Survey) 
+                .Include(e => e.Survey)
                 .FirstOrDefaultAsync(m => m.EmployeeNumber == id);
             if (employee == null)
             {
@@ -123,7 +123,7 @@ namespace Dimension_Data_Demo.Controllers
             int employee_ID = 0;
             try
             {
-                 employee_ID = ((int)_context.Employee.OrderByDescending(e => e.EmployeeNumber).Select(e => e.EmployeeNumber).First()) + 1; //gets the employee number of the new employee
+                employee_ID = ((int)_context.Employee.OrderByDescending(e => e.EmployeeNumber).Select(e => e.EmployeeNumber).First()) + 1; //gets the employee number of the new employee
 
                 Employee new_employee = new Employee();
                 new_employee.EmployeeNumber = employee_ID;
@@ -138,7 +138,7 @@ namespace Dimension_Data_Demo.Controllers
                 _context.Add(new_employee);
                 _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string error = ex.ToString();
                 ViewBag.Message = "Error adding employee. Please try again later.";
@@ -362,5 +362,5 @@ namespace Dimension_Data_Demo.Controllers
             }
         }
     }
-  
+
 }

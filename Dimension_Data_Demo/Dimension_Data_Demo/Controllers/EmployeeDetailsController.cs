@@ -25,7 +25,7 @@ namespace Dimension_Data_Demo.Controllers
         // GET: EmployeeDetails
         public async Task<IActionResult> Index(int? id)
         {
-            if(id != null)
+            if (id != null)
             {
                 HttpContext.Session.SetInt32("DetailID", (int)id);
             }
@@ -78,7 +78,7 @@ namespace Dimension_Data_Demo.Controllers
 
                     HttpContext.Session.SetInt32("newDetailsID", detail_ID);//new detail id is added to session to be used at a later time
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     string error = ex.ToString();//variable used to see error when testing
                     ViewBag.Message = "There was an error updating the information. Please try again later";
@@ -125,7 +125,7 @@ namespace Dimension_Data_Demo.Controllers
             {
                 return NotFound();
             }
-            
+
             ViewData["GenderId"] = new SelectList(_context.Gender, "GenderId", "Gender1", employeeDetails.GenderId);
             ViewData["MaritalId"] = new SelectList(_context.MaritalStatus, "MaritalId", "MaritalStatus1", employeeDetails.MaritalId);
             HttpContext.Session.SetString("oldEmployeeDetails", JsonConvert.SerializeObject(employeeDetails));//changes current model information into string and stores in a session,used later
@@ -147,7 +147,7 @@ namespace Dimension_Data_Demo.Controllers
             var old_Model_Info = HttpContext.Session.GetString("oldEmployeeDetails");//gets model details before changes could have been model
             var new_Model_Info = JsonConvert.SerializeObject(employeeDetails);//get new model info te see if info was changed
 
-            if(old_Model_Info == new_Model_Info)//compares string to see if model has been changed or if is still the same
+            if (old_Model_Info == new_Model_Info)//compares string to see if model has been changed or if is still the same
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -155,17 +155,17 @@ namespace Dimension_Data_Demo.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if(employeeDetails.Age < 1 || employeeDetails.DistanceFromHome < 0)
+                    if (employeeDetails.Age < 1 || employeeDetails.DistanceFromHome < 0)
                     {
                         ViewBag.Message = "Age and Distance from home must be positive number values";
                         return View();
                     }
-                    else if(employeeDetails.Attrition.ToUpper() != "YES" & employeeDetails.Attrition.ToUpper() != "NO")
+                    else if (employeeDetails.Attrition.ToUpper() != "YES" & employeeDetails.Attrition.ToUpper() != "NO")
                     {
                         ViewBag.Message = "Attrition field can only be Yes or No";
                         return View();
                     }
-                    else if((employeeDetails.Over18[0].ToString()).ToUpper() != "Y" & (employeeDetails.Over18[0].ToString()).ToUpper() != "N")
+                    else if ((employeeDetails.Over18[0].ToString()).ToUpper() != "Y" & (employeeDetails.Over18[0].ToString()).ToUpper() != "N")
                     {
                         ViewBag.Message = "Over 18 value can only be a Y or an N";
                         return View();
@@ -192,7 +192,7 @@ namespace Dimension_Data_Demo.Controllers
                     return RedirectToAction("Index", "Employees");
                 }
             }
-            
+
             ViewData["GenderId"] = new SelectList(_context.Gender, "GenderId", "GenderId", employeeDetails.GenderId);
             ViewData["MaritalId"] = new SelectList(_context.MaritalStatus, "MaritalId", "MaritalId", employeeDetails.MaritalId);
             return View(employeeDetails);

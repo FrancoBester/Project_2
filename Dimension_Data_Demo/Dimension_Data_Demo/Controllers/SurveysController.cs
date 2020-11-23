@@ -38,7 +38,7 @@ namespace Dimension_Data_Demo.Controllers
                     HttpContext.Session.SetInt32("SurveyId", (int)SurveyID);//saves id in session to be used when the user returns to the page an does not use the main navigation page
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     string error = ex.ToString();
                     ViewBag.Message = "There was a problem retrieving the data. Please try later";
@@ -90,10 +90,10 @@ namespace Dimension_Data_Demo.Controllers
 
             try
             {
-                int survey_ID = (int)_context.Surveys.Where(e => e.EnvironmentSatisfaction == surveys.EnvironmentSatisfaction && e.JobSatisfaction == surveys.JobSatisfaction && 
+                int survey_ID = (int)_context.Surveys.Where(e => e.EnvironmentSatisfaction == surveys.EnvironmentSatisfaction && e.JobSatisfaction == surveys.JobSatisfaction &&
                 e.RelationshipSatisfaction == surveys.RelationshipSatisfaction).Select(e => e.SurveyId).FirstOrDefault();//gets id of record that meets all where clauses
 
-                if(survey_ID == 0)//if 0 then a new record needs to be added
+                if (survey_ID == 0)//if 0 then a new record needs to be added
                 {
                     int new_survey_ID = ((int)_context.Surveys.OrderByDescending(e => e.SurveyId).Select(e => e.SurveyId).First()) + 1;//gets the id of the new record that will be added into the table
                     surveys.SurveyId = new_survey_ID;//assignes new id to model
@@ -115,7 +115,7 @@ namespace Dimension_Data_Demo.Controllers
                 return View();
             }
 
-            return RedirectToAction("Create","Employees");
+            return RedirectToAction("Create", "Employees");
         }
 
         // GET: Surveys/Edit/5
@@ -155,7 +155,7 @@ namespace Dimension_Data_Demo.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if(surveys.EnvironmentSatisfaction <= -1 || surveys.JobSatisfaction <= -1 || surveys.RelationshipSatisfaction <= -1)
+                    if (surveys.EnvironmentSatisfaction <= -1 || surveys.JobSatisfaction <= -1 || surveys.RelationshipSatisfaction <= -1)
                     {
                         ViewBag.Message = "All numbers must be positive values";
                         return View();
@@ -168,7 +168,7 @@ namespace Dimension_Data_Demo.Controllers
                             int survey_ID = (int)_context.Surveys.Where(e => e.EnvironmentSatisfaction == surveys.EnvironmentSatisfaction && e.JobSatisfaction == surveys.JobSatisfaction &&
                             e.RelationshipSatisfaction == surveys.RelationshipSatisfaction).Select(e => e.SurveyId).First();//gets id of record that meets all where clauses
 
-                            if(survey_ID == 0)
+                            if (survey_ID == 0)
                             {
                                 survey_ID = ((int)_context.Surveys.OrderByDescending(e => e.SurveyId).Select(e => e.SurveyId).First()) + 1;//gets the id of the new record that will be added into the database
                                 surveys.SurveyId = survey_ID;//assignes new id to model
@@ -185,7 +185,7 @@ namespace Dimension_Data_Demo.Controllers
                             _context.Update(temp_employee);//addes employee model to db context
                             await _context.SaveChangesAsync();//update database with new data from employee model
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             string error = ex.ToString();
                             ViewBag.Message = "There was an error updating the information. Please try again later";
@@ -212,6 +212,6 @@ namespace Dimension_Data_Demo.Controllers
         {
             return _context.Surveys.Any(e => e.SurveyId == id);
         }
-        
+
     }
 }

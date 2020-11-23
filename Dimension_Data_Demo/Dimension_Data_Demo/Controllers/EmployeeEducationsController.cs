@@ -40,7 +40,7 @@ namespace Dimension_Data_Demo.Controllers
                     HttpContext.Session.SetInt32("edu_employeeNumber", (int)id);//saves id in session to be used when the user returns to the page an does not use the main navigation page
                     HttpContext.Session.SetInt32("EducationId", (int)EduactionID);//saves id in session to be used when the user returns to the page an does not use the main navigation page
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     string error = ex.ToString();
                     ViewBag.Message = "There was a problem retrieving the data. Please try later";
@@ -100,7 +100,7 @@ namespace Dimension_Data_Demo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EducationId,Education,EducationField")] EmployeeEducation employeeEducation)
         {
-           
+
             if (employeeEducation.Education <= -1)//ensures that all data intered is logically correct
             {
                 return RedirectToAction(nameof(Index));
@@ -112,7 +112,7 @@ namespace Dimension_Data_Demo.Controllers
 
             try
             {
-                int education_ID = (int)_context.EmployeeEducation.Where(e => e.Education == employeeEducation.Education && 
+                int education_ID = (int)_context.EmployeeEducation.Where(e => e.Education == employeeEducation.Education &&
                 e.EducationField == employeeEducation.EducationField).Select(e => e.EducationId).FirstOrDefault();//gets id of record that meets all where clauses
 
                 if (education_ID == 0)//if 0 then a new record needs to be added
@@ -135,7 +135,7 @@ namespace Dimension_Data_Demo.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return  RedirectToAction("Create", "EmployeeHistories"); ;
+            return RedirectToAction("Create", "EmployeeHistories"); ;
         }
 
         // GET: EmployeeEducations/Edit/5
@@ -154,7 +154,7 @@ namespace Dimension_Data_Demo.Controllers
                 }
                 ViewData["fieldData"] = EducationFieldlist;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string error = ex.ToString();
                 return RedirectToAction(nameof(Index));
@@ -186,7 +186,7 @@ namespace Dimension_Data_Demo.Controllers
                 return NotFound();
             }
 
-            if(JsonConvert.SerializeObject(employeeEducation) == HttpContext.Session.GetString("oldEducationModel"))// compares old and current model to limit update query to database when models are same
+            if (JsonConvert.SerializeObject(employeeEducation) == HttpContext.Session.GetString("oldEducationModel"))// compares old and current model to limit update query to database when models are same
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -194,7 +194,7 @@ namespace Dimension_Data_Demo.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if(employeeEducation.Education <= -1)
+                    if (employeeEducation.Education <= -1)
                     {
                         return RedirectToAction(nameof(Index));
                     }
@@ -225,7 +225,7 @@ namespace Dimension_Data_Demo.Controllers
                             _context.Update(temp_employee);//addes employee model to db context
                             await _context.SaveChangesAsync();//update database with new data from employee model
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             string error = ex.ToString();
                             return RedirectToAction(nameof(Index));
@@ -245,7 +245,7 @@ namespace Dimension_Data_Demo.Controllers
                     }
                 }
                 return RedirectToAction("Index", "Employees");
-            }   
+            }
         }
 
         private bool EmployeeEducationExists(int id)
