@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Franco Bester\\Music\\Project_2\\Dimension_Data_Demo\\Dimension_Data_Demo\\Dimension_Data_Demo.csproj": {}
+    "C:\\Users\\Franco Bester\\Desktop\\Project_2\\Dimension_Data_Demo\\Dimension_Data_Demo\\Dimension_Data_Demo.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Franco Bester\\Music\\Project_2\\Dimension_Data_Demo\\Dimension_Data_Demo\\Dimension_Data_Demo.csproj": {
+    "C:\\Users\\Franco Bester\\Desktop\\Project_2\\Dimension_Data_Demo\\Dimension_Data_Demo\\Dimension_Data_Demo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Franco Bester\\Music\\Project_2\\Dimension_Data_Demo\\Dimension_Data_Demo\\Dimension_Data_Demo.csproj",
+        "projectUniqueName": "C:\\Users\\Franco Bester\\Desktop\\Project_2\\Dimension_Data_Demo\\Dimension_Data_Demo\\Dimension_Data_Demo.csproj",
         "projectName": "Dimension_Data_Demo",
-        "projectPath": "C:\\Users\\Franco Bester\\Music\\Project_2\\Dimension_Data_Demo\\Dimension_Data_Demo\\Dimension_Data_Demo.csproj",
+        "projectPath": "C:\\Users\\Franco Bester\\Desktop\\Project_2\\Dimension_Data_Demo\\Dimension_Data_Demo\\Dimension_Data_Demo.csproj",
         "packagesPath": "C:\\Users\\Franco Bester\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Franco Bester\\Music\\Project_2\\Dimension_Data_Demo\\Dimension_Data_Demo\\obj\\",
+        "outputPath": "C:\\Users\\Franco Bester\\Desktop\\Project_2\\Dimension_Data_Demo\\Dimension_Data_Demo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Franco Bester\\AppData\\Roaming\\NuGet\\NuGet.Config",
